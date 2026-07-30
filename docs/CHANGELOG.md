@@ -1,5 +1,53 @@
 # Journal de sessions
 
+## 2026-07-30 — Écran phrases refait, antimémoire porté à 209 phrases
+
+Trois structures ont été maquettées et comparées avant tout code. Retenu : tuiles plus fiche
+plein écran, **sans le bloc sans-laitage épinglé** que j'avais proposé. Le voyage ne se résume
+pas à l'alimentation, et cette contrainte n'a pas à être privilégiée sur les autres.
+
+**Structure**
+
+Trois niveaux. Les 15 tuiles de catégories tiennent sur un écran, sans aucune phrase affichée.
+Une liste par catégorie. Puis une fiche plein écran où l'italien fait 36 px, avec le français en
+dessous, l'astuce éventuelle, un bouton copier et la navigation vers la phrase suivante. La
+recherche court-circuite les deux premiers niveaux. Clavier géré : Échap ferme, flèches
+naviguent.
+
+La fiche répond à un besoin précis, pas à une envie décorative : faire lire la phrase par un
+serveur ou un pharmacien quand la prononciation ne passe pas.
+
+**Contenu porté de 96 à 209 phrases, 8 à 15 catégories**
+
+Le corpus initial couvrait la survie alimentaire et négligeait le quotidien réel du séjour. Six
+sections ajoutées, choisies depuis l'itinéraire lui-même :
+
+- **Comprendre la réponse** : ce qu'on va vous dire (« solo contanti », « pausa pranzo »,
+  « è al completo »). Absent de la plupart des guides, pourtant la moitié d'un échange.
+- **Plage et mer** : cinq journées de plage au programme, et la distinction payante entre
+  _spiaggia libera_ et _lido_.
+- **Au restaurant** : mécanique de commande, dont le _coperto_ et la carafe d'eau souvent refusée.
+- **Au supermarché** : dont le piège de la pesée des fruits à faire soi-même.
+- **Visites et billets** : sites payants de Matera, Otrante, Lecce, et les épaules couvertes.
+- **Nombres et heures** : indispensable pour comprendre un prix ou un horaire à l'oral.
+- **Pharmacie et santé** : août dans les Pouilles, donc coup de soleil et déshydratation. Dont
+  « tachipirina », le nom que tout le monde emploie en Italie pour le paracétamol.
+
+16 astuces d'usage ont été ajoutées sur les vrais pièges locaux, affichées sur la fiche.
+
+**Vérifications**
+
+85 tests verts, dont un nouveau fichier de 11 tests sur le corpus : unicité des identifiants,
+icônes existant dans le registre, libellés courts assez brefs pour les tuiles, aucune phrase
+italienne en doublon. Ce dernier test a immédiatement attrapé « Posso pagare con la carta? »
+présent deux fois, ce qui aurait cassé la clé de liste Vue.
+
+Parcours Playwright : 15 tuiles toutes dans l'écran, aucune phrase italienne à l'accueil, liste
+filtrée correcte, fiche à 36 px mesurés, copie effective dans le presse-papier, navigation
+suivante, fermeture par Échap, recherche transversale sur « tachipirina » et « fontanella ».
+
+Non déployé.
+
 ## 2026-07-30 — URL sans hash, liens du journal vers la carte
 
 **Fait**

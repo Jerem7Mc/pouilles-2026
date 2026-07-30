@@ -3,6 +3,9 @@ import {
   BookOpen,
   Bus,
   Check,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
   Compass,
   Copy,
   CreditCard,
@@ -10,13 +13,16 @@ import {
   Ellipsis,
   Gift,
   Handshake,
+  Hash,
   Heart,
   IceCreamCone,
   Landmark,
   Languages,
   Map,
   MapPin,
+  MessagesSquare,
   MilkOff,
+  Pill,
   Plane,
   Search,
   Settings,
@@ -31,6 +37,7 @@ import {
   Waves,
   Wallet,
   WifiOff,
+  X,
 } from 'lucide-vue-next'
 
 /**
@@ -64,8 +71,13 @@ export const ICONES = {
   glacier: IceCreamCone,
   manger: Utensils,
 
-  // Sections de phrases
+  // Sections de phrases. Celles dont l'icône existe déjà réutilisent sa clé :
+  // `manger` pour le restaurant, `supermarche`, `visites`, `plage`, `transport`.
   laitage: MilkOff,
+  comprendre: MessagesSquare,
+  nombres: Hash,
+  sante: Pill,
+  plage: Waves,
   orientation: Compass,
   achats: CreditCard,
   urgence: Siren,
@@ -77,10 +89,13 @@ export const ICONES = {
   recherche: Search,
   bus: Bus,
   avion: Plane,
-  plage: Waves,
   horsLigne: WifiOff,
   supprimer: Trash2,
   copier: Copy,
+  fermer: X,
+  precedent: ChevronLeft,
+  suivant: ChevronRight,
+  heure: Clock,
   telecharger: Download,
   valide: Check,
 } as const

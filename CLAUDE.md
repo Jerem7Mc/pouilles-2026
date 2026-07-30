@@ -76,7 +76,7 @@ src/
   partage/      monnaie.ts, voyage.ts, stockage.ts, icones.ts, Icone.vue
   depenses/     calculs.ts (pur, testé), useDepenses.ts (état), composants
   journal/      donnees/itineraire.ts + JournalView
-  phrases/      donnees/phrases.ts + PhrasesView
+  phrases/      donnees/phrases.ts, PhrasesView (3 niveaux), FichePhrase
   lieux/        donnees/lieux.ts, donnees/etapes.ts, CarteLieux.vue, LieuxView
   reglages/     ReglagesView
 scripts/        generer-icones.mjs (génère les PNG et le favicon, zéro dépendance)
@@ -143,6 +143,14 @@ Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
     **type d'objet** et de la distance au centre-ville. Ne jamais valider sur le nom de ville
     seul : « Trani » apparaît dans la province « Barletta-Andria-Trani », ce qui avait laissé
     passer la gare d'Andria.
+- **L'écran phrases a trois niveaux** : tuiles de catégories, liste, puis fiche plein écran.
+  La fiche existe pour une raison précise : afficher l'italien en 36 px afin de le faire lire
+  par un serveur ou un pharmacien quand la prononciation ne passe pas. Ce n'est pas un
+  agrandissement décoratif, ne pas le réduire.
+- **Aucune catégorie de phrases n'est privilégiée.** Le sans-laitage est une contrainte parmi
+  d'autres, pas un axe du voyage : il est rangé comme les autres, et un test le vérifie.
+- **Les phrases italiennes doivent être uniques** : elles servent de clé de liste Vue. Un test
+  bloque les doublons.
 - **Aucun défilement horizontal pour choisir.** Catégories de dépense et types de lieux sont en
   grille : une option hors écran est une option qu'on n'utilise pas.
 - **Les liens externes sont vérifiés joignables avant d'être écrits.** Le domaine

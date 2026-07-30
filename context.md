@@ -3,10 +3,9 @@
 **État** : en local, plusieurs lots non déployés. La version en ligne est antérieure aux
 retours sur la carte, le budget repas, les URL sans `#` et les liens journal vers carte.
 
-**En attente d'arbitrage** : la structure de l'écran phrases. Trois options comparées dans
-https://claude.ai/code/artifact/15b2f1be-c0ca-42f8-baf4-787e00042b48 — recommandation A+C,
-tuiles de catégories, bloc sans-laitage épinglé, fiche plein écran en 30 px pour montrer la
-phrase à quelqu'un.
+L'écran phrases est refait : 15 catégories, 209 phrases, en trois niveaux (tuiles, liste,
+fiche plein écran à 36 px). Aucune catégorie épinglée, sur demande explicite : le voyage ne se
+résume pas à l'alimentation.
 
 **URL de production** : https://pouilles-2026.vercel.app (projet Vercel `pouilles-2026`,
 compte `jerems-projects-85dffad9`). C'est **cette** URL, l'alias stable, qu'il faut installer
