@@ -15,6 +15,12 @@ export type TypeLieu = 'transport' | 'site' | 'hebergement' | 'manger' | 'superm
 export type Precision = 'poi' | 'rue' | 'ville'
 
 export interface Lieu {
+  /**
+   * Identifiant stable, référencé par l'itinéraire. Généré depuis le nom mais
+   * écrit en clair ici : un test vérifie que chaque référence du carnet de
+   * route pointe bien sur un lieu existant.
+   */
+  id: string
   nom: string
   type: TypeLieu
   ville: string
@@ -59,6 +65,7 @@ export const LIEUX: readonly Lieu[] = [
   // TRANSPORT — d'où l'on part chaque matin
   // ==========================================================
   {
+    id: 'aeroport-de-bari',
     nom: 'Aéroport de Bari',
     type: 'transport',
     ville: 'Bari',
@@ -70,6 +77,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J11],
   },
   {
+    id: 'bari-centrale',
     nom: 'Bari Centrale',
     type: 'transport',
     ville: 'Bari',
@@ -81,6 +89,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J2, J3, J4, J5, J6, J7, J11],
   },
   {
+    id: 'gare-de-matera-centrale',
     nom: 'Gare de Matera Centrale',
     type: 'transport',
     ville: 'Matera',
@@ -92,6 +101,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J2],
   },
   {
+    id: 'gare-de-trani',
     nom: 'Gare de Trani',
     type: 'transport',
     ville: 'Trani',
@@ -103,6 +113,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J3],
   },
   {
+    id: 'gare-de-polignano-a-mare',
     nom: 'Gare de Polignano a Mare',
     type: 'transport',
     ville: 'Polignano a Mare',
@@ -114,6 +125,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'gare-de-monopoli',
     nom: 'Gare de Monopoli',
     type: 'transport',
     ville: 'Monopoli',
@@ -125,6 +137,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'gare-d-ostuni',
     nom: 'Gare d’Ostuni',
     type: 'transport',
     ville: 'Ostuni',
@@ -136,6 +149,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J5],
   },
   {
+    id: 'gare-d-alberobello',
     nom: 'Gare d’Alberobello',
     type: 'transport',
     ville: 'Alberobello',
@@ -147,6 +161,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J6],
   },
   {
+    id: 'gare-de-lecce',
     nom: 'Gare de Lecce',
     type: 'transport',
     ville: 'Lecce',
@@ -158,6 +173,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J7, J8, J11],
   },
   {
+    id: 'city-terminal-bus-lecce',
     nom: 'City Terminal Bus, Lecce',
     type: 'transport',
     ville: 'Lecce',
@@ -169,6 +185,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J9, J10],
   },
   {
+    id: 'gare-de-gallipoli',
     nom: 'Gare de Gallipoli',
     type: 'transport',
     ville: 'Gallipoli',
@@ -180,6 +197,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J8],
   },
   {
+    id: 'gare-d-otrante',
     nom: 'Gare d’Otrante',
     type: 'transport',
     ville: 'Otranto',
@@ -195,6 +213,7 @@ export const LIEUX: readonly Lieu[] = [
   // SITES — ce qu'on vient voir
   // ==========================================================
   {
+    id: 'bari-vecchia-piazza-mercantile',
     nom: 'Bari Vecchia, Piazza Mercantile',
     type: 'site',
     ville: 'Bari',
@@ -206,6 +225,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J11],
   },
   {
+    id: 'basilique-san-nicola',
     nom: 'Basilique San Nicola',
     type: 'site',
     ville: 'Bari',
@@ -217,6 +237,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J11],
   },
   {
+    id: 'chateau-normand-souabe',
     nom: 'Château normand-souabe',
     type: 'site',
     ville: 'Bari',
@@ -228,6 +249,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J11],
   },
   {
+    id: 'lungomare-nazario-sauro',
     nom: 'Lungomare Nazario Sauro',
     type: 'site',
     ville: 'Bari',
@@ -239,6 +261,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1],
   },
   {
+    id: 'belvedere-luigi-guerricchio',
     nom: 'Belvédère Luigi Guerricchio',
     type: 'site',
     ville: 'Matera',
@@ -250,6 +273,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J2],
   },
   {
+    id: 'santa-maria-de-idris',
     nom: 'Santa Maria de Idris',
     type: 'site',
     ville: 'Matera',
@@ -261,6 +285,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J2],
   },
   {
+    id: 'cathedrale-de-trani',
     nom: 'Cathédrale de Trani',
     type: 'site',
     ville: 'Trani',
@@ -272,6 +297,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J3],
   },
   {
+    id: 'chateau-souabe-de-trani',
     nom: 'Château souabe de Trani',
     type: 'site',
     ville: 'Trani',
@@ -283,6 +309,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J3],
   },
   {
+    id: 'lama-monachile',
     nom: 'Lama Monachile',
     type: 'site',
     ville: 'Polignano a Mare',
@@ -294,6 +321,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'cala-porta-vecchia',
     nom: 'Cala Porta Vecchia',
     type: 'site',
     ville: 'Monopoli',
@@ -305,6 +333,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'chateau-charles-quint',
     nom: 'Château Charles Quint',
     type: 'site',
     ville: 'Monopoli',
@@ -316,6 +345,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'concathedrale-d-ostuni',
     nom: 'Concathédrale d’Ostuni',
     type: 'site',
     ville: 'Ostuni',
@@ -327,6 +357,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J5],
   },
   {
+    id: 'rione-monti',
     nom: 'Rione Monti',
     type: 'site',
     ville: 'Alberobello',
@@ -338,6 +369,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J6],
   },
   {
+    id: 'rione-aia-piccola',
     nom: 'Rione Aia Piccola',
     type: 'site',
     ville: 'Alberobello',
@@ -349,6 +381,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J6],
   },
   {
+    id: 'piazza-del-duomo',
     nom: 'Piazza del Duomo',
     type: 'site',
     ville: 'Lecce',
@@ -360,6 +393,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J7, J11],
   },
   {
+    id: 'basilique-santa-croce',
     nom: 'Basilique Santa Croce',
     type: 'site',
     ville: 'Lecce',
@@ -371,6 +405,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J7],
   },
   {
+    id: 'amphitheatre-romain',
     nom: 'Amphithéâtre romain',
     type: 'site',
     ville: 'Lecce',
@@ -382,6 +417,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J7],
   },
   {
+    id: 'chateau-angevin-de-gallipoli',
     nom: 'Château angevin de Gallipoli',
     type: 'site',
     ville: 'Gallipoli',
@@ -393,6 +429,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J8],
   },
   {
+    id: 'spiaggia-della-purita',
     nom: 'Spiaggia della Purità',
     type: 'site',
     ville: 'Gallipoli',
@@ -404,6 +441,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J8],
   },
   {
+    id: 'chateau-aragonais-d-otrante',
     nom: 'Château aragonais d’Otrante',
     type: 'site',
     ville: 'Otranto',
@@ -415,6 +453,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J9],
   },
   {
+    id: 'cathedrale-d-otrante',
     nom: 'Cathédrale d’Otrante',
     type: 'site',
     ville: 'Otranto',
@@ -426,6 +465,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J9],
   },
   {
+    id: 'plage-de-porto-cesareo',
     nom: 'Plage de Porto Cesareo',
     type: 'site',
     ville: 'Porto Cesareo',
@@ -441,6 +481,7 @@ export const LIEUX: readonly Lieu[] = [
   // HÉBERGEMENT
   // ==========================================================
   {
+    id: 'host-bari-centrale',
     nom: 'Host Bari Centrale',
     type: 'hebergement',
     ville: 'Bari',
@@ -452,6 +493,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'lobby-collective-hostel',
     nom: 'Lobby Collective Hostel',
     type: 'hebergement',
     ville: 'Lecce',
@@ -467,6 +509,7 @@ export const LIEUX: readonly Lieu[] = [
   // OÙ MANGER, sans laitage
   // ==========================================================
   {
+    id: 'boulangerie-fiore',
     nom: 'Boulangerie Fiore',
     type: 'manger',
     ville: 'Bari',
@@ -478,6 +521,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J1, J11],
   },
   {
+    id: 'la-lopa',
     nom: 'La Lopa',
     type: 'manger',
     ville: 'Matera',
@@ -489,6 +533,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J2],
   },
   {
+    id: 'peschef',
     nom: 'Peschef',
     type: 'manger',
     ville: 'Trani',
@@ -500,6 +545,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J3],
   },
   {
+    id: 'pescaria',
     nom: 'Pescaria',
     type: 'manger',
     ville: 'Polignano a Mare',
@@ -511,6 +557,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: [J4],
   },
   {
+    id: 'la-puccia',
     nom: 'La Puccia',
     type: 'manger',
     ville: 'Lecce',
@@ -526,6 +573,7 @@ export const LIEUX: readonly Lieu[] = [
   // SUPERMARCHÉS
   // ==========================================================
   {
+    id: 'coop',
     nom: 'Coop',
     type: 'supermarche',
     ville: 'Bari',
@@ -537,6 +585,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'famila',
     nom: 'Famila',
     type: 'supermarche',
     ville: 'Bari',
@@ -548,6 +597,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'eurospin',
     nom: 'Eurospin',
     type: 'supermarche',
     ville: 'Lecce',
@@ -559,6 +609,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_LECCE,
   },
   {
+    id: 'conad-city',
     nom: 'Conad City',
     type: 'supermarche',
     ville: 'Lecce',
@@ -574,6 +625,7 @@ export const LIEUX: readonly Lieu[] = [
   // GLACIERS sans laitage — commodité, pas objectif
   // ==========================================================
   {
+    id: 'gelateria-gentile',
     nom: 'Gelateria Gentile',
     type: 'glacier',
     ville: 'Bari',
@@ -585,6 +637,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'gelateria-piccinni',
     nom: 'Gelateria Piccinni',
     type: 'glacier',
     ville: 'Bari',
@@ -596,6 +649,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'il-gelatiere',
     nom: 'Il Gelatiere',
     type: 'glacier',
     ville: 'Bari',
@@ -607,6 +661,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_BARI,
   },
   {
+    id: 'gelatario',
     nom: 'Gelatario',
     type: 'glacier',
     ville: 'Lecce',
@@ -618,6 +673,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_LECCE,
   },
   {
+    id: 'agricola-gelateria',
     nom: 'Agricola Gelateria',
     type: 'glacier',
     ville: 'Lecce',
@@ -629,6 +685,7 @@ export const LIEUX: readonly Lieu[] = [
     jours: JOURS_LECCE,
   },
   {
+    id: 'la-romana-dal-1947',
     nom: 'La Romana dal 1947',
     type: 'glacier',
     ville: 'Lecce',
@@ -653,6 +710,31 @@ export function lienCarte(lieu: Lieu): string {
     return `https://maps.apple.com/?ll=${lieu.lat},${lieu.lon}&q=${encodeURIComponent(lieu.nom)}`
   }
   return `https://maps.apple.com/?q=${encodeURIComponent(lieu.adresse)}`
+}
+
+/**
+ * Itinéraire pas à pas, délégué à Google Maps.
+ *
+ * Calculer un itinéraire dans l'application supposerait un moteur de routage
+ * externe, sans données de transport en commun italien et inutilisable
+ * hors-ligne. Google Maps a les horaires Trenitalia et les lignes de bus
+ * locales : autant lui passer la main. Le lien s'ouvre dans l'application
+ * Google Maps si elle est installée, sinon dans le navigateur.
+ */
+export function lienItineraire(lieu: Lieu): string {
+  const destination = lieu.precision === 'poi' ? `${lieu.lat},${lieu.lon}` : lieu.adresse
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
+}
+
+const PAR_ID = new Map(LIEUX.map((lieu) => [lieu.id, lieu]))
+
+/** Renvoie undefined plutôt que de lever : un lien cassé ne doit pas vider l'écran. */
+export function lieuParId(id: string): Lieu | undefined {
+  return PAR_ID.get(id)
+}
+
+export function lieuxParIds(ids: readonly string[]): Lieu[] {
+  return ids.map(lieuParId).filter((lieu): lieu is Lieu => lieu !== undefined)
 }
 
 export const LIBELLES_TYPE: Record<TypeLieu, { label: string; court: string; icone: NomIcone }> = {

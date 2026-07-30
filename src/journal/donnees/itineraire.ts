@@ -26,6 +26,17 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['aeroport-de-bari', 'bari-centrale'],
+    lieuxSites: [
+      'bari-vecchia-piazza-mercantile',
+      'basilique-san-nicola',
+      'chateau-normand-souabe',
+      'lungomare-nazario-sauro',
+    ],
+    lieuxManger: ['boulangerie-fiore'],
+    reservations: [
+      { label: 'Navette aéroport, Ferrotramviaria', url: 'https://www.ferrotramviaria.it/home' },
+    ],
   },
   {
     date: '2026-08-25',
@@ -40,6 +51,10 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Restaurant La Lopa, midi et soir : fave e cicorie (purée de fèves à l’huile d’olive, chicorée sauvage, peperoni cruschi).',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-de-matera-centrale'],
+    lieuxSites: ['belvedere-luigi-guerricchio', 'santa-maria-de-idris'],
+    lieuxManger: ['la-lopa'],
+    reservations: [{ label: 'Horaires et billets FAL', url: 'https://ferrovieappulolucane.it' }],
   },
   {
     date: '2026-08-26',
@@ -53,6 +68,10 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Friterie marine Peschef sur le port : poulpe grillé ou grande salade de fruits de mer, huile d’olive et citron.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-de-trani'],
+    lieuxSites: ['cathedrale-de-trani', 'chateau-souabe-de-trani'],
+    lieuxManger: ['peschef'],
+    reservations: [{ label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' }],
   },
   {
     date: '2026-08-27',
@@ -67,6 +86,10 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Pescaria à Polignano : panino con polpo fritto (poulpe frit, figues, chicorée). Demander impérativement à retirer la crème de ricotta.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-de-polignano-a-mare', 'gare-de-monopoli'],
+    lieuxSites: ['lama-monachile', 'cala-porta-vecchia', 'chateau-charles-quint'],
+    lieuxManger: ['pescaria'],
+    reservations: [{ label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' }],
   },
   {
     date: '2026-08-28',
@@ -81,6 +104,12 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Boulangerie d’Ostuni : puccia au feu de bois garnie de légumes grillés, thon à l’huile et câpres. Préciser « senza formaggio ».',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-d-ostuni'],
+    lieuxSites: ['concathedrale-d-ostuni'],
+    lieuxManger: [],
+    reservations: [{ label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' }],
+    alerte:
+      'La gare est à 2,8 km du centre historique. Prendre la navette de bus STP qui attend devant la gare, la montée à pied n’est pas raisonnable en août.',
   },
   {
     date: '2026-08-29',
@@ -95,6 +124,13 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Grand cornet de taralli artisanaux (farine, vin blanc, huile d’olive) en boulangerie, avec tomates cerises et fruits frais.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-d-alberobello'],
+    lieuxSites: ['rione-aia-piccola', 'rione-monti'],
+    lieuxManger: [],
+    reservations: [
+      { label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' },
+      { label: 'Réseau FSE', url: 'https://www.fssudest.it' },
+    ],
   },
   {
     date: '2026-08-30',
@@ -109,6 +145,12 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'La Puccia, Viale Giacomo Leopardi : puccia leccese sur mesure, prosciutto crudo, tomates séchées, olives, roquette. Sans fromage ni crème.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['bari-centrale', 'gare-de-lecce'],
+    lieuxSites: ['piazza-del-duomo', 'basilique-santa-croce', 'amphitheatre-romain'],
+    lieuxManger: ['la-puccia'],
+    reservations: [{ label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' }],
+    alerte:
+      'À vérifier dès l’arrivée à Lecce : les horaires de Salento in Bus pour Otrante et Porto Cesareo. Le site salentoinbus.it ne répond plus, il faut consulter l’affichage officiel en gare ou au City Terminal.',
   },
   {
     date: '2026-08-31',
@@ -122,6 +164,13 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'En trattoria : orecchiette con cime di rapa (ail, huile d’olive, anchois). Bien préciser « senza formaggio », certains en saupoudrent au service.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['gare-de-lecce', 'gare-de-gallipoli'],
+    lieuxSites: ['chateau-angevin-de-gallipoli', 'spiaggia-della-purita'],
+    lieuxManger: ['la-puccia'],
+    reservations: [
+      { label: 'Réseau FSE', url: 'https://www.fssudest.it' },
+      { label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' },
+    ],
   },
   {
     date: '2026-09-01',
@@ -136,6 +185,12 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Frise à emporter : pains secs réhydratés, tomates fraîches frottées, huile d’olive extra-vierge et origan.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['city-terminal-bus-lecce', 'gare-d-otrante'],
+    lieuxSites: ['chateau-aragonais-d-otrante', 'cathedrale-d-otrante'],
+    lieuxManger: [],
+    reservations: [{ label: 'Repli en train, réseau FSE', url: 'https://www.fssudest.it' }],
+    alerte:
+      'Salento in Bus part du City Terminal, au nord, et non de la gare. Aucun site joignable pour les horaires : vérifier l’affichage sur place. Repli possible en train FSE jusqu’à Otrante.',
   },
   {
     date: '2026-09-02',
@@ -149,6 +204,12 @@ export const ITINERAIRE: readonly Jour[] = [
     ouManger:
       'Pique-nique autonome préparé à l’Eurospin voisin de l’auberge (pain de campagne, prosciutto crudo, olives, tomates), pour éviter les tarifs des paillotes.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['city-terminal-bus-lecce'],
+    lieuxSites: ['plage-de-porto-cesareo'],
+    lieuxManger: [],
+    reservations: [],
+    alerte:
+      'Salento in Bus depuis le City Terminal. Horaires à vérifier sur place, le site du réseau est hors service. Pique-nique à préparer la veille à l’Eurospin.',
   },
   {
     date: '2026-09-03',
@@ -162,6 +223,14 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 2310,
     ouManger: 'Derniers en-cas de rue à Bari : parts de focaccia ou taralli avant l’embarquement.',
     repasPrevu: REPAS_PAR_JOUR,
+    lieuxTransport: ['gare-de-lecce', 'bari-centrale', 'aeroport-de-bari'],
+    lieuxSites: ['bari-vecchia-piazza-mercantile', 'piazza-del-duomo'],
+    lieuxManger: ['boulangerie-fiore'],
+    reservations: [
+      { label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' },
+      { label: 'Navette aéroport, Ferrotramviaria', url: 'https://www.ferrotramviaria.it/home' },
+    ],
+    alerte: 'Vol à 20 h 40. Consigne automatique à Bari Centrale, 6 € prévus.',
   },
 ]
 

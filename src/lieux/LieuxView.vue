@@ -1,14 +1,34 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Icone from '../partage/Icone.vue'
 import { JOURS, jourActif, libelleJourCourt } from '../partage/voyage'
 import { ETAPES, etape } from './donnees/etapes'
-import { LIBELLES_PRECISION, LIBELLES_TYPE, LIEUX, lienCarte } from './donnees/lieux'
+import {
+  LIBELLES_PRECISION,
+  LIBELLES_TYPE,
+  LIEUX,
+  lienCarte,
+  lienItineraire,
+  lieuParId,
+} from './donnees/lieux'
 import type { TypeLieu } from './donnees/lieux'
 import CarteLieux from './CarteLieux.vue'
 
+const route = useRoute()
+
 const TYPES = Object.keys(LIBELLES_TYPE) as TypeLieu[]
 const VILLES = ['Bari', 'Lecce'] as const
+
+/**
+ * Lieu ciblé depuis le journal, via `/lieux?lieu=<id>`. On lève alors tous les
+ * filtres : arriver sur une liste vide parce qu'un filtre de jour masquait la
+ * cible serait absurde.
+ */
+const cible = computed(() => {
+  const id = route.query.lieu
+  return typeof id === 'string' ? (lieuParId(id) ?? null) : null
+})
 
 const filtreType = ref<TypeLieu | null>(null)
 const filtreVille = ref<string | null>(null)
@@ -17,7 +37,22 @@ const filtreVille = ref<string | null>(null)
  * adresses qui servent aujourd'hui. Hors des dates, rien n'est filtré, on
  * consulte l'ensemble.
  */
-const filtreJour = ref<string | null>(jourActif())
+const filtreJour = ref<string | null>(cible.value ? null : jourActif())
+
+function amene() {
+  if (!cible.value) return
+  filtreType.value = null
+  filtreVille.value = null
+  filtreJour.value = null
+  void nextTick(() => {
+    document
+      .getElementById(`lieu-${cible.value?.id}`)
+      ?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  })
+}
+
+onMounted(amene)
+watch(cible, amene)
 
 /**
  * Ville et jour sont deux façons de restreindre la même chose : choisir l'une
@@ -72,7 +107,7 @@ function reinitialise() {
 <template>
   <div>
     <div class="pt-3">
-      <CarteLieux :lieux="lieuxFiltres" :etapes="etapesFiltrees" />
+      <CarteLieux :lieux="lieuxFiltres" :etapes="etapesFiltrees" :focus="cible" />
     </div>
 
     <section class="bloc">
@@ -143,27 +178,36 @@ function reinitialise() {
       <ul class="mt-2">
         <li
           v-for="lieu in groupe.lieux"
-          :key="lieu.nom + lieu.ville"
-          class="border-b border-sable-fonce/60 py-3 last:border-0"
+          :id="`lieu-${lieu.id}`"
+          :key="lieu.id"
+          class="scroll-mt-24 border-b border-sable-fonce/60 py-3 last:border-0"
+          :class="lieu.id === cible?.id ? '-mx-2 rounded-xl bg-terre-clair px-2' : ''"
         >
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0">
-              <p class="font-semibold">{{ lieu.nom }}</p>
-              <p class="text-xs font-bold uppercase tracking-wider text-terre">{{ lieu.ville }}</p>
-              <p class="mt-1.5 text-sm leading-relaxed text-encre-doux">{{ lieu.note }}</p>
-              <p class="mt-1 text-xs text-encre-doux/80">
-                {{ LIBELLES_PRECISION[lieu.precision] }}
-              </p>
-            </div>
+          <p class="font-semibold">{{ lieu.nom }}</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-terre">{{ lieu.ville }}</p>
+          <p class="mt-1.5 text-sm leading-relaxed text-encre-doux">{{ lieu.note }}</p>
+          <p class="mt-1 text-xs text-encre-doux/80">{{ LIBELLES_PRECISION[lieu.precision] }}</p>
+
+          <div class="mt-2 flex gap-1.5">
+            <a
+              :href="lienItineraire(lieu)"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-mer text-xs font-bold text-white"
+              :aria-label="`Itinéraire vers ${lieu.nom} dans Google Maps`"
+            >
+              <Icone nom="orientation" :taille="15" />
+              Itinéraire
+            </a>
             <a
               :href="lienCarte(lieu)"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex min-h-11 shrink-0 items-center gap-1 rounded-xl bg-white px-3 text-xs font-bold text-mer"
+              class="flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-white text-xs font-bold text-encre"
               :aria-label="`Ouvrir ${lieu.nom} dans Plans`"
             >
               <Icone nom="carte" :taille="15" />
-              Y aller
+              Voir dans Plans
             </a>
           </div>
         </li>

@@ -9,7 +9,12 @@ import { LIBELLES_TYPE } from './donnees/lieux'
 import type { Lieu, TypeLieu } from './donnees/lieux'
 import type { Etape } from './donnees/etapes'
 
-const props = defineProps<{ lieux: readonly Lieu[]; etapes: readonly Etape[] }>()
+const props = defineProps<{
+  lieux: readonly Lieu[]
+  etapes: readonly Etape[]
+  /** Lieu à centrer et dont la bulle s'ouvre, quand on arrive depuis le journal. */
+  focus?: Lieu | null
+}>()
 
 const conteneur = ref<HTMLElement | null>(null)
 const carte = shallowRef<L.Map | null>(null)
@@ -68,6 +73,37 @@ function pastilleGroupe(groupe: L.MarkerCluster) {
   })
 }
 
+/** Étapes du voyage : petits points sombres, sous les lieux dans l'empilement. */
+function ajouteEtapes(groupe: L.MarkerClusterGroup, points: L.LatLngExpression[]) {
+  for (const etape of props.etapes) {
+    L.marker([etape.lat, etape.lon], { icon: pastille('#1c1917', 9) })
+      .bindPopup(`<strong>${etape.ville}</strong><br>Étape du voyage`)
+      .addTo(groupe)
+    points.push([etape.lat, etape.lon])
+  }
+}
+
+/** Ajoute les lieux et renvoie le marqueur ciblé, s'il y en a un. */
+function ajouteLieux(groupe: L.MarkerClusterGroup, points: L.LatLngExpression[]): L.Marker | null {
+  let marqueurCible: L.Marker | null = null
+
+  for (const lieu of props.lieux) {
+    const estCible = lieu.id === props.focus?.id
+    const marqueur = L.marker([lieu.lat, lieu.lon], {
+      icon: pastille(COULEURS[lieu.type], estCible ? 17 : 13),
+      zIndexOffset: estCible ? 1000 : 0,
+    })
+      .bindPopup(
+        `<strong>${lieu.nom}</strong><br>${LIBELLES_TYPE[lieu.type].label}<br>${lieu.adresse}`,
+      )
+      .addTo(groupe)
+    if (estCible) marqueurCible = marqueur
+    points.push([lieu.lat, lieu.lon])
+  }
+
+  return marqueurCible
+}
+
 function dessine() {
   const instance = carte.value
   const groupe = couche.value
@@ -75,21 +111,15 @@ function dessine() {
 
   groupe.clearLayers()
   const points: L.LatLngExpression[] = []
+  ajouteEtapes(groupe, points)
+  const marqueurCible = ajouteLieux(groupe, points)
 
-  for (const etape of props.etapes) {
-    L.marker([etape.lat, etape.lon], { icon: pastille('#1c1917', 9) })
-      .bindPopup(`<strong>${etape.ville}</strong><br>Étape du voyage`)
-      .addTo(groupe)
-    points.push([etape.lat, etape.lon])
-  }
-
-  for (const lieu of props.lieux) {
-    L.marker([lieu.lat, lieu.lon], { icon: pastille(COULEURS[lieu.type]) })
-      .bindPopup(
-        `<strong>${lieu.nom}</strong><br>${LIBELLES_TYPE[lieu.type].label}<br>${lieu.adresse}`,
-      )
-      .addTo(groupe)
-    points.push([lieu.lat, lieu.lon])
+  // Arrivée depuis le journal : on zoome sur le point demandé plutôt que de
+  // cadrer sur l'ensemble, et on ouvre sa bulle pour qu'il soit identifiable.
+  if (marqueurCible) {
+    instance.setView(marqueurCible.getLatLng(), 16, { animate: false })
+    groupe.zoomToShowLayer(marqueurCible, () => marqueurCible.openPopup())
+    return
   }
 
   if (points.length > 0) {
@@ -135,7 +165,7 @@ watch(enLigne, (actif) => {
   if (actif) requestAnimationFrame(monte)
 })
 
-watch(() => [props.lieux, props.etapes], dessine, { deep: false })
+watch(() => [props.lieux, props.etapes, props.focus], dessine, { deep: false })
 </script>
 
 <template>

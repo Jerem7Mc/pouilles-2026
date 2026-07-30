@@ -5,7 +5,9 @@ import { formatEuros } from '../partage/monnaie'
 import { JOURS, jourActif, libelleJour, libelleJourCourt } from '../partage/voyage'
 import { totalParDate } from '../depenses/calculs'
 import { useDepenses } from '../depenses/useDepenses'
+import { lieuxParIds } from '../lieux/donnees/lieux'
 import { ITINERAIRE } from './donnees/itineraire'
+import RubriqueJour from './RubriqueJour.vue'
 
 const { depenses } = useDepenses()
 
@@ -28,12 +30,6 @@ const numero = computed(() => JOURS.indexOf(selection.value) + 1)
 const prevu = computed(() => (jour.value ? jour.value.transportPrevu + jour.value.repasPrevu : 0))
 const reel = computed(() => totalParDate(depenses.value)[selection.value] ?? 0)
 const ecart = computed(() => reel.value - prevu.value)
-
-const RUBRIQUES = [
-  { cle: 'aFaire', titre: 'Quoi voir, quoi faire', icone: 'carte', montant: null },
-  { cle: 'transport', titre: 'Comment y aller', icone: 'transport', montant: 'transportPrevu' },
-  { cle: 'ouManger', titre: 'Où manger, sans laitage', icone: 'manger', montant: 'repasPrevu' },
-] as const
 </script>
 
 <template>
@@ -74,6 +70,14 @@ const RUBRIQUES = [
           {{ jour.titre }}
         </h2>
         <p class="mt-2 text-sm text-encre-doux">{{ jour.base }} · {{ jour.hebergement }}</p>
+
+        <p
+          v-if="jour.alerte"
+          class="mt-3 flex gap-2 rounded-xl bg-terre-clair px-3 py-2.5 text-sm leading-relaxed text-terre"
+        >
+          <Icone nom="urgence" :taille="16" class="mt-0.5 shrink-0" />
+          <span>{{ jour.alerte }}</span>
+        </p>
       </header>
 
       <!-- Deux tuiles empruntées à la direction bento : le réel et le prévu du
@@ -102,16 +106,29 @@ const RUBRIQUES = [
         </p>
       </section>
 
-      <section v-for="rubrique in RUBRIQUES" :key="rubrique.cle" class="bloc">
-        <p class="micro flex items-center gap-1.5">
-          <Icone :nom="rubrique.icone" :taille="14" />
-          {{ rubrique.titre }}
-          <span v-if="rubrique.montant" class="tabular-nums normal-case tracking-normal">
-            · {{ formatEuros(jour[rubrique.montant]) }} prévus
-          </span>
-        </p>
-        <p class="mt-2 leading-relaxed">{{ jour[rubrique.cle] }}</p>
-      </section>
+      <RubriqueJour
+        titre="Comment y aller"
+        icone="transport"
+        :texte="jour.transport"
+        :montant="jour.transportPrevu"
+        :lieux="lieuxParIds(jour.lieuxTransport)"
+        :reservations="jour.reservations"
+      />
+
+      <RubriqueJour
+        titre="Quoi voir, quoi faire"
+        icone="carte"
+        :texte="jour.aFaire"
+        :lieux="lieuxParIds(jour.lieuxSites)"
+      />
+
+      <RubriqueJour
+        titre="Où manger, sans laitage"
+        icone="manger"
+        :texte="jour.ouManger"
+        :montant="jour.repasPrevu"
+        :lieux="lieuxParIds(jour.lieuxManger)"
+      />
     </article>
   </div>
 </template>

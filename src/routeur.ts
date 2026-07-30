@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import DepensesView from './depenses/DepensesView.vue'
 import JournalView from './journal/JournalView.vue'
 import LieuxView from './lieux/LieuxView.vue'
@@ -6,11 +6,15 @@ import PhrasesView from './phrases/PhrasesView.vue'
 import ReglagesView from './reglages/ReglagesView.vue'
 
 /**
- * Historique par hash volontairement : aucune règle de réécriture à configurer
- * chez l'hébergeur, et aucune erreur 404 possible au rechargement hors-ligne.
+ * URL propres, sans `#`.
+ *
+ * Cela demande deux choses, toutes deux en place : une réécriture côté
+ * hébergeur (`vercel.json`) pour que `/lieux` serve `index.html`, et le
+ * `navigateFallback` de Workbox pour que la même chose vaille hors-ligne depuis
+ * le service worker. En développement, Vite assure ce repli tout seul.
  */
 export const routeur = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     // La racine mène au journal : c'est l'écran de contexte du jour. La saisie
     // de dépense reste à un seul geste grâce au pavé collé en bas d'écran.

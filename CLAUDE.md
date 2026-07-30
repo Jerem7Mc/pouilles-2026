@@ -110,9 +110,15 @@ stockage indisponible) au lieu de l'avaler, et l'interface l'affiche.
 
 ## 5. Routes
 
-`/journal` carnet de route (**et la racine `/` y redirige**) · `/phrases` italien ·
-`/lieux` carte et adresses · `/depenses` saisie et budget · `/reglages` enveloppes et
-sauvegarde. Tout chemin inconnu redirige vers le journal.
+**URL propres, sans `#`** : `/journal` (la racine `/` y redirige) · `/phrases` · `/lieux` ·
+`/depenses` · `/reglages`. Tout chemin inconnu redirige vers le journal.
+
+Cela repose sur deux réécritures, les deux en place : `vercel.json` côté hébergeur, et
+`navigateFallback: '/index.html'` dans Workbox pour que le rechargement hors-ligne d'une route
+profonde fonctionne aussi. Vite assure le repli en développement.
+
+`/lieux?lieu=<id>` cible un lieu : les filtres sont levés, la ligne est mise en évidence et la
+carte zoome sur le point en ouvrant sa bulle. C'est ce que produisent les puces du journal.
 
 Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
 
@@ -139,6 +145,15 @@ Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
     passer la gare d'Andria.
 - **Aucun défilement horizontal pour choisir.** Catégories de dépense et types de lieux sont en
   grille : une option hors écran est une option qu'on n'utilise pas.
+- **Les liens externes sont vérifiés joignables avant d'être écrits.** Le domaine
+  `salentoinbus.it` ne résout plus : aucun lien n'y renvoie, un avertissement le dit dans les
+  journées concernées, et un test empêche sa réintroduction.
+- **Les itinéraires sont délégués à Google Maps** (`lienItineraire`). Les calculer dans l'app
+  supposerait un moteur de routage externe, sans horaires de transport italien et inutilisable
+  hors-ligne.
+- **L'itinéraire référence les lieux par identifiant**, jamais par nom. Trois tests vérifient que
+  chaque référence existe, qu'elle est rattachée à la bonne journée, et qu'aucun identifiant
+  n'est en doublon.
 - **La carte OSM exige le réseau.** La politique d'usage des tuiles interdit le préchargement
   massif : `CarteLieux.vue` bascule sur l'image de carte quand `navigator.onLine` est faux.
 - La logique de budget vit dans `calculs.ts`, en fonctions pures et testées. Les composants

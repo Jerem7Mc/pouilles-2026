@@ -1,5 +1,45 @@
 # Journal de sessions
 
+## 2026-07-30 — URL sans hash, liens du journal vers la carte
+
+**Fait**
+
+- Passage en historique HTML5 : `/journal`, `/phrases`, `/lieux`, `/depenses`, `/reglages`, sans
+  `#`. `vercel.json` réécrit vers `index.html`, et `navigateFallback` de Workbox fait de même
+  hors-ligne. Ma justification initiale du hash était trop prudente : Workbox couvrait déjà le
+  cas du rechargement hors-ligne.
+- Chaque lieu porte un identifiant stable, généré depuis son nom. L'itinéraire référence ces
+  identifiants pour ses points de transport, ses sites et ses restaurants.
+- Le journal affiche sous chaque rubrique des puces vers `/lieux?lieu=<id>` : la carte zoome sur
+  le point, ouvre sa bulle, et la ligne correspondante est mise en évidence dans la liste.
+- Boutons de réservation par journée, vers Trenitalia, FAL, FSE et Ferrotramviaria.
+- Chaque lieu propose « Itinéraire » vers Google Maps et « Voir dans Plans » vers Apple Plans.
+
+**Liens externes vérifiés, pas supposés**
+
+Chaque URL a été appelée avant d'être écrite. Deux corrections : `ferrotramviaria.it` renvoie 404
+à la racine, il faut `/home` ; et surtout **`salentoinbus.it` ne résout plus en DNS**, le site du
+réseau de bus des 1er et 2 septembre a disparu. Aucun lien mort livré, un avertissement le dit
+dans les journées concernées, et un test empêche sa réintroduction.
+
+**Arbitrages**
+
+- Les itinéraires restent délégués à Google Maps. Les calculer dans l'app supposerait un moteur
+  de routage externe, sans horaires de transport italien, et inutilisable hors-ligne.
+- `dessine` de `CarteLieux` dépassait la complexité 10 après ajout du ciblage : découpée en
+  `ajouteEtapes` et `ajouteLieux` plutôt que d'assouplir la règle.
+
+**Vérifications**
+
+75 tests verts, dont trois nouveaux sur l'intégrité des références du carnet vers les lieux.
+Parcours Playwright : les six routes répondent sans `#`, le rechargement direct de `/lieux`
+fonctionne, la puce « Bari Centrale » du journal mène à `/lieux?lieu=bari-centrale` avec bulle
+ouverte et ligne surlignée, les liens de réservation et d'itinéraire pointent où il faut.
+
+**En attente**
+
+La structure de l'écran phrases, trois options soumises à arbitrage. Non déployé.
+
 ## 2026-07-30 — Carte utile, budget repas réaliste, accueil sur le journal
 
 **Demandé**

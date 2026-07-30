@@ -1,7 +1,12 @@
 # Où on en est — Pouilles 2026
 
-**État** : en local, des changements non déployés. La dernière version en ligne date d'avant
-les retours sur la carte, le budget repas et la route d'accueil.
+**État** : en local, plusieurs lots non déployés. La version en ligne est antérieure aux
+retours sur la carte, le budget repas, les URL sans `#` et les liens journal vers carte.
+
+**En attente d'arbitrage** : la structure de l'écran phrases. Trois options comparées dans
+https://claude.ai/code/artifact/15b2f1be-c0ca-42f8-baf4-787e00042b48 — recommandation A+C,
+tuiles de catégories, bloc sans-laitage épinglé, fiche plein écran en 30 px pour montrer la
+phrase à quelqu'un.
 
 **URL de production** : https://pouilles-2026.vercel.app (projet Vercel `pouilles-2026`,
 compte `jerems-projects-85dffad9`). C'est **cette** URL, l'alias stable, qu'il faut installer
@@ -52,8 +57,10 @@ hors-ligne ni l'installation.
   dans l'app. Deux corrections : les postes oubliés (glaces, entrées de sites, courses,
   souvenirs, marge) et surtout les repas, passés à **25 € par jour** puisque le plan ne
   comptait que deux repas quotidiens et descendait à 12 € certains jours.
-- **Horaires Salento in Bus** : les grilles changent souvent au 1er septembre. Vérifier
-  l'affichage officiel en gare de Lecce dès l'arrivée le 30 août, avant la journée d'Otrante.
+- **Salento in Bus : le site n'existe plus.** `salentoinbus.it` ne résout plus en DNS,
+  vérifié le 30/07/2026. C'est le réseau des 1er et 2 septembre, pour Otrante et Porto Cesareo.
+  Vérifier l'affichage officiel au City Terminal de Lecce dès l'arrivée le 30 août. Repli
+  possible pour Otrante : train FSE, qui a une gare à 900 m du centre.
 
 - **Adresse du Coop de Bari à vérifier sur place.** Le géocodage place Via Giulio Petroni 22 à
   2 km de la gare, alors que le plan annonce « 2 minutes à pied, en face de l'hôtel ». L'un des

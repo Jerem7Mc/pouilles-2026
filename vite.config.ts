@@ -33,7 +33,11 @@ export default defineConfig({
         // Doublon lourd de la carte (982 ko) et visuel non utilisé : inutile de
         // les embarquer dans le cache hors-ligne.
         globIgnores: ['**/carte-toursitique-pouilles.png', '**/italie.png'],
-        navigateFallback: 'index.html',
+        // Sans hash dans l'URL, un rechargement hors-ligne sur /lieux doit
+        // resservir index.html depuis le cache. Les requêtes d'assets et de
+        // fichiers versionnés en sont exclues.
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/assets\//u, /\.[a-zA-Z0-9]+$/u],
       },
     }),
   ],
