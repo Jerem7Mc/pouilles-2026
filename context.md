@@ -6,16 +6,29 @@
 
 ## Prochaines actions, dans l'ordre
 
-1. Déployer sur Vercel (`vercel` ou import du repo). Gratuit, HTTPS requis pour la PWA.
-2. Sur l'iPhone : ouvrir l'URL dans Safari, Partager, « Sur l'écran d'accueil ».
+1. Déployer sur Vercel : `npx vercel --prod`, projet `pouilles-2026`. Gratuit, HTTPS requis
+   pour la PWA. **Toujours `--prod`** : une URL de preview change à chaque déploiement, et
+   comme le stockage est lié à l'origine, installer depuis une preview perdrait les dépenses
+   au déploiement suivant.
+2. Sur l'iPhone : ouvrir l'URL de production **dans Safari**, Partager, « Sur l'écran
+   d'accueil ». Voir le point de vigilance sur Chrome plus bas.
 3. Lancer depuis l'icône, saisir une dépense d'essai, la supprimer.
 4. Mode Avion, vérifier que les quatre onglets répondent.
 5. Exporter une sauvegarde et la stocker ailleurs que sur le téléphone.
 
 Ces cinq points sont aussi rappelés dans l'écran Réglages de l'application.
 
+Serveur local : `npm run dev -- --port 1605 --host`. Le service worker ne s'enregistre que
+sur une origine sécurisée, donc l'accès par IP locale montre l'interface mais pas le
+hors-ligne ni l'installation.
+
 ## Points de vigilance
 
+- **Installer depuis Safari, pas Chrome.** Jérém navigue sous Chrome, mais sur iOS seul Safari
+  crée une PWA autonome. Le « Ajouter à l'écran d'accueil » de Chrome iOS ne fait qu'un
+  raccourci qui rouvre dans Chrome, avec un stockage de site ordinaire donc évinçable.
+  Vérification : si l'app lancée depuis l'icône affiche une barre d'adresse, c'est un
+  raccourci, pas une PWA.
 - **Persistance iOS** : en PWA installée, `localStorage` n'est pas soumis à la purge 7 jours de
   Safari, mais reste évincible sous forte pression disque. L'export manuel est le seul filet.
   À faire une fois par soir pendant le voyage.
