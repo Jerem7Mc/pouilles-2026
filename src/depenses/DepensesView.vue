@@ -9,17 +9,23 @@ const { erreurStockage } = useDepenses()
 </script>
 
 <template>
-  <div class="space-y-4">
+  <!--
+    Ordre voulu : ce qu'on lit d'abord en haut, ce qu'on touche en bas. Le pavé
+    de saisie est le dernier enfant pour que son `position: sticky` le maintienne
+    épinglé au-dessus de la barre d'onglets pendant tout le défilement.
+  -->
+  <div>
     <p
       v-if="erreurStockage"
       role="alert"
-      class="rounded-xl bg-alerte px-3 py-2 text-sm font-medium text-white"
+      class="mt-3 rounded-xl bg-alerte px-3 py-2 text-sm font-semibold text-white"
     >
       {{ erreurStockage }}
     </p>
-    <SaisieDepense />
+
     <BandeauBudget />
     <ListeEnveloppes />
     <ListeDepenses />
+    <SaisieDepense />
   </div>
 </template>

@@ -1,5 +1,40 @@
 # Journal de sessions
 
+## 2026-07-30 — Refonte visuelle, direction « carnet + pavé du pouce »
+
+Trois directions ont été maquettées et comparées dans le navigateur avant tout code. Jérém a
+retenu **A + C** : structure carnet partout, pavé de saisie en bas d'écran.
+
+**Fait**
+
+- Suppression de toutes les cartes blanches empilées. Hiérarchie portée par la taille du texte,
+  le vide et des filets d'un pixel. Classes `.micro`, `.bloc`, `.chiffre` dans `style.css`.
+- Saisie de dépense descendue en pavé collant au-dessus de la barre d'onglets, adossée à la
+  variable `--hauteur-nav` pour ne dépendre d'aucun nombre magique. Libellé et date repliés par
+  défaut : le cas courant est un montant seul.
+- Deux tuiles de statistiques sur le journal, empruntées à la direction bento, pour comparer le
+  dépensé et le prévu du jour sans lire une phrase.
+- Présélection du jour en cours sur les trois écrans concernés, via une fonction unique
+  `jourActif()`. La bande de journées du journal recentre la pastille active au montage.
+- Ordre des catégories de phrases revu : le sans-laitage passe après les achats.
+
+**Arbitrages**
+
+- Aucune couleur ni donnée touchée, comme demandé. La logique de budget n'a pas bougé, ses
+  tests restaient la garantie de non-régression.
+- Les sept catégories du pavé défilent horizontalement : quatre sont visibles d'emblée, les
+  trois dernières demandent un glissement. Alternative écartée : deux rangées, qui coûtaient
+  70 px d'écran en permanence.
+- Montant aligné à droite contre le symbole euro. En alignement à gauche dans un champ de
+  largeur fixe, le € se retrouvait à 60 px des chiffres.
+
+**Vérifications**
+
+67 tests verts. Parcours Playwright avec l'horloge figée au 27/08, jour 4 : pavé visible à
+l'ouverture et après défilement, jamais recouvert par la barre d'onglets, saisie complète
+fonctionnelle, jour actif présélectionné sur les trois écrans, aucun débordement horizontal sur
+les cinq routes, zéro erreur console.
+
 ## 2026-07-30 — Retours utilisateur, carte OSM et icônes de librairie
 
 **Demandé**

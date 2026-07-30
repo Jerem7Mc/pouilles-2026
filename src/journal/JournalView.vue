@@ -28,23 +28,33 @@ const numero = computed(() => JOURS.indexOf(selection.value) + 1)
 const prevu = computed(() => (jour.value ? jour.value.transportPrevu + jour.value.repasPrevu : 0))
 const reel = computed(() => totalParDate(depenses.value)[selection.value] ?? 0)
 const ecart = computed(() => reel.value - prevu.value)
+
+const RUBRIQUES = [
+  { cle: 'aFaire', titre: 'Quoi voir, quoi faire', icone: 'carte', montant: null },
+  { cle: 'transport', titre: 'Comment y aller', icone: 'transport', montant: 'transportPrevu' },
+  { cle: 'ouManger', titre: 'Où manger, sans laitage', icone: 'manger', montant: 'repasPrevu' },
+] as const
 </script>
 
 <template>
-  <div class="space-y-4">
-    <!-- Sélecteur de jour : défilement horizontal, une pastille par journée -->
-    <nav ref="bandeJours" aria-label="Journées du voyage" class="-mx-4 overflow-x-auto px-4">
-      <ul class="flex gap-2 pb-1">
+  <div>
+    <!-- Bande des journées : la pastille active est ramenée au centre au montage -->
+    <nav
+      ref="bandeJours"
+      aria-label="Journées du voyage"
+      class="rangee-defilante zone-sure-haut sticky top-14 z-10 -mx-4 bg-sable/95 px-4 pb-2 pt-1 backdrop-blur"
+    >
+      <ul class="flex gap-1.5">
         <li v-for="date in JOURS" :key="date">
           <button
             type="button"
-            class="min-h-11 whitespace-nowrap rounded-xl px-3 text-sm font-semibold"
+            class="min-h-11 whitespace-nowrap rounded-xl px-3 text-xs font-bold"
             :class="
               date === selection
-                ? 'bg-terre text-white'
+                ? 'bg-encre text-sable'
                 : date === aujourdhui
                   ? 'bg-terre-clair text-terre'
-                  : 'bg-white text-encre-doux'
+                  : 'text-encre-doux'
             "
             :aria-current="date === selection ? 'true' : undefined"
             @click="selection = date"
@@ -55,23 +65,31 @@ const ecart = computed(() => reel.value - prevu.value)
       </ul>
     </nav>
 
-    <article v-if="jour" class="space-y-4">
-      <header class="rounded-2xl bg-white p-4 shadow-sm">
-        <p class="text-sm font-medium text-encre-doux">
-          Jour {{ numero }} sur {{ JOURS.length }} · {{ libelleJour(jour.date) }}
-        </p>
-        <h1 class="mt-1 text-2xl font-bold">{{ jour.titre }}</h1>
-        <p class="mt-1 text-sm text-encre-doux">Base {{ jour.base }} · {{ jour.hebergement }}</p>
+    <article v-if="jour">
+      <header class="bloc">
+        <p class="micro">Jour {{ numero }} sur {{ JOURS.length }} · {{ libelleJour(jour.date) }}</p>
+        <h1 class="mt-1.5 text-3xl font-bold leading-tight tracking-tight text-balance">
+          {{ jour.titre }}
+        </h1>
+        <p class="mt-2 text-sm text-encre-doux">{{ jour.base }} · {{ jour.hebergement }}</p>
       </header>
 
-      <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="text-sm font-medium text-encre-doux">Budget du jour</h2>
-        <div class="mt-2 flex items-baseline gap-4 tabular-nums">
-          <p class="text-2xl font-bold">{{ formatEuros(reel) }}</p>
-          <p class="text-sm text-encre-doux">dépensés sur {{ formatEuros(prevu) }} prévus</p>
+      <!-- Deux tuiles empruntées à la direction bento : le réel et le prévu du
+           jour se comparent d'un coup d'œil, sans lire une phrase. -->
+      <section class="bloc">
+        <p class="micro">Budget du jour</p>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <div class="rounded-2xl bg-white px-3 py-2.5">
+            <p class="micro">Dépensé</p>
+            <p class="chiffre-moyen mt-0.5">{{ formatEuros(reel) }}</p>
+          </div>
+          <div class="rounded-2xl bg-white px-3 py-2.5">
+            <p class="micro">Prévu</p>
+            <p class="chiffre-moyen mt-0.5 text-encre-doux">{{ formatEuros(prevu) }}</p>
+          </div>
         </div>
         <p
-          class="mt-1 text-sm font-medium tabular-nums"
+          class="mt-2.5 text-sm font-semibold tabular-nums"
           :class="ecart > 0 ? 'text-attention' : 'text-olive'"
         >
           {{
@@ -82,34 +100,15 @@ const ecart = computed(() => reel.value - prevu.value)
         </p>
       </section>
 
-      <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="flex items-center gap-2 font-semibold">
-          <Icone nom="carte" />
-          Quoi voir, quoi faire
-        </h2>
-        <p class="mt-1 text-sm leading-relaxed">{{ jour.aFaire }}</p>
-      </section>
-
-      <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="flex items-center gap-2 font-semibold">
-          <Icone nom="transport" />
-          Comment y aller
-          <span class="ml-1 text-sm font-normal text-encre-doux tabular-nums">
-            {{ formatEuros(jour.transportPrevu) }} prévus
+      <section v-for="rubrique in RUBRIQUES" :key="rubrique.cle" class="bloc">
+        <p class="micro flex items-center gap-1.5">
+          <Icone :nom="rubrique.icone" :taille="14" />
+          {{ rubrique.titre }}
+          <span v-if="rubrique.montant" class="tabular-nums normal-case tracking-normal">
+            · {{ formatEuros(jour[rubrique.montant]) }} prévus
           </span>
-        </h2>
-        <p class="mt-1 text-sm leading-relaxed">{{ jour.transport }}</p>
-      </section>
-
-      <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="flex items-center gap-2 font-semibold">
-          <Icone nom="manger" />
-          Où manger, sans laitage
-          <span class="ml-1 text-sm font-normal text-encre-doux tabular-nums">
-            {{ formatEuros(jour.repasPrevu) }} prévus
-          </span>
-        </h2>
-        <p class="mt-1 text-sm leading-relaxed">{{ jour.ouManger }}</p>
+        </p>
+        <p class="mt-2 leading-relaxed">{{ jour[rubrique.cle] }}</p>
       </section>
     </article>
   </div>

@@ -48,12 +48,12 @@ function bascule(id: string) {
 </script>
 
 <template>
-  <div class="space-y-4">
-    <!-- Barre de catégories collante : accessible au pouce quelle que soit la
-         position de défilement, c'est le reproche principal de la version 1. -->
-    <div class="sticky top-14 z-10 -mx-4 space-y-2 bg-sable/95 px-4 pb-2 pt-1 backdrop-blur">
+  <div>
+    <!-- Recherche et catégories restent collées en haut : c'est ce qu'on
+         cherche en premier, y compris après avoir défilé. -->
+    <div class="sticky top-14 z-10 -mx-4 bg-sable/95 px-4 pb-2 pt-1 backdrop-blur">
       <label class="relative block">
-        <span class="absolute inset-y-0 left-3 flex items-center text-encre-doux">
+        <span class="absolute inset-y-0 left-0 flex items-center text-encre-doux">
           <Icone nom="recherche" :taille="18" />
         </span>
         <input
@@ -62,17 +62,17 @@ function bascule(id: string) {
           enterkeyhint="search"
           placeholder="Chercher « fromage », « billet », « numéro »…"
           aria-label="Chercher une phrase"
-          class="w-full rounded-xl bg-white py-3 pl-10 pr-3 shadow-sm outline-none focus:ring-2 focus:ring-terre/40"
+          class="w-full border-b-2 border-sable-fonce bg-transparent py-2.5 pl-7 outline-none focus:border-encre"
         />
       </label>
 
-      <nav aria-label="Catégories de phrases" class="-mx-4 overflow-x-auto px-4">
-        <ul class="flex gap-2 pb-1">
+      <nav aria-label="Catégories de phrases" class="rangee-defilante -mx-4 mt-2 px-4">
+        <ul class="flex gap-1.5">
           <li>
             <button
               type="button"
-              class="min-h-11 whitespace-nowrap rounded-xl px-3 text-sm font-semibold"
-              :class="sectionActive === null ? 'bg-terre text-white' : 'bg-white text-encre-doux'"
+              class="min-h-11 whitespace-nowrap rounded-xl px-3 text-xs font-bold"
+              :class="sectionActive === null ? 'bg-encre text-sable' : 'text-encre-doux'"
               :aria-pressed="sectionActive === null"
               @click="sectionActive = null"
             >
@@ -82,14 +82,12 @@ function bascule(id: string) {
           <li v-for="section in SECTIONS_PHRASES" :key="section.id">
             <button
               type="button"
-              class="flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-xl px-3 text-sm font-semibold"
-              :class="
-                sectionActive === section.id ? 'bg-terre text-white' : 'bg-white text-encre-doux'
-              "
+              class="flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-xl px-3 text-xs font-bold"
+              :class="sectionActive === section.id ? 'bg-encre text-sable' : 'text-encre-doux'"
               :aria-pressed="sectionActive === section.id"
               @click="bascule(section.id)"
             >
-              <Icone :nom="section.icone" :taille="16" />
+              <Icone :nom="section.icone" :taille="15" />
               {{ section.court }}
             </button>
           </li>
@@ -97,23 +95,23 @@ function bascule(id: string) {
       </nav>
     </div>
 
-    <p v-if="total === 0" class="rounded-xl bg-white p-4 text-sm text-encre-doux shadow-sm">
+    <p v-if="total === 0" class="bloc text-sm text-encre-doux">
       Aucune phrase ne correspond à cette recherche.
     </p>
 
-    <section
-      v-for="section in sections"
-      :key="section.id"
-      class="rounded-2xl bg-white p-4 shadow-sm"
-    >
-      <h2 class="flex items-center gap-2 font-semibold">
-        <Icone :nom="section.icone" />
+    <section v-for="section in sections" :key="section.id" class="bloc">
+      <p class="micro flex items-center gap-1.5">
+        <Icone :nom="section.icone" :taille="14" />
         {{ section.titre }}
-      </h2>
-      <ul class="mt-2 divide-y divide-sable">
-        <li v-for="phrase in section.phrases" :key="phrase.it" class="py-2">
-          <p class="text-sm text-encre-doux">{{ phrase.fr }}</p>
-          <p class="text-lg font-semibold leading-snug" lang="it">{{ phrase.it }}</p>
+      </p>
+      <ul class="mt-2">
+        <li
+          v-for="phrase in section.phrases"
+          :key="phrase.it"
+          class="border-b border-sable-fonce/60 py-2.5 last:border-0"
+        >
+          <p class="text-xs text-encre-doux">{{ phrase.fr }}</p>
+          <p class="mt-0.5 text-lg font-semibold leading-snug" lang="it">{{ phrase.it }}</p>
         </li>
       </ul>
     </section>

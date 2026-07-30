@@ -36,20 +36,18 @@ const pourcentageTemps = computed(() =>
 </script>
 
 <template>
-  <section class="rounded-2xl bg-white p-4 shadow-sm">
-    <p class="text-sm font-medium text-encre-doux">Reste à dépenser</p>
-    <p class="mt-1 text-5xl font-bold tabular-nums" :class="COULEURS[rythme.statut]">
-      {{ formatEuros(resteGlobal) }}
-    </p>
-    <p class="mt-1 text-sm text-encre-doux tabular-nums">
+  <section class="bloc">
+    <p class="micro">Reste à dépenser</p>
+    <p class="chiffre mt-2" :class="COULEURS[rythme.statut]">{{ formatEuros(resteGlobal) }}</p>
+    <p class="mt-2 text-sm tabular-nums text-encre-doux">
       {{ formatEuros(totalDepense) }} dépensés sur {{ formatEuros(budgetTotal) }}
     </p>
 
-    <!-- La barre porte deux informations : ce qui est consommé, et où on
-         devrait en être compte tenu du jour de voyage. -->
-    <div class="relative mt-3 h-3 overflow-hidden rounded-full bg-sable-fonce">
+    <!-- Un trait de 2 px porte deux informations : le budget consommé, et le
+         repère de là où on devrait en être au vu du jour de voyage. -->
+    <div class="relative mt-4 h-0.5 bg-sable-fonce">
       <div
-        class="h-full rounded-full transition-all"
+        class="absolute inset-y-0 left-0 transition-all"
         :class="{
           'bg-olive': rythme.statut === 'ok' || rythme.statut === 'avant',
           'bg-attention': rythme.statut === 'attention',
@@ -60,12 +58,12 @@ const pourcentageTemps = computed(() =>
       />
       <div
         v-if="pourcentageTemps > 0"
-        class="absolute top-0 h-full w-0.5 bg-encre"
+        class="absolute -top-1 h-2.5 w-px bg-terre"
         :style="{ left: `${pourcentageTemps}%` }"
         :title="`Rythme attendu au jour ${rythme.jour}`"
       />
     </div>
 
-    <p class="mt-2 text-sm font-medium" :class="COULEURS[rythme.statut]">{{ message }}</p>
+    <p class="mt-3 text-sm font-semibold" :class="COULEURS[rythme.statut]">{{ message }}</p>
   </section>
 </template>

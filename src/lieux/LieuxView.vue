@@ -70,32 +70,38 @@ function reinitialise() {
 </script>
 
 <template>
-  <div class="space-y-4">
-    <CarteLieux :lieux="lieuxFiltres" :etapes="etapesFiltrees" />
+  <div>
+    <div class="pt-3">
+      <CarteLieux :lieux="lieuxFiltres" :etapes="etapesFiltrees" />
+    </div>
 
-    <section class="space-y-2 rounded-2xl bg-white p-3 shadow-sm">
-      <div class="flex flex-wrap gap-2">
-        <button
-          v-for="type in TYPES"
-          :key="type"
-          type="button"
-          class="flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold"
-          :class="filtreType === type ? 'bg-terre text-white' : 'bg-sable text-encre-doux'"
-          :aria-pressed="filtreType === type"
-          @click="filtreType = filtreType === type ? null : type"
-        >
-          <Icone :nom="LIBELLES_TYPE[type].icone" :taille="16" />
-          {{ LIBELLES_TYPE[type].label }}
-        </button>
+    <section class="bloc">
+      <p class="micro">Filtrer</p>
+
+      <div class="rangee-defilante -mx-4 mt-2.5 px-4">
+        <div class="flex gap-1.5">
+          <button
+            v-for="type in TYPES"
+            :key="type"
+            type="button"
+            class="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-bold"
+            :class="filtreType === type ? 'bg-encre text-sable' : 'bg-white text-encre-doux'"
+            :aria-pressed="filtreType === type"
+            @click="filtreType = filtreType === type ? null : type"
+          >
+            <Icone :nom="LIBELLES_TYPE[type].icone" :taille="15" />
+            {{ LIBELLES_TYPE[type].label }}
+          </button>
+        </div>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="mt-1.5 flex gap-1.5">
         <button
           v-for="ville in VILLES"
           :key="ville"
           type="button"
-          class="min-h-11 rounded-xl px-3 text-sm font-semibold"
-          :class="filtreVille === ville ? 'bg-mer text-white' : 'bg-sable text-encre-doux'"
+          class="min-h-11 rounded-xl px-3 text-xs font-bold"
+          :class="filtreVille === ville ? 'bg-mer text-white' : 'bg-white text-encre-doux'"
           :aria-pressed="filtreVille === ville"
           @click="choisitVille(ville)"
         >
@@ -105,7 +111,7 @@ function reinitialise() {
         <select
           :value="filtreJour ?? ''"
           aria-label="Filtrer par journée du voyage"
-          class="min-h-11 flex-1 rounded-xl bg-sable px-2 text-sm font-semibold text-encre"
+          class="min-h-11 min-w-0 flex-1 rounded-xl bg-white px-2 text-xs font-bold text-encre"
           @change="choisitJour"
         >
           <option value="">Toutes les journées</option>
@@ -118,46 +124,45 @@ function reinitialise() {
       <button
         v-if="actif"
         type="button"
-        class="min-h-11 w-full rounded-xl bg-sable text-sm font-semibold text-encre-doux"
+        class="mt-1.5 min-h-11 w-full rounded-xl text-xs font-bold text-encre-doux underline decoration-sable-fonce decoration-2 underline-offset-4"
         @click="reinitialise()"
       >
-        Tout afficher ({{ LIEUX.length }} lieux)
+        Tout afficher · {{ LIEUX.length }} lieux
       </button>
     </section>
 
-    <p
-      v-if="groupes.length === 0"
-      class="rounded-2xl bg-white p-4 text-sm text-encre-doux shadow-sm"
-    >
+    <p v-if="groupes.length === 0" class="bloc text-sm text-encre-doux">
       Aucun lieu ne correspond à ce filtre.
     </p>
 
-    <section
-      v-for="groupe in groupes"
-      :key="groupe.type"
-      class="rounded-2xl bg-white p-4 shadow-sm"
-    >
-      <h2 class="flex items-center gap-2 font-semibold">
-        <Icone :nom="groupe.icone" />
+    <section v-for="groupe in groupes" :key="groupe.type" class="bloc">
+      <p class="micro flex items-center gap-1.5">
+        <Icone :nom="groupe.icone" :taille="14" />
         {{ groupe.label }}
-      </h2>
-      <ul class="mt-2 divide-y divide-sable">
-        <li v-for="lieu in groupe.lieux" :key="lieu.nom + lieu.ville" class="py-3">
+      </p>
+      <ul class="mt-2">
+        <li
+          v-for="lieu in groupe.lieux"
+          :key="lieu.nom + lieu.ville"
+          class="border-b border-sable-fonce/60 py-3 last:border-0"
+        >
           <div class="flex items-start justify-between gap-3">
             <div class="min-w-0">
               <p class="font-semibold">{{ lieu.nom }}</p>
-              <p class="text-xs font-medium text-terre">{{ lieu.ville }}</p>
-              <p class="mt-1 text-sm leading-relaxed text-encre-doux">{{ lieu.note }}</p>
-              <p class="mt-1 text-xs text-encre-doux">{{ LIBELLES_PRECISION[lieu.precision] }}</p>
+              <p class="text-xs font-bold uppercase tracking-wider text-terre">{{ lieu.ville }}</p>
+              <p class="mt-1.5 text-sm leading-relaxed text-encre-doux">{{ lieu.note }}</p>
+              <p class="mt-1 text-xs text-encre-doux/80">
+                {{ LIBELLES_PRECISION[lieu.precision] }}
+              </p>
             </div>
             <a
               :href="lienCarte(lieu)"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex min-h-11 shrink-0 items-center gap-1 rounded-xl bg-sable px-3 text-sm font-semibold text-mer"
-              :aria-label="`Ouvrir ${lieu.nom} dans les cartes`"
+              class="flex min-h-11 shrink-0 items-center gap-1 rounded-xl bg-white px-3 text-xs font-bold text-mer"
+              :aria-label="`Ouvrir ${lieu.nom} dans Plans`"
             >
-              <Icone nom="carte" :taille="16" />
+              <Icone nom="carte" :taille="15" />
               Y aller
             </a>
           </div>

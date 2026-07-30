@@ -37,26 +37,26 @@ function confirme(id: string) {
 </script>
 
 <template>
-  <section class="rounded-2xl bg-white p-4 shadow-sm">
-    <h2 class="text-sm font-medium text-encre-doux">Historique</h2>
+  <section class="bloc">
+    <p class="micro">Historique</p>
 
     <p v-if="parJour.length === 0" class="mt-3 text-sm text-encre-doux">
-      Aucune dépense enregistrée. Saisis un montant puis touche une catégorie.
+      Aucune dépense enregistrée. Saisis un montant en bas d’écran puis touche une catégorie.
     </p>
 
-    <div v-for="groupe in parJour" :key="groupe.date" class="mt-4">
-      <div class="flex items-baseline justify-between border-b border-sable-fonce pb-1">
-        <h3 class="text-sm font-semibold">{{ libelleJour(groupe.date) }}</h3>
-        <span class="text-sm font-semibold tabular-nums">{{ formatEuros(groupe.total) }}</span>
+    <div v-for="groupe in parJour" :key="groupe.date" class="mt-5 first:mt-3">
+      <div class="flex items-baseline justify-between border-b border-encre pb-1">
+        <h3 class="micro">{{ libelleJour(groupe.date) }}</h3>
+        <span class="text-sm font-bold tabular-nums">{{ formatEuros(groupe.total) }}</span>
       </div>
       <ul>
         <li
           v-for="ligne in groupe.lignes"
           :key="ligne.id"
-          class="flex items-center gap-2 border-b border-sable py-2 last:border-0"
+          class="flex items-center gap-2.5 border-b border-sable-fonce/60 py-2.5 last:border-0"
         >
           <span class="shrink-0 text-encre-doux">
-            <Icone :nom="categorie(ligne.categorie).icone" />
+            <Icone :nom="categorie(ligne.categorie).icone" :taille="18" />
           </span>
           <span class="min-w-0 flex-1">
             <span class="block truncate text-sm font-medium">
@@ -66,10 +66,10 @@ function confirme(id: string) {
               {{ categorie(ligne.categorie).label }}
             </span>
           </span>
-          <span class="text-sm font-semibold tabular-nums">{{ formatEuros(ligne.centimes) }}</span>
+          <span class="text-sm font-bold tabular-nums">{{ formatEuros(ligne.centimes) }}</span>
           <button
             type="button"
-            class="flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2 text-sm font-semibold"
+            class="flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2 text-xs font-bold"
             :class="aConfirmer === ligne.id ? 'bg-alerte text-white' : 'text-encre-doux'"
             :aria-label="
               aConfirmer === ligne.id ? 'Confirmer la suppression' : 'Supprimer cette dépense'
@@ -77,7 +77,7 @@ function confirme(id: string) {
             @click="confirme(ligne.id)"
           >
             <span v-if="aConfirmer === ligne.id">Sûr ?</span>
-            <Icone v-else nom="supprimer" :taille="18" />
+            <Icone v-else nom="supprimer" :taille="17" />
           </button>
         </li>
       </ul>

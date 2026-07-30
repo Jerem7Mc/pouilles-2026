@@ -79,9 +79,9 @@ function efface() {
 </script>
 
 <template>
-  <section class="rounded-2xl bg-white p-4 shadow-sm">
-    <h2 class="font-semibold">Sauvegarde</h2>
-    <p class="mt-1 text-sm text-encre-doux">
+  <section class="bloc">
+    <p class="micro">Sauvegarde</p>
+    <p class="mt-2 text-sm text-encre-doux">
       Les données ne vivent que sur cet appareil. Exporte-les avant le départ, puis une fois par
       soir pendant le voyage : c’est le seul filet en cas de téléphone perdu.
     </p>
@@ -97,7 +97,7 @@ function efface() {
       </button>
       <button
         type="button"
-        class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-sable text-sm font-semibold text-encre"
+        class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-white text-sm font-semibold text-encre"
         @click="telecharge()"
       >
         <Icone nom="telecharger" :taille="16" />
@@ -114,7 +114,7 @@ function efface() {
         rows="4"
         placeholder="Colle ici le contenu d’une sauvegarde"
         aria-label="Contenu d’une sauvegarde à restaurer"
-        class="mt-2 w-full rounded-xl bg-sable p-2 font-mono text-xs outline-none focus:ring-2 focus:ring-terre/40"
+        class="mt-2 w-full rounded-xl bg-white p-2 font-mono text-xs outline-none focus:ring-2 focus:ring-terre/40"
       />
       <button
         type="button"
@@ -132,7 +132,7 @@ function efface() {
     <button
       type="button"
       class="mt-4 min-h-11 w-full rounded-xl text-sm font-semibold"
-      :class="confirmeEffacement ? 'bg-alerte text-white' : 'bg-sable text-alerte'"
+      :class="confirmeEffacement ? 'bg-alerte text-white' : 'bg-white text-alerte'"
       @click="efface()"
     >
       {{ confirmeEffacement ? 'Confirmer : tout supprimer' : 'Effacer toutes les dépenses' }}

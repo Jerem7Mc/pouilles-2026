@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
 import { parseMontant } from '../partage/monnaie'
-import { JOURS, jourActif, libelleJour } from '../partage/voyage'
+import { JOURS, jourActif, libelleJour, libelleJourCourt } from '../partage/voyage'
 import { CATEGORIES } from './categories'
 import type { CategorieId } from './types'
 import { useDepenses } from './useDepenses'
@@ -12,6 +12,7 @@ const { ajouter } = useDepenses()
 const saisie = ref('')
 const libelle = ref('')
 const confirmation = ref('')
+const detailOuvert = ref(false)
 
 // Hors voyage, on retombe sur le premier jour pour que les essais avant le
 // départ n'atterrissent pas sur une date absente du carnet de route.
@@ -25,74 +26,96 @@ function enregistre(categorie: CategorieId) {
   if (montant === null) return
 
   ajouter({ categorie, centimes: montant, libelle: libelle.value, date: date.value })
-  confirmation.value = `${CATEGORIES.find((c) => c.id === categorie)?.label} enregistré`
+  confirmation.value = `${CATEGORIES.find((c) => c.id === categorie)?.label} · enregistré`
   saisie.value = ''
   libelle.value = ''
+  detailOuvert.value = false
   window.setTimeout(() => {
     confirmation.value = ''
-  }, 1600)
+  }, 1800)
 }
 </script>
 
 <template>
-  <section class="rounded-2xl bg-white p-4 shadow-sm">
-    <label class="block">
-      <span class="text-sm font-medium text-encre-doux">Montant</span>
-      <div class="mt-1 flex items-baseline gap-2">
-        <input
-          v-model="saisie"
-          type="text"
-          inputmode="decimal"
-          enterkeyhint="done"
-          placeholder="0,00"
-          aria-label="Montant de la dépense en euros"
-          class="w-full min-w-0 border-b-2 border-sable-fonce bg-transparent py-2 text-4xl font-bold tabular-nums outline-none focus:border-terre"
-        />
-        <span class="text-3xl font-bold text-encre-doux">€</span>
-      </div>
-    </label>
-
-    <input
-      v-model="libelle"
-      type="text"
-      maxlength="60"
-      placeholder="Libellé (facultatif)"
-      aria-label="Libellé de la dépense, facultatif"
-      class="mt-3 w-full rounded-xl bg-sable px-3 py-2 outline-none focus:ring-2 focus:ring-terre/40"
-    />
-
-    <p class="mt-4 text-sm font-medium text-encre-doux">Touche une catégorie pour enregistrer</p>
-    <div class="mt-2 grid grid-cols-4 gap-2">
+  <!--
+    Pavé collé au-dessus de la barre d'onglets : montant et catégories sont
+    dans la zone du pouce, atteignables à une main sans changer de prise.
+  -->
+  <section
+    class="pave-pouce -mx-4 border-t border-sable-fonce bg-sable/95 px-4 pb-3 pt-2.5 backdrop-blur"
+    aria-label="Saisir une dépense"
+  >
+    <div class="flex items-baseline gap-1">
+      <!--
+        Champ de largeur fixe et texte aligné à droite : les chiffres viennent
+        toucher le symbole euro, comme sur une calculatrice. En alignement à
+        gauche, le € se retrouvait à 60 px des chiffres sur un montant court.
+        Largeur calée sur le plafond de saisie, 1000,00, en tabular-nums.
+      -->
+      <input
+        v-model="saisie"
+        type="text"
+        inputmode="decimal"
+        enterkeyhint="done"
+        placeholder="0,00"
+        aria-label="Montant de la dépense en euros"
+        class="w-32 min-w-0 bg-transparent text-right text-3xl font-bold tabular-nums outline-none placeholder:text-encre-doux/30"
+      />
+      <span class="text-xl font-bold text-encre-doux">€</span>
       <button
-        v-for="categorie in CATEGORIES"
-        :key="categorie.id"
         type="button"
-        :disabled="!pret"
-        class="flex min-h-[68px] flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-xs font-semibold transition active:scale-95 disabled:opacity-35"
-        :class="pret ? 'bg-terre-clair text-terre' : 'bg-sable text-encre-doux'"
-        @click="enregistre(categorie.id)"
+        class="ml-auto flex min-h-9 items-center gap-1 rounded-lg px-2 text-xs font-bold text-encre-doux"
+        :aria-expanded="detailOuvert"
+        @click="detailOuvert = !detailOuvert"
       >
-        <Icone :nom="categorie.icone" :taille="24" />
-        <span class="text-center leading-tight">{{ categorie.label }}</span>
+        {{ libelleJourCourt(date) }}
+        <span v-if="libelle" class="text-terre" aria-label="libellé renseigné">·</span>
       </button>
     </div>
 
-    <div class="mt-4 flex items-center justify-between gap-3 text-sm">
-      <label class="flex items-center gap-2 text-encre-doux">
-        <span>Jour</span>
-        <select
-          v-model="date"
-          aria-label="Jour de la dépense"
-          class="rounded-lg bg-sable px-2 py-1 font-medium text-encre"
-        >
-          <option v-for="jour in JOURS" :key="jour" :value="jour">
-            {{ libelleJour(jour) }}
-          </option>
-        </select>
-      </label>
-      <span v-if="confirmation" class="font-semibold text-olive" role="status">
-        {{ confirmation }}
-      </span>
+    <!-- Libellé et date : repliés par défaut, ils ne doivent pas coûter un
+         geste dans le cas courant où l'on saisit juste un montant. -->
+    <div v-if="detailOuvert" class="mt-2 flex gap-2">
+      <input
+        v-model="libelle"
+        type="text"
+        maxlength="60"
+        placeholder="Libellé (facultatif)"
+        aria-label="Libellé de la dépense, facultatif"
+        class="min-w-0 flex-1 rounded-xl bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-terre/40"
+      />
+      <select
+        v-model="date"
+        aria-label="Jour de la dépense"
+        class="min-h-11 rounded-xl bg-white px-2 text-sm font-semibold"
+      >
+        <option v-for="jour in JOURS" :key="jour" :value="jour">{{ libelleJour(jour) }}</option>
+      </select>
     </div>
+
+    <div class="rangee-defilante -mx-4 mt-2.5 px-4">
+      <div class="flex gap-1.5">
+        <button
+          v-for="categorie in CATEGORIES"
+          :key="categorie.id"
+          type="button"
+          :disabled="!pret"
+          class="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-bold transition active:scale-95 disabled:opacity-40"
+          :class="pret ? 'bg-terre text-white' : 'bg-white text-encre-doux'"
+          @click="enregistre(categorie.id)"
+        >
+          <Icone :nom="categorie.icone" :taille="16" />
+          {{ categorie.label }}
+        </button>
+      </div>
+    </div>
+
+    <p
+      class="mt-1.5 h-4 text-xs font-bold"
+      :class="confirmation ? 'text-olive' : 'text-encre-doux'"
+      role="status"
+    >
+      {{ confirmation || (pret ? 'Touche une catégorie pour enregistrer' : '') }}
+    </p>
   </section>
 </template>

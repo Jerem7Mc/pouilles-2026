@@ -42,6 +42,78 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/*
+ * ============================================================
+ * Système « carnet »
+ * ============================================================
+ * Pas de cartes blanches empilées : la hiérarchie est portée par
+ * la taille du texte, le vide et des filets d'un pixel. Ces trois
+ * classes reviennent partout, d'où leur définition ici plutôt que
+ * six utilitaires répétés dans chaque composant.
+ */
+
+/* Étiquette de section : petites capitales espacées, discrètes */
+.micro {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-encre-doux);
+}
+
+/* Bloc de contenu séparé du suivant par un filet, jamais après le dernier */
+.bloc {
+  padding-block: 1.375rem;
+  border-bottom: 1px solid var(--color-sable-fonce);
+}
+.bloc:last-child {
+  border-bottom: 0;
+}
+
+/* Chiffre héros : c'est lui qu'on lit à un mètre, en plein soleil */
+.chiffre {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+.chiffre-moyen {
+  font-size: 2.375rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Hauteur de la barre de navigation, déclarée une seule fois : le pavé de
+ * saisie s'y adosse, et un ajustement de l'une suit automatiquement l'autre.
+ */
+:root {
+  --hauteur-nav: 4rem;
+}
+
+/*
+ * Pavé du pouce : la saisie du montant reste collée au-dessus de la barre
+ * d'onglets. En haut d'écran, le champ était inatteignable sans changer de
+ * prise sur le téléphone.
+ */
+.pave-pouce {
+  position: sticky;
+  bottom: calc(var(--hauteur-nav) + env(safe-area-inset-bottom));
+  z-index: 10;
+}
+
+/* Rangée de pastilles qui défile horizontalement sans barre visible */
+.rangee-defilante {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.rangee-defilante::-webkit-scrollbar {
+  display: none;
+}
+
 /* Cibles tactiles : jamais en dessous de 44 px, recommandation Apple */
 button,
 a,

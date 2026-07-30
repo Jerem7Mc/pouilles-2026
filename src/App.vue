@@ -24,7 +24,7 @@ const ONGLETS: readonly { nom: string; label: string; icone: NomIcone }[] = [
   <div class="min-h-dvh bg-sable">
     <header class="zone-sure-haut sticky top-0 z-20 bg-sable/95 backdrop-blur">
       <div class="flex h-14 items-center justify-between px-4">
-        <h1 class="text-lg font-bold">{{ titre }}</h1>
+        <h1 class="text-lg font-bold tracking-tight">{{ titre }}</h1>
         <RouterLink
           :to="{ name: 'reglages' }"
           class="flex min-h-11 min-w-11 items-center justify-center rounded-xl text-encre-doux"
@@ -35,7 +35,7 @@ const ONGLETS: readonly { nom: string; label: string; icone: NomIcone }[] = [
       </div>
     </header>
 
-    <main class="px-4 pb-28">
+    <main class="px-4 pb-24">
       <RouterView />
     </main>
 
@@ -47,7 +47,7 @@ const ONGLETS: readonly { nom: string; label: string; icone: NomIcone }[] = [
         <li v-for="onglet in ONGLETS" :key="onglet.nom" class="flex-1">
           <RouterLink
             :to="{ name: onglet.nom }"
-            class="flex min-h-16 flex-col items-center justify-center gap-1 text-xs font-semibold text-encre-doux"
+            class="flex min-h-[var(--hauteur-nav)] flex-col items-center justify-center gap-1 text-[0.65rem] font-bold uppercase tracking-wider text-encre-doux"
             active-class="text-terre"
           >
             <Icone :nom="onglet.icone" :taille="22" />

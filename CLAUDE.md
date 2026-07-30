@@ -33,6 +33,22 @@ hébergeur et tout 404 au rechargement hors-ligne.
 
 ## 2. Design system
 
+**Structure « carnet ».** Pas de cartes blanches empilées : la hiérarchie est portée par la
+taille du texte, le vide et des filets d'un pixel. Trois classes définies dans `style.css` et
+utilisées partout, à préférer à six utilitaires Tailwind répétés :
+
+- `.micro` étiquette de section, petites capitales espacées
+- `.bloc` section séparée par un filet, sans filet après la dernière
+- `.chiffre` et `.chiffre-moyen` chiffres héros en `tabular-nums`
+
+Les seules surfaces blanches restantes sont celles qui doivent se détacher : les deux tuiles
+de statistiques du journal, les champs de saisie, la carte, et la barre d'onglets.
+
+**Pavé du pouce.** Sur l'écran Dépenses, la saisie est en bas via `.pave-pouce`, adossée à
+`--hauteur-nav`. En haut d'écran le champ était inatteignable sans changer de prise sur le
+téléphone, ce qui condamnait l'objectif des cinq secondes. `SaisieDepense.vue` doit rester le
+dernier enfant de `DepensesView` pour que son `position: sticky` fonctionne.
+
 **Aucun emoji dans l'interface.** Toutes les icônes viennent de `lucide-vue-next`, déclarées
 dans le registre `src/partage/icones.ts` et rendues par `src/partage/Icone.vue`. Les fichiers
 de données ne portent qu'un nom de clé (`icone: 'glaces'`), jamais un composant : ils restent
