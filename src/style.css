@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+/*
+ * Palette pensée pour une lecture en plein soleil d'août : fond très clair,
+ * texte quasi noir, accents saturés. Aucune valeur de couleur en dur dans
+ * les composants, on passe toujours par ces variables de thème.
+ */
+@theme {
+  --color-sable: #faf7f2;
+  --color-sable-fonce: #f0e9df;
+  --color-encre: #1c1917;
+  --color-encre-doux: #57534e;
+  --color-terre: #c2410c;
+  --color-terre-clair: #fff1e9;
+  --color-mer: #0e7490;
+  --color-olive: #4d7c0f;
+  --color-alerte: #b91c1c;
+  --color-attention: #b45309;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+html {
+  background-color: var(--color-sable);
+  /* Empêche iOS d'agrandir le texte en paysage */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--color-encre);
+  font-family: var(--font-sans);
+  /* Pas de rebond élastique qui donne l'impression que l'app décroche */
+  overscroll-behavior-y: none;
+}
+
+/* Zones sûres iPhone : encoche en haut, barre gestuelle en bas */
+.zone-sure-haut {
+  padding-top: env(safe-area-inset-top);
+}
+.zone-sure-bas {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Cibles tactiles : jamais en dessous de 44 px, recommandation Apple */
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+
+/* Le clavier iOS zoome sur tout champ dont la police fait moins de 16 px */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
