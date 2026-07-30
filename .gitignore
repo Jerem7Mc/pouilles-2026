@@ -32,3 +32,5 @@ sauvegardes/
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*
