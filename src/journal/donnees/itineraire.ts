@@ -148,9 +148,15 @@ export const ITINERAIRE: readonly Jour[] = [
     lieuxTransport: ['bari-centrale', 'gare-de-lecce'],
     lieuxSites: ['piazza-del-duomo', 'basilique-santa-croce', 'amphitheatre-romain'],
     lieuxManger: ['la-puccia'],
-    reservations: [{ label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' }],
+    reservations: [
+      { label: 'Billets Trenitalia', url: 'https://www.trenitalia.com' },
+      {
+        label: 'Salento in Bus, horaires officiels',
+        url: 'https://www.provincia.le.it/salento-in-bus-orari-e-linee/',
+      },
+    ],
     alerte:
-      'À vérifier dès l’arrivée à Lecce : les horaires de Salento in Bus pour Otrante et Porto Cesareo. Le site salentoinbus.it ne répond plus, il faut consulter l’affichage officiel en gare ou au City Terminal.',
+      'Horaires de Salento in Bus pour Otrante et Porto Cesareo : le site salentoinbus.it n’existe plus, la source officielle est la Province de Lecce, un PDF par ligne. Call center tous les jours de 8h à 20h au 379 333 79 79. Les deux lignes partent du City Terminal, à 2 km de la gare.',
   },
   {
     date: '2026-08-31',
@@ -180,7 +186,7 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Château fortifié d’Otrante et sa cathédrale, baignade dans l’eau transparente près des remparts du port.',
     transport:
-      'Réseau de bus estival Salento in Bus depuis le terminal de Lecce. Vigilance : les grilles horaires changent souvent au 1er septembre, vérifier l’affichage officiel en gare de Lecce dès l’arrivée le 30 août.',
+      'Ligne 101 Salento in Bus, opérée par ELIOS, au départ du City Terminal de Lecce : 07h30, 11h30 et 16h15, arrivée au port d’Otrante 1h45 plus tard. Retours du port à 09h00, 14h00 et 18h30, le dernier rentre à Lecce à 20h14. Billet à bord, espèces ou carte.',
     transportPrevu: 800,
     ouManger:
       'Frise à emporter : pains secs réhydratés, tomates fraîches frottées, huile d’olive extra-vierge et origan.',
@@ -188,9 +194,19 @@ export const ITINERAIRE: readonly Jour[] = [
     lieuxTransport: ['city-terminal-bus-lecce', 'gare-d-otrante'],
     lieuxSites: ['chateau-aragonais-d-otrante', 'cathedrale-d-otrante'],
     lieuxManger: [],
-    reservations: [{ label: 'Repli en train, réseau FSE', url: 'https://www.fssudest.it' }],
+    reservations: [
+      {
+        label: 'Horaires ligne 101, PDF officiel',
+        url: 'https://www.provincia.le.it/wp-content/uploads/2026/06/Linea-101-Lecce-Torre-dellOrso-Otranto-A.pdf',
+      },
+      {
+        label: 'Salento in Bus, toutes les lignes',
+        url: 'https://www.provincia.le.it/salento-in-bus-orari-e-linee/',
+      },
+      { label: 'Repli en train, réseau FSE', url: 'https://www.fssudest.it' },
+    ],
     alerte:
-      'Salento in Bus part du City Terminal, au nord, et non de la gare. Aucun site joignable pour les horaires : vérifier l’affichage sur place. Repli possible en train FSE jusqu’à Otrante.',
+      'Départ du City Terminal, au nord, et non de la gare : 2 km séparent les deux. Grille valable du 1er au 13 septembre, à reconfirmer au 379 333 79 79. L’arrêt Otranto Stazione FSE précède le port de 8 minutes. Repli en train FSE si la ligne ne roule pas.',
   },
   {
     date: '2026-09-02',
@@ -199,7 +215,8 @@ export const ITINERAIRE: readonly Jour[] = [
     hebergement: 'Lobby Collective Hostel Lecce',
     aFaire:
       'Journée farniente sur les plages de sable blanc et l’eau turquoise du golfe de Tarente.',
-    transport: 'Ligne dédiée Salento in Bus depuis le terminal de bus de Lecce.',
+    transport:
+      'Ligne 104 Salento in Bus, opérée par CHIFFI, au départ du City Terminal de Lecce à 09h00, arrivée Via Garibaldi à 09h56. Retours à 07h29, 12h59 et 17h59, le dernier rentre à Lecce à 18h55. Billet à bord, espèces ou carte.',
     transportPrevu: 700,
     ouManger:
       'Pique-nique autonome préparé à l’Eurospin voisin de l’auberge (pain de campagne, prosciutto crudo, olives, tomates), pour éviter les tarifs des paillotes.',
@@ -207,9 +224,22 @@ export const ITINERAIRE: readonly Jour[] = [
     lieuxTransport: ['city-terminal-bus-lecce'],
     lieuxSites: ['plage-de-porto-cesareo'],
     lieuxManger: [],
-    reservations: [],
+    reservations: [
+      {
+        label: 'Horaires ligne 104, PDF officiel',
+        url: 'https://www.provincia.le.it/wp-content/uploads/2026/06/Linea-104-Lecce-Porto-Cesareo-Gallipoli-A.pdf',
+      },
+      {
+        label: 'Salento in Bus, toutes les lignes',
+        url: 'https://www.provincia.le.it/salento-in-bus-orari-e-linee/',
+      },
+      {
+        label: 'Second opérateur, STP Lecce',
+        url: 'https://www.stplecce.it/it/index.php?option=com_content&view=article&id=415%3Alinea-lecce-leverano-porto-cesareo&catid=11&Itemid=126',
+      },
+    ],
     alerte:
-      'Salento in Bus depuis le City Terminal. Horaires à vérifier sur place, le site du réseau est hors service. Pique-nique à préparer la veille à l’Eurospin.',
+      'Trois passages par jour seulement : viser l’aller de 09h00 et le retour de 17h59, au City Terminal. Grille valable du 1er au 13 septembre, à reconfirmer au 379 333 79 79. Si la ligne ne roule pas, la STP dessert Porto Cesareo par Leverano au départ de la gare. Pique-nique à préparer la veille à l’Eurospin.',
   },
   {
     date: '2026-09-03',

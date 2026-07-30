@@ -1,5 +1,48 @@
 # Journal de sessions
 
+## 2026-07-30 — Horaires Salento in Bus retrouvés, dernière journée sécurisée
+
+Audit de reprise sur un dépôt propre. Le code n'avait rien à se reprocher, mais les données
+portaient un vrai trou : la journée du 2 septembre à Porto Cesareo reposait sur Salento in Bus
+et sur rien d'autre, `reservations: []`, alors qu'Otrante avait au moins un repli ferroviaire.
+Porto Cesareo n'a pas de gare. Si le bus ne roulait pas, la dernière journée pleine du voyage
+tombait sans plan B.
+
+**Ma prémisse était fausse.** J'avais conclu en juillet que le réseau était mort parce que
+`salentoinbus.it` ne résolvait plus. C'est le domaine qui est mort, pas le service : Salento in
+Bus tourne du 13 juin au 13 septembre 2026 et la Province de Lecce publie les horaires sur
+`provincia.le.it`, un PDF par ligne. L'app envoyait donc chercher un affichage papier alors que
+les heures étaient publiques. Leçon : un domaine qui ne résout plus ne prouve rien sur
+l'existence du service, seulement sur celle du site.
+
+**Horaires intégrés**, période du 1er au 13 septembre, celle qui couvre nos deux dates.
+
+- Ligne 101 Otrante, opérée par ELIOS : aller du City Terminal 07h30, 11h30, 16h15 ; retour du
+  port 09h00, 14h00, 18h30, dernier retour à Lecce 20h14.
+- Ligne 104 Porto Cesareo, opérée par CHIFFI : aller 09h00, arrivée 09h56 ; retours 07h29,
+  12h59, 17h59, dernier retour à Lecce 18h55.
+- Billet achetable **à bord**, espèces ou carte, léger supplément. C'est ce qui rend la journée
+  récupérable sans rien avoir préparé. Call center 379 333 79 79, tous les jours 8h-20h.
+- Second opérateur nommé pour Porto Cesareo : STP par Leverano, au départ de la **gare**, pas du
+  City Terminal. Le trou est refermé.
+
+**Tarifs non intégrés** : la Province ne les publie pas. `transportPrevu` reste à 8 € et 7 €,
+estimés. Rien d'inventé, conformément à la règle sur les données non vérifiées.
+
+**Piège écarté** : la ligne 104 dessert aussi Gallipoli, mais le 31 août tombe dans la période
+haute saison, qui est un autre PDF. Ces horaires n'ont donc pas été recopiés sur la journée
+Gallipoli, qui reste au train FSE.
+
+Un test de plus, 86 au total : les deux journées Salento in Bus doivent pointer sur
+`provincia.le.it`. L'interdiction de `salentoinbus.it` reste en place, les deux règles se
+complètent au lieu de se remplacer.
+
+Réserve assumée : figer des horaires dans les données accepte qu'ils bougent d'ici septembre.
+D'où la consigne de reconfirmation et le numéro du call center affichés dans le journal.
+
+**Hors code** : PWA installée depuis Safari et testée en Mode Avion, les quatre onglets
+répondent hors-ligne. Il ne reste que la discipline de l'export du soir pendant le voyage.
+
 ## 2026-07-30 — Écran phrases refait, antimémoire porté à 209 phrases
 
 Trois structures ont été maquettées et comparées avant tout code. Retenu : tuiles plus fiche

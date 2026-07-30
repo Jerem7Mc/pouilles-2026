@@ -54,10 +54,16 @@ développement Vite fait son propre repli SPA et masque le problème.
 
 ## Pour le voyage, à ne pas perdre
 
-- **Salento in Bus : le site n'existe plus.** `salentoinbus.it` ne résout plus en DNS, vérifié
-  le 30/07/2026. C'est le réseau des 1er et 2 septembre, pour Otrante et Porto Cesareo.
-  Vérifier l'affichage officiel au City Terminal de Lecce dès l'arrivée le 30 août. Repli pour
-  Otrante : train FSE, gare à 900 m du centre.
+- **Salento in Bus : le domaine est mort, pas le réseau.** `salentoinbus.it` ne résout plus,
+  mais le service tourne du 13 juin au 13 septembre 2026 et les horaires sont publiés par la
+  Province de Lecce sur `provincia.le.it`, un PDF par ligne. Horaires du 1er au 13 septembre
+  relevés et intégrés au journal le 30/07/2026 :
+  - **ligne 101, Otrante** (ELIOS) : aller du City Terminal 07h30, 11h30, 16h15 ; retour du
+    port 09h00, 14h00, 18h30. Repli train FSE.
+  - **ligne 104, Porto Cesareo** (CHIFFI) : aller 09h00, arrivée 09h56 ; retours 07h29, 12h59,
+    17h59. Second opérateur STP par Leverano, au départ de la gare.
+  - Billet **à bord**, espèces ou carte, léger supplément. Call center 379 333 79 79, 8h-20h.
+    Grilles susceptibles de bouger : reconfirmer à l'arrivée le 30 août.
 - **Gare et terminal de bus de Lecce sont à 2 km, dans des directions opposées.** Gallipoli part
   de la gare ferroviaire au sud, Otrante et Porto Cesareo du City Terminal au nord.
 - **La gare d'Ostuni est à 2,8 km du centre historique.** La navette STP n'est pas optionnelle.
@@ -69,7 +75,14 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **La carte interactive exige du réseau.** Hors-ligne, l'écran Lieux bascule sur la carte en
   image. Liste des adresses, phrases et dépenses restent disponibles sans réseau.
 
-## Installation sur l'iPhone, encore à faire
+## Installation sur l'iPhone, faite
+
+Installée en PWA depuis Safari et testée hors-ligne le 30/07/2026, les quatre onglets
+répondent en Mode Avion. Reste la discipline du soir pendant le voyage : **exporter une
+sauvegarde et la stocker ailleurs que sur le téléphone**, `localStorage` reste évinçable sous
+forte pression disque même en PWA installée.
+
+Procédure conservée pour mémoire, en cas de réinstallation :
 
 1. Ouvrir https://pouilles-2026.vercel.app **dans Safari**, pas Chrome. Sur iOS, seul Safari
    crée une PWA autonome ; le raccourci de Chrome garde un stockage de site ordinaire, donc

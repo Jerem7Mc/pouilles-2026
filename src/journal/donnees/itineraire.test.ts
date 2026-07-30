@@ -90,4 +90,15 @@ describe('réservations', () => {
     const toutes = ITINERAIRE.flatMap((jour) => jour.reservations.map((r) => r.url)).join(' ')
     expect(toutes).not.toContain('salentoinbus')
   })
+
+  it('donne les horaires officiels de la Province aux deux journées Salento in Bus', () => {
+    // Le domaine du réseau est mort, le réseau non : les horaires 2026 sont
+    // publiés par la Province de Lecce, un PDF par ligne. Sans ce lien, l'app
+    // enverrait chercher un affichage papier alors que les heures sont connues.
+    for (const date of ['2026-09-01', '2026-09-02']) {
+      const jour = ITINERAIRE.find((autre) => autre.date === date)
+      const urls = jour?.reservations.map((reservation) => reservation.url).join(' ') ?? ''
+      expect(urls, date).toContain('provincia.le.it')
+    }
+  })
 })
