@@ -30,6 +30,11 @@ lieu doit avoir une icône déclarée, sans quoi le marqueur serait une pastille
 l'interlocutrice. `Sei molto bello` retiré, l'accord français de « dérangée » corrigé, et
 `Sei fidanzata?` ajoutée, qui manquait alors que c'est la question la plus utile de la section.
 
+La section ne contenait que des phrases **à dire**, dont trois pour éconduire quelqu'un, et rien
+pour reconnaître un refus qu'on vous adresse, qui est pourtant le cas fréquent. Trois lignes
+ajoutées, marquées « à entendre, pas à dire » dans leur astuce : `Sono fidanzata`,
+`Sto aspettando il mio ragazzo`, `Non mi interessa`. Le corpus passe à 212 phrases.
+
 ## 2026-07-30 — Horaires Salento in Bus retrouvés, dernière journée sécurisée
 
 Audit de reprise sur un dépôt propre. Le code n'avait rien à se reprocher, mais les données

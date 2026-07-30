@@ -425,6 +425,22 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
       { fr: 'Non merci, ça ne m’intéresse pas', it: 'No grazie, non mi interessa' },
       { fr: 'Je préfère rester seul, merci', it: 'Preferisco stare da solo, grazie' },
       { fr: 'Laisse-moi tranquille, s’il te plaît', it: 'Lasciami in pace, per favore' },
+      {
+        fr: 'Je suis en couple',
+        it: 'Sono fidanzata',
+        astuce:
+          'À entendre, pas à dire. Réponse courante et définitive : insister se voit très mal.',
+      },
+      {
+        fr: 'J’attends mon copain',
+        it: 'Sto aspettando il mio ragazzo',
+        astuce: 'À entendre. Vrai ou pas, c’est un non.',
+      },
+      {
+        fr: 'Ça ne m’intéresse pas',
+        it: 'Non mi interessa',
+        astuce: 'À entendre. Sans ambiguïté, la conversation s’arrête là.',
+      },
       { fr: 'J’ai compris, aucun souci', it: 'Ho capito, nessun problema' },
       { fr: 'Pardon de t’avoir dérangée, bonne soirée', it: 'Scusa il disturbo, buona serata' },
       { fr: 'Je suis désolé, je repars jeudi', it: 'Mi dispiace, torno a casa giovedì' },
