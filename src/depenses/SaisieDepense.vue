@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import Icone from '../partage/Icone.vue'
 import { parseMontant } from '../partage/monnaie'
 import { JOURS, isoDuJour, libelleJour, position } from '../partage/voyage'
 import { CATEGORIES } from './categories'
@@ -72,7 +73,7 @@ function enregistre(categorie: CategorieId) {
         :class="pret ? 'bg-terre-clair text-terre' : 'bg-sable text-encre-doux'"
         @click="enregistre(categorie.id)"
       >
-        <span class="text-2xl leading-none">{{ categorie.emoji }}</span>
+        <Icone :nom="categorie.icone" :taille="24" />
         <span class="text-center leading-tight">{{ categorie.label }}</span>
       </button>
     </div>

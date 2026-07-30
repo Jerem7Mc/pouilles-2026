@@ -14,7 +14,11 @@ Cible Dolibarr : **Jamais**. Application jetable, personnelle, sans données d'e
 ## 1. Stack technique et commandes clés
 
 Vue 3 + Vite + TypeScript strict, Tailwind v4, vue-router en historique par hash,
-vite-plugin-pwa (Workbox). Aucun backend : `localStorage` uniquement.
+vite-plugin-pwa (Workbox), Leaflet + markercluster pour la carte, lucide-vue-next pour les
+icônes. Aucun backend : `localStorage` uniquement.
+
+TypeScript reste en 6.0.x : `typescript-eslint` plafonne à `<6.1.0`. `@types/node` suit la
+majeure du Node local, pas la dernière publiée.
 
 ```bash
 npm run dev        # serveur de développement
@@ -28,6 +32,12 @@ Déploiement : Vercel, gratuit. L'historique par hash évite toute règle de ré
 hébergeur et tout 404 au rechargement hors-ligne.
 
 ## 2. Design system
+
+**Aucun emoji dans l'interface.** Toutes les icônes viennent de `lucide-vue-next`, déclarées
+dans le registre `src/partage/icones.ts` et rendues par `src/partage/Icone.vue`. Les fichiers
+de données ne portent qu'un nom de clé (`icone: 'glaces'`), jamais un composant : ils restent
+sérialisables et découplés de l'affichage. Ajouter une icône = l'importer nommément dans le
+registre, pour que le bundle ne prenne que celles utilisées.
 
 Toutes les couleurs et la police sont déclarées dans `@theme` de `src/style.css` :
 `sable`, `sable-fonce`, `encre`, `encre-doux`, `terre`, `terre-clair`, `mer`, `olive`,
@@ -47,14 +57,17 @@ Arborescence par responsabilité, une fonctionnalité par dossier.
 
 ```
 src/
-  partage/      monnaie.ts, voyage.ts, stockage.ts  (socle réutilisable, testé)
+  partage/      monnaie.ts, voyage.ts, stockage.ts, icones.ts, Icone.vue
   depenses/     calculs.ts (pur, testé), useDepenses.ts (état), composants
   journal/      donnees/itineraire.ts + JournalView
   phrases/      donnees/phrases.ts + PhrasesView
-  lieux/        donnees/lieux.ts + LieuxView
+  lieux/        donnees/lieux.ts, donnees/etapes.ts, CarteLieux.vue, LieuxView
   reglages/     ReglagesView
 scripts/        generer-icones.mjs (génère les PNG et le favicon, zéro dépendance)
 ```
+
+Ordre des onglets : Journal, Phrases, Lieux, Dépenses. La route d'accueil `/` reste malgré
+tout l'écran de saisie des dépenses, pour tenir l'objectif des cinq secondes depuis l'icône.
 
 Les fichiers `donnees/` sont des listes littérales figées, exemptés de `max-lines`.
 
@@ -91,6 +104,12 @@ stockage indisponible) au lieu de l'avaler, et l'interface l'affiche.
 ## 7. Règles de développement
 
 - Aucune donnée ne quitte l'appareil. Pas de backend, pas de compte, pas de télémétrie.
+- **Aucune coordonnée inventée.** Les positions viennent d'un géocodage Nominatim figé dans
+  `donnees/`, avec un champ `precision` (`poi`, `rue`, `ville`) affiché dans l'interface. Le
+  texte libre de Nominatim est peu fiable dans le Sud : utiliser les requêtes structurées
+  (`city=`, `street=`) et vérifier chaque résultat contre la boîte englobante du voyage.
+- **La carte OSM exige le réseau.** La politique d'usage des tuiles interdit le préchargement
+  massif : `CarteLieux.vue` bascule sur l'image de carte quand `navigator.onLine` est faux.
 - La logique de budget vit dans `calculs.ts`, en fonctions pures et testées. Les composants
   ne calculent pas, ils affichent.
 - Toute donnée relue du stockage est validée (`estDepenseValide`) : une entrée corrompue est

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import Icone from '../partage/Icone.vue'
 import { formatEuros } from '../partage/monnaie'
 import { libelleJour } from '../partage/voyage'
 import { categorie } from './categories'
@@ -54,8 +55,8 @@ function confirme(id: string) {
           :key="ligne.id"
           class="flex items-center gap-2 border-b border-sable py-2 last:border-0"
         >
-          <span class="text-xl" :aria-label="categorie(ligne.categorie).label">
-            {{ categorie(ligne.categorie).emoji }}
+          <span class="shrink-0 text-encre-doux">
+            <Icone :nom="categorie(ligne.categorie).icone" />
           </span>
           <span class="min-w-0 flex-1">
             <span class="block truncate text-sm font-medium">
@@ -68,14 +69,15 @@ function confirme(id: string) {
           <span class="text-sm font-semibold tabular-nums">{{ formatEuros(ligne.centimes) }}</span>
           <button
             type="button"
-            class="min-h-11 min-w-11 rounded-lg text-sm font-semibold"
+            class="flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2 text-sm font-semibold"
             :class="aConfirmer === ligne.id ? 'bg-alerte text-white' : 'text-encre-doux'"
             :aria-label="
               aConfirmer === ligne.id ? 'Confirmer la suppression' : 'Supprimer cette dépense'
             "
             @click="confirme(ligne.id)"
           >
-            {{ aConfirmer === ligne.id ? 'Sûr ?' : '×' }}
+            <span v-if="aConfirmer === ligne.id">Sûr ?</span>
+            <Icone v-else nom="supprimer" :taille="18" />
           </button>
         </li>
       </ul>

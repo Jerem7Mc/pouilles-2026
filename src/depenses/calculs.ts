@@ -41,7 +41,7 @@ export function etatEnveloppes(
     return {
       id: categorie.id,
       label: categorie.label,
-      emoji: categorie.emoji,
+      icone: categorie.icone,
       depense,
       enveloppe,
       reste: enveloppe - depense,

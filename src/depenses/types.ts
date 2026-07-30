@@ -1,3 +1,5 @@
+import type { NomIcone } from '../partage/icones'
+
 export type CategorieId =
   'transport' | 'repas' | 'courses' | 'glaces' | 'visites' | 'souvenirs' | 'divers'
 
@@ -17,7 +19,7 @@ export type Enveloppes = Record<CategorieId, number>
 export interface LigneEnveloppe {
   id: CategorieId
   label: string
-  emoji: string
+  icone: NomIcone
   depense: number
   enveloppe: number
   reste: number

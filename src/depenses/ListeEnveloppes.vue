@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Icone from '../partage/Icone.vue'
 import { formatEuros } from '../partage/monnaie'
 import { useDepenses } from './useDepenses'
 
@@ -18,7 +19,10 @@ function couleurBarre(pourcentage: number, depasse: boolean): string {
     <ul class="mt-3 space-y-3">
       <li v-for="ligne in lignes" :key="ligne.id">
         <div class="flex items-baseline justify-between gap-2 text-sm">
-          <span class="font-semibold">{{ ligne.emoji }} {{ ligne.label }}</span>
+          <span class="flex items-center gap-1.5 font-semibold">
+            <Icone :nom="ligne.icone" :taille="16" />
+            {{ ligne.label }}
+          </span>
           <span
             class="tabular-nums"
             :class="ligne.depasse ? 'text-alerte font-semibold' : 'text-encre-doux'"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import Icone from '../partage/Icone.vue'
 import { formatEuros } from '../partage/monnaie'
 import { JOURS, isoDuJour, libelleJour, libelleJourCourt, position } from '../partage/voyage'
 import { totalParDate } from '../depenses/calculs'
@@ -72,13 +73,17 @@ const ecart = computed(() => reel.value - prevu.value)
       </section>
 
       <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="font-semibold">🗺️ Quoi voir, quoi faire</h2>
+        <h2 class="flex items-center gap-2 font-semibold">
+          <Icone nom="carte" />
+          Quoi voir, quoi faire
+        </h2>
         <p class="mt-1 text-sm leading-relaxed">{{ jour.aFaire }}</p>
       </section>
 
       <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="font-semibold">
-          🚆 Comment y aller
+        <h2 class="flex items-center gap-2 font-semibold">
+          <Icone nom="transport" />
+          Comment y aller
           <span class="ml-1 text-sm font-normal text-encre-doux tabular-nums">
             {{ formatEuros(jour.transportPrevu) }} prévus
           </span>
@@ -87,8 +92,9 @@ const ecart = computed(() => reel.value - prevu.value)
       </section>
 
       <section class="rounded-2xl bg-white p-4 shadow-sm">
-        <h2 class="font-semibold">
-          🍽️ Où manger, sans laitage
+        <h2 class="flex items-center gap-2 font-semibold">
+          <Icone nom="manger" />
+          Où manger, sans laitage
           <span class="ml-1 text-sm font-normal text-encre-doux tabular-nums">
             {{ formatEuros(jour.repasPrevu) }} prévus
           </span>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import Icone from '../partage/Icone.vue'
 import { formatCentimes, formatEuros, parseMontant } from '../partage/monnaie'
 import { CATEGORIES } from './categories'
 import type { CategorieId } from './types'
@@ -37,7 +38,10 @@ function modifie(id: CategorieId, evenement: Event) {
       <li v-for="valeur in valeurs" :key="valeur.id">
         <label class="flex items-center justify-between gap-3">
           <span class="min-w-0">
-            <span class="block text-sm font-semibold">{{ valeur.emoji }} {{ valeur.label }}</span>
+            <span class="flex items-center gap-1.5 text-sm font-semibold">
+              <Icone :nom="valeur.icone" :taille="16" />
+              {{ valeur.label }}
+            </span>
             <span class="block text-xs leading-snug text-encre-doux">{{ valeur.base }}</span>
           </span>
           <span class="flex shrink-0 items-baseline gap-1">

@@ -7,9 +7,13 @@ compte `jerems-projects-85dffad9`). C'est **cette** URL, l'alias stable, qu'il f
 sur l'écran d'accueil. Les URL de déploiement horodatées changent à chaque `vercel --prod` et
 n'ont pas le même stockage.
 
-Redéployer : `vercel --prod`. Le dossier étant nommé `Italy`, avec une majuscule, le CLI
-refusait de créer le projet ; il a fallu le lier explicitement avec
-`vercel link --project pouilles-2026`. C'est fait, `.vercel/` conserve le lien.
+**Dépôt** : `git@github.com:Jerem7Mc/pouilles-2026.git`, branche `main`, reliée à Vercel.
+Un `git push` suffit à déployer, `vercel --prod` n'est plus nécessaire.
+
+Le dossier étant nommé `Italy`, avec une majuscule, le CLI Vercel refusait de créer le projet ;
+il a fallu le lier explicitement avec `vercel link --project pouilles-2026`. C'est fait,
+`.vercel/` conserve le lien. À noter aussi : le hook RTK de la config globale réécrit `npx` en
+`npm run`, ce qui casse `npx <outil-non-installé>` ; passer par le binaire du cache npx.
 
 **Voyage** : 24/08/2026 au 03/09/2026. Bari 6 nuits, Lecce 4 nuits. Vol retour le 03/09 à 20 h 40.
 
@@ -43,6 +47,12 @@ hors-ligne ni l'installation.
   et une marge d'imprévu.
 - **Horaires Salento in Bus** : les grilles changent souvent au 1er septembre. Vérifier
   l'affichage officiel en gare de Lecce dès l'arrivée le 30 août, avant la journée d'Otrante.
+
+- **Adresse du Coop de Bari à vérifier sur place.** Le géocodage place Via Giulio Petroni 22 à
+  2 km de la gare, alors que le plan annonce « 2 minutes à pied, en face de l'hôtel ». L'un des
+  deux est faux. Le Famila, lui, est bien à 8 minutes.
+- **La carte interactive a besoin de réseau.** Hors-ligne, l'écran Lieux affiche la carte en
+  image à la place. La liste des adresses et les phrases restent disponibles sans réseau.
 
 ## Ce qui n'est volontairement pas fait
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import Icone from '../partage/Icone.vue'
 import { isoDuJour } from '../partage/voyage'
 import { useDepenses } from './useDepenses'
 
@@ -88,16 +89,18 @@ function efface() {
     <div class="mt-3 flex gap-2">
       <button
         type="button"
-        class="min-h-11 flex-1 rounded-xl bg-terre text-sm font-semibold text-white"
+        class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-terre text-sm font-semibold text-white"
         @click="copie()"
       >
+        <Icone nom="copier" :taille="16" />
         Copier
       </button>
       <button
         type="button"
-        class="min-h-11 flex-1 rounded-xl bg-sable text-sm font-semibold text-encre"
+        class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-sable text-sm font-semibold text-encre"
         @click="telecharge()"
       >
+        <Icone nom="telecharger" :taille="16" />
         Télécharger
       </button>
     </div>

@@ -1,3 +1,5 @@
+import type { NomIcone } from '../../partage/icones'
+
 export interface Phrase {
   fr: string
   it: string
@@ -6,19 +8,23 @@ export interface Phrase {
 export interface SectionPhrases {
   id: string
   titre: string
-  emoji: string
+  /** Libellé court, pour les pastilles de filtre sur mobile. */
+  court: string
+  icone: NomIcone
   phrases: readonly Phrase[]
 }
 
 /**
  * Antimémoire de survie, consultable hors-ligne. Les crochets marquent les
- * mots à remplacer par sa destination.
+ * mots à remplacer. Le sans-laitage vient en premier : c'est le seul bloc dont
+ * dépend la santé, les autres ne coûtent qu'un malentendu.
  */
 export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
   {
     id: 'laitage',
     titre: 'Sans laitage',
-    emoji: '🥛',
+    court: 'Sans laitage',
+    icone: 'laitage',
     phrases: [
       {
         fr: 'Je suis intolérant au lait et au fromage',
@@ -33,12 +39,54 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
         it: 'Questo gusto è fatto con acqua o con latte?',
       },
       { fr: 'C’est à base d’huile d’olive ?', it: 'È a base di olio d’oliva?' },
+      {
+        fr: 'Attention, c’est important pour ma santé',
+        it: 'Attenzione, è importante per la mia salute',
+      },
+    ],
+  },
+  {
+    id: 'politesse',
+    titre: 'Politesse',
+    court: 'Politesse',
+    icone: 'politesse',
+    phrases: [
+      { fr: 'Bonjour', it: 'Buongiorno' },
+      { fr: 'Bonsoir', it: 'Buonasera' },
+      { fr: 'Salut', it: 'Ciao' },
+      { fr: 'Au revoir', it: 'Arrivederci' },
+      { fr: 'S’il vous plaît', it: 'Per favore' },
+      { fr: 'Merci', it: 'Grazie' },
+      { fr: 'Excusez-moi', it: 'Scusi' },
+      { fr: 'Parlez-vous français ?', it: 'Parla francese?' },
+      { fr: 'Parlez-vous anglais ?', it: 'Parla inglese?' },
+      { fr: 'Je ne comprends pas', it: 'Non capisco' },
+      { fr: 'Pouvez-vous répéter plus lentement ?', it: 'Può ripetere più lentamente?' },
+    ],
+  },
+  {
+    id: 'orientation',
+    titre: 'S’orienter',
+    court: 'Orientation',
+    icone: 'orientation',
+    phrases: [
+      { fr: 'Où se trouve la gare ?', it: 'Dov’è la stazione?' },
+      { fr: 'Où se trouve l’arrêt de bus ?', it: 'Dov’è la fermata dell’autobus?' },
+      { fr: 'Où sont les toilettes ?', it: 'Dov’è il bagno?' },
+      { fr: 'Le centre-ville', it: 'Il centro città' },
+      { fr: 'Le supermarché', it: 'Il supermercato' },
+      { fr: 'C’est loin ?', it: 'È lontano?' },
+      { fr: 'C’est près ?', it: 'È vicino?' },
+      { fr: 'À droite', it: 'A destra' },
+      { fr: 'À gauche', it: 'A sinistra' },
+      { fr: 'Tout droit', it: 'Sempre dritto' },
     ],
   },
   {
     id: 'transports',
     titre: 'Transports',
-    emoji: '🚂',
+    court: 'Transports',
+    icone: 'transport',
     phrases: [
       { fr: 'Un billet pour [Bari], s’il vous plaît', it: 'Un biglietto per [Bari], per favore' },
       { fr: 'Aller-retour', it: 'Andata e ritorno' },
@@ -60,26 +108,10 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
     ],
   },
   {
-    id: 'orientation',
-    titre: 'S’orienter',
-    emoji: '🗺️',
-    phrases: [
-      { fr: 'Où se trouve la gare ?', it: 'Dov’è la stazione?' },
-      { fr: 'Où se trouve l’arrêt de bus ?', it: 'Dov’è la fermata dell’autobus?' },
-      { fr: 'Où sont les toilettes ?', it: 'Dov’è il bagno?' },
-      { fr: 'Le centre-ville', it: 'Il centro città' },
-      { fr: 'Le supermarché', it: 'Il supermercato' },
-      { fr: 'C’est loin ?', it: 'È lontano?' },
-      { fr: 'C’est près ?', it: 'È vicino?' },
-      { fr: 'À droite', it: 'A destra' },
-      { fr: 'À gauche', it: 'A sinistra' },
-      { fr: 'Tout droit', it: 'Sempre dritto' },
-    ],
-  },
-  {
     id: 'achats',
     titre: 'Achats et argent',
-    emoji: '🛍️',
+    court: 'Achats',
+    icone: 'achats',
     phrases: [
       { fr: 'Combien ça coûte ?', it: 'Quanto costa?' },
       { fr: 'Puis-je payer par carte bancaire ?', it: 'Posso pagare con la carta?' },
@@ -87,12 +119,14 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
       { fr: 'Où sont les paniers ?', it: 'Dove sono i cestini?' },
       { fr: 'Où sont les caddies ?', it: 'Dove sono i carrelli?' },
       { fr: 'Où se trouve la caisse ?', it: 'Dov’è la cassa?' },
+      { fr: 'C’est trop cher pour moi', it: 'È troppo caro per me' },
     ],
   },
   {
     id: 'hebergement',
     titre: 'Auberge et hôtel',
-    emoji: '🏨',
+    court: 'Hôtel',
+    icone: 'hebergement',
     phrases: [
       {
         fr: 'J’ai une réservation au nom de [votre nom]',
@@ -109,32 +143,73 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
     ],
   },
   {
+    id: 'drague',
+    titre: 'Rencontres',
+    court: 'Rencontres',
+    icone: 'drague',
+    phrases: [
+      // Aborder
+      { fr: 'Salut, je peux t’offrir un verre ?', it: 'Ciao, posso offrirti da bere?' },
+      { fr: 'Je peux m’asseoir ?', it: 'Posso sedermi?' },
+      { fr: 'Tu es d’ici ?', it: 'Sei di qui?' },
+      {
+        fr: 'Je suis français, je voyage dans les Pouilles',
+        it: 'Sono francese, sto viaggiando in Puglia',
+      },
+      { fr: 'Je ne parle pas bien italien, désolé', it: 'Non parlo bene italiano, scusa' },
+      { fr: 'Tu me conseilles quoi, dans le coin ?', it: 'Cosa mi consigli qui in zona?' },
+
+      // Faire connaissance
+      { fr: 'Comment tu t’appelles ?', it: 'Come ti chiami?' },
+      { fr: 'Moi c’est [votre prénom]', it: 'Io sono [votre prénom]' },
+      { fr: 'Tu es ici en vacances ?', it: 'Sei qui in vacanza?' },
+      { fr: 'Tu fais quoi dans la vie ?', it: 'Che lavoro fai?' },
+      { fr: 'Tu as quel âge ?', it: 'Quanti anni hai?' },
+      { fr: 'Je suis à Bari pour une semaine', it: 'Sono a Bari per una settimana' },
+
+      // Compliments
+      { fr: 'Tu as un très beau sourire', it: 'Hai un sorriso bellissimo' },
+      { fr: 'Tu es très belle', it: 'Sei molto bella' },
+      { fr: 'Tu es très beau', it: 'Sei molto bello' },
+      { fr: 'J’aime beaucoup ton accent', it: 'Mi piace molto il tuo accento' },
+      { fr: 'Tu danses très bien', it: 'Balli molto bene' },
+
+      // Proposer
+      { fr: 'Tu veux boire quelque chose avec moi ?', it: 'Ti va di bere qualcosa con me?' },
+      { fr: 'On va prendre une glace ?', it: 'Ti va di andare a prendere un gelato?' },
+      { fr: 'Je connais un bel endroit', it: 'Conosco un bel posto' },
+      { fr: 'On se voit demain ?', it: 'Ci vediamo domani?' },
+      { fr: 'Tu me donnes ton numéro ?', it: 'Mi dai il tuo numero?' },
+      { fr: 'Tu es sur Instagram ?', it: 'Sei su Instagram?' },
+      { fr: 'Je peux te revoir ?', it: 'Posso rivederti?' },
+
+      // Aller plus loin, en demandant
+      { fr: 'Tu me plais beaucoup', it: 'Mi piaci molto' },
+      { fr: 'Je passe un très bon moment avec toi', it: 'Mi sto divertendo molto con te' },
+      { fr: 'Je peux t’embrasser ?', it: 'Posso baciarti?' },
+
+      // Dire non, et savoir reconnaître un non
+      { fr: 'Non merci, ça ne m’intéresse pas', it: 'No grazie, non mi interessa' },
+      { fr: 'Je préfère rester seul, merci', it: 'Preferisco stare da solo, grazie' },
+      { fr: 'Laisse-moi tranquille, s’il te plaît', it: 'Lasciami in pace, per favore' },
+      { fr: 'J’ai compris, aucun souci', it: 'Ho capito, nessun problema' },
+      { fr: 'Pardon de t’avoir dérangé, bonne soirée', it: 'Scusa il disturbo, buona serata' },
+      { fr: 'Je suis désolé, je repars jeudi', it: 'Mi dispiace, torno a casa giovedì' },
+    ],
+  },
+  {
     id: 'urgence',
     titre: 'Urgence',
-    emoji: '🆘',
+    court: 'Urgence',
+    icone: 'urgence',
     phrases: [
       { fr: 'Pouvez-vous m’aider, s’il vous plaît ?', it: 'Può aiutarmi, per favore?' },
       { fr: 'J’ai perdu mon téléphone', it: 'Ho perso il mio telefono' },
       { fr: 'J’ai perdu mon portefeuille', it: 'Ho perso il mio portafoglio' },
       { fr: 'Où se trouve la pharmacie la plus proche ?', it: 'Dov’è la farmacia più vicina?' },
       { fr: 'Je ne me sens pas bien', it: 'Non mi sento bene' },
-    ],
-  },
-  {
-    id: 'politesse',
-    titre: 'Politesse',
-    emoji: '👋',
-    phrases: [
-      { fr: 'Bonjour', it: 'Buongiorno' },
-      { fr: 'Bonsoir', it: 'Buonasera' },
-      { fr: 'Salut', it: 'Ciao' },
-      { fr: 'Au revoir', it: 'Arrivederci' },
-      { fr: 'S’il vous plaît', it: 'Per favore' },
-      { fr: 'Merci', it: 'Grazie' },
-      { fr: 'Excusez-moi', it: 'Scusi' },
-      { fr: 'Parlez-vous français ?', it: 'Parla francese?' },
-      { fr: 'Parlez-vous anglais ?', it: 'Parla inglese?' },
-      { fr: 'Je ne comprends pas', it: 'Non capisco' },
+      { fr: 'Appelez une ambulance', it: 'Chiami un’ambulanza' },
+      { fr: 'J’ai besoin d’un médecin', it: 'Ho bisogno di un medico' },
     ],
   },
 ]
