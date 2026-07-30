@@ -4,23 +4,24 @@ Dernière mise à jour : 30/07/2026. Départ dans 25 jours.
 
 ## État en une ligne
 
-Application complète et vérifiée en local. **Trois commits non poussés**, donc la version en
-ligne est en retard de trois lots.
+**Tout est poussé et déployé.** `main` et `origin/main` sont alignés, la production est à jour
+et vérifiée. Aucun fichier non commité, `npm run verify` vert, 85 tests.
 
-## À trancher au démarrage
+## Rien en attente
 
-**Pousser ou non les 3 commits locaux.** Un `git push` déclenche un déploiement Vercel
-automatique. La consigne de rester en local venait d'une crainte de quota, écartée depuis : le
-plan Hobby plafonne à environ une centaine de déploiements par jour et on en a fait 4. Rien
-n'empêche de pousser, mais c'est à Jérém de le demander.
+Aucune décision en suspens, aucun travail commencé et non terminé. La prochaine session repart
+sur une base propre.
 
-```
-4796725  feat: ecran phrases en trois niveaux, corpus porte a 209 phrases
-4ab70c4  feat: URL sans hash et liens du journal vers la carte
-0f62e8f  feat: transports et sites sur la carte, budget repas realiste
-```
+Piège corrigé au dernier moment, à ne pas réintroduire : le premier `vercel.json` utilisait une
+expression régulière brute avec lookahead négatif, ce que Vercel n'interprète pas (il attend du
+path-to-regexp). Résultat, les cinq routes renvoyaient 404 en production alors que tout
+fonctionnait en local. La forme simple `"/(.*)"` est la bonne : Vercel sert les fichiers
+existants **avant** d'appliquer les réécritures, donc les assets ne sont pas capturés. Vérifié :
+les six routes répondent 200, et `manifest.webmanifest`, `sw.js`, les PNG et le JPEG de la carte
+sont toujours servis avec leur bon type MIME.
 
-Rien d'autre n'est en attente. Aucun fichier non commité, `npm run verify` vert, 85 tests.
+Leçon générale : une réécriture d'hébergeur ne se teste pas en local, le serveur de
+développement Vite fait son propre repli SPA et masque le problème.
 
 ## Repères techniques
 
