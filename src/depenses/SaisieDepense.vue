@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
 import { parseMontant } from '../partage/monnaie'
-import { JOURS, isoDuJour, libelleJour, position } from '../partage/voyage'
+import { JOURS, jourActif, libelleJour } from '../partage/voyage'
 import { CATEGORIES } from './categories'
 import type { CategorieId } from './types'
 import { useDepenses } from './useDepenses'
@@ -15,8 +15,7 @@ const confirmation = ref('')
 
 // Hors voyage, on retombe sur le premier jour pour que les essais avant le
 // départ n'atterrissent pas sur une date absente du carnet de route.
-const aujourdhui = isoDuJour()
-const date = ref(position(aujourdhui) === 'pendant' ? aujourdhui : JOURS[0])
+const date = ref(jourActif() ?? JOURS[0])
 
 const centimes = computed(() => parseMontant(saisie.value))
 const pret = computed(() => centimes.value !== null)

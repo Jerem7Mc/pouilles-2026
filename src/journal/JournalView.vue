@@ -1,16 +1,26 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
 import { formatEuros } from '../partage/monnaie'
-import { JOURS, isoDuJour, libelleJour, libelleJourCourt, position } from '../partage/voyage'
+import { JOURS, jourActif, libelleJour, libelleJourCourt } from '../partage/voyage'
 import { totalParDate } from '../depenses/calculs'
 import { useDepenses } from '../depenses/useDepenses'
 import { ITINERAIRE } from './donnees/itineraire'
 
 const { depenses } = useDepenses()
 
-const aujourdhui = isoDuJour()
-const selection = ref(position(aujourdhui) === 'pendant' ? aujourdhui : JOURS[0])
+const aujourdhui = jourActif()
+const selection = ref(aujourdhui ?? JOURS[0])
+
+const bandeJours = ref<HTMLElement | null>(null)
+
+// Au jour 9, la pastille active est hors écran : sans cela il faudrait faire
+// défiler à la main chaque fois qu'on ouvre le journal.
+onMounted(() => {
+  bandeJours.value
+    ?.querySelector('[aria-current="true"]')
+    ?.scrollIntoView({ block: 'nearest', inline: 'center' })
+})
 
 const jour = computed(() => ITINERAIRE.find((etape) => etape.date === selection.value))
 const numero = computed(() => JOURS.indexOf(selection.value) + 1)
@@ -23,7 +33,7 @@ const ecart = computed(() => reel.value - prevu.value)
 <template>
   <div class="space-y-4">
     <!-- Sélecteur de jour : défilement horizontal, une pastille par journée -->
-    <nav aria-label="Journées du voyage" class="-mx-4 overflow-x-auto px-4">
+    <nav ref="bandeJours" aria-label="Journées du voyage" class="-mx-4 overflow-x-auto px-4">
       <ul class="flex gap-2 pb-1">
         <li v-for="date in JOURS" :key="date">
           <button

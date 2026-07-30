@@ -7,6 +7,7 @@ import {
   ajouteJours,
   ecartJours,
   isoDuJour,
+  jourActif,
   libelleJour,
   libelleJourCourt,
   numeroJour,
@@ -45,6 +46,23 @@ describe('numeroJour', () => {
   it('renvoie null hors du voyage', () => {
     expect(numeroJour('2026-08-23')).toBeNull()
     expect(numeroJour('2026-09-04')).toBeNull()
+  })
+})
+
+describe('jourActif', () => {
+  it('renvoie la journée en cours pendant le voyage', () => {
+    expect(jourActif(new Date(2026, 7, 27, 14))).toBe('2026-08-27')
+  })
+
+  it('fonctionne le premier et le dernier jour', () => {
+    expect(jourActif(new Date(2026, 7, 24, 8))).toBe('2026-08-24')
+    expect(jourActif(new Date(2026, 8, 3, 23, 59))).toBe('2026-09-03')
+  })
+
+  it('renvoie null avant et après le voyage', () => {
+    expect(jourActif(new Date(2026, 6, 30, 12))).toBeNull()
+    expect(jourActif(new Date(2026, 7, 23, 23, 59))).toBeNull()
+    expect(jourActif(new Date(2026, 8, 4, 0, 1))).toBeNull()
   })
 })
 

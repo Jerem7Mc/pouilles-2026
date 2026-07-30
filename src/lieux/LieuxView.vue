@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
-import { JOURS, libelleJour } from '../partage/voyage'
+import { JOURS, jourActif, libelleJour } from '../partage/voyage'
 import { ETAPES, etape } from './donnees/etapes'
 import { LIBELLES_PRECISION, LIBELLES_TYPE, LIEUX, lienCarte } from './donnees/lieux'
 import type { TypeLieu } from './donnees/lieux'
@@ -12,7 +12,12 @@ const VILLES = ['Bari', 'Lecce'] as const
 
 const filtreType = ref<TypeLieu | null>(null)
 const filtreVille = ref<string | null>(null)
-const filtreJour = ref<string | null>(null)
+/**
+ * Pendant le voyage, on ouvre l'écran sur la journée en cours : ce sont ces
+ * adresses qui servent aujourd'hui. Hors des dates, rien n'est filtré, on
+ * consulte l'ensemble.
+ */
+const filtreJour = ref<string | null>(jourActif())
 
 /**
  * Ville et jour sont deux façons de restreindre la même chose : choisir l'une

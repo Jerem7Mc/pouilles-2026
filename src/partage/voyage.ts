@@ -46,6 +46,18 @@ export function numeroJour(iso: string): number | null {
   return index === -1 ? null : index + 1
 }
 
+/**
+ * Journée du voyage en cours, ou null en dehors des dates.
+ *
+ * Source unique pour les trois écrans qui présélectionnent un jour : journal,
+ * lieux et saisie de dépense. Chacun choisit ensuite son repli hors voyage,
+ * mais aucun ne recalcule « aujourd'hui » pour son compte.
+ */
+export function jourActif(maintenant: Date = new Date()): string | null {
+  const aujourdhui = isoDuJour(maintenant)
+  return numeroJour(aujourdhui) === null ? null : aujourdhui
+}
+
 const FORMAT_LONG = new Intl.DateTimeFormat('fr-FR', {
   weekday: 'long',
   day: 'numeric',

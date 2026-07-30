@@ -16,35 +16,12 @@ export interface SectionPhrases {
 
 /**
  * Antimémoire de survie, consultable hors-ligne. Les crochets marquent les
- * mots à remplacer. Le sans-laitage vient en premier : c'est le seul bloc dont
- * dépend la santé, les autres ne coûtent qu'un malentendu.
+ * mots à remplacer par sa destination ou son prénom.
+ *
+ * L'ordre des sections est celui des pastilles de filtre, et il est voulu :
+ * du plus courant au plus rare, le sans-laitage placé juste après les achats.
  */
 export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
-  {
-    id: 'laitage',
-    titre: 'Sans laitage',
-    court: 'Sans laitage',
-    icone: 'laitage',
-    phrases: [
-      {
-        fr: 'Je suis intolérant au lait et au fromage',
-        it: 'Sono intollerante al latte e al formaggio',
-      },
-      { fr: 'Sans fromage', it: 'Senza formaggio' },
-      { fr: 'Sans crème', it: 'Senza crema' },
-      { fr: 'Sans beurre', it: 'Senza burro' },
-      { fr: 'Est-ce qu’il y a du lait ou du beurre là-dedans ?', it: 'C’è latte o burro dentro?' },
-      {
-        fr: 'Ce parfum de glace est-il fait avec de l’eau ou du lait ?',
-        it: 'Questo gusto è fatto con acqua o con latte?',
-      },
-      { fr: 'C’est à base d’huile d’olive ?', it: 'È a base di olio d’oliva?' },
-      {
-        fr: 'Attention, c’est important pour ma santé',
-        it: 'Attenzione, è importante per la mia salute',
-      },
-    ],
-  },
   {
     id: 'politesse',
     titre: 'Politesse',
@@ -120,6 +97,31 @@ export const SECTIONS_PHRASES: readonly SectionPhrases[] = [
       { fr: 'Où sont les caddies ?', it: 'Dove sono i carrelli?' },
       { fr: 'Où se trouve la caisse ?', it: 'Dov’è la cassa?' },
       { fr: 'C’est trop cher pour moi', it: 'È troppo caro per me' },
+    ],
+  },
+  {
+    id: 'laitage',
+    titre: 'Sans laitage',
+    court: 'Sans laitage',
+    icone: 'laitage',
+    phrases: [
+      {
+        fr: 'Je suis intolérant au lait et au fromage',
+        it: 'Sono intollerante al latte e al formaggio',
+      },
+      { fr: 'Sans fromage', it: 'Senza formaggio' },
+      { fr: 'Sans crème', it: 'Senza crema' },
+      { fr: 'Sans beurre', it: 'Senza burro' },
+      { fr: 'Est-ce qu’il y a du lait ou du beurre là-dedans ?', it: 'C’è latte o burro dentro?' },
+      {
+        fr: 'Ce parfum de glace est-il fait avec de l’eau ou du lait ?',
+        it: 'Questo gusto è fatto con acqua o con latte?',
+      },
+      { fr: 'C’est à base d’huile d’olive ?', it: 'È a base di olio d’oliva?' },
+      {
+        fr: 'Attention, c’est important pour ma santé',
+        it: 'Attenzione, è importante per la mia salute',
+      },
     ],
   },
   {
