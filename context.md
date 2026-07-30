@@ -67,9 +67,11 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **Gare et terminal de bus de Lecce sont à 2 km, dans des directions opposées.** Gallipoli part
   de la gare ferroviaire au sud, Otrante et Porto Cesareo du City Terminal au nord.
 - **La gare d'Ostuni est à 2,8 km du centre historique.** La navette STP n'est pas optionnelle.
-- **Adresse du Coop de Bari à vérifier sur place.** Le géocodage place Via Giulio Petroni 22 à
-  2 km de la gare, ce qui contredit le « 2 minutes à pied » du plan. Le Famila, lui, colle avec
-  ses 8 minutes.
+- **Courses à Bari : c'est le Lidl, pas le Coop.** Résolu le 30/07/2026. Le Coop était placé Via
+  Giulio Petroni, à 2 508 m de l'auberge. Le « 2 minutes à pied » du plan désignait en fait le
+  **Lidl de la Via Giuseppe Capruzzi, à 200 m**, vérifié par Overpass. Le Coop est corrigé sur
+  Via Paolo Lembo 17, à 557 m, mais en `precision: 'rue'` : OpenStreetMap ne connaît aucun Coop
+  à ce numéro, l'enseigne reste à confirmer sur place. Un test fige le classement.
 - **Budget** : enveloppes par défaut à **565 €**, contre 267,40 € au plan initial. Les repas
   sont passés à 25 € par jour, petit-déjeuner compris. Réglable dans l'écran Réglages.
 - **La carte interactive exige du réseau.** Hors-ligne, l'écran Lieux bascule sur la carte en
@@ -78,9 +80,14 @@ développement Vite fait son propre repli SPA et masque le problème.
 ## Installation sur l'iPhone, faite
 
 Installée en PWA depuis Safari et testée hors-ligne le 30/07/2026, les quatre onglets
-répondent en Mode Avion. Reste la discipline du soir pendant le voyage : **exporter une
-sauvegarde et la stocker ailleurs que sur le téléphone**, `localStorage` reste évinçable sous
-forte pression disque même en PWA installée.
+répondent en Mode Avion.
+
+Sauvegardes : **tous les 2 ou 3 jours**, pas chaque soir, ma consigne initiale était de la
+sur-prudence. Ce qui est en jeu est un relevé de dépenses, pas des pièces comptables. Le risque
+réel est l'éviction de `localStorage` sous pression disque, avec 11 jours de photos. Chemin qui
+boucle vraiment depuis un téléphone seul : bouton **Copier**, puis collage dans un mail qu'on
+s'envoie. `restaure()` ne lit que du texte collé, il n'y a pas d'import de fichier : un JSON sur
+Drive obligerait à l'ouvrir et à tout recopier.
 
 Procédure conservée pour mémoire, en cas de réinstallation :
 

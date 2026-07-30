@@ -82,8 +82,10 @@ function efface() {
   <section class="bloc">
     <p class="micro">Sauvegarde</p>
     <p class="mt-2 text-sm text-encre-doux">
-      Les données ne vivent que sur cet appareil. Exporte-les avant le départ, puis une fois par
-      soir pendant le voyage : c’est le seul filet en cas de téléphone perdu.
+      Les données ne vivent que sur cet appareil. Sauvegarde tous les 2 ou 3 jours, et après la
+      journée la plus dépensière. Depuis le téléphone, le plus simple est Copier, puis coller dans
+      un mail que tu t’envoies : la restauration se fait par collage, alors qu’un fichier téléchargé
+      oblige à l’ouvrir et à tout recopier.
     </p>
 
     <div class="mt-3 flex gap-2">

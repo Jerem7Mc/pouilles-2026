@@ -156,7 +156,7 @@ export const ITINERAIRE: readonly Jour[] = [
       },
     ],
     alerte:
-      'Horaires de Salento in Bus pour Otrante et Porto Cesareo : le site salentoinbus.it n’existe plus, la source officielle est la Province de Lecce, un PDF par ligne. Call center tous les jours de 8h à 20h au 379 333 79 79. Les deux lignes partent du City Terminal, à 2 km de la gare.',
+      'Horaires de Salento in Bus pour Otrante et Porto Cesareo : le site salentoinbus.it n’existe plus, la source officielle est la Province de Lecce, un PDF par ligne, et les horaires des 1er et 2 septembre sont déjà dans le journal. Rien à aller chercher au terminal. Call center 379 333 79 79, tous les jours de 8h à 20h. Les deux lignes partent du City Terminal, à 2 km de la gare.',
   },
   {
     date: '2026-08-31',
@@ -206,7 +206,7 @@ export const ITINERAIRE: readonly Jour[] = [
       { label: 'Repli en train, réseau FSE', url: 'https://www.fssudest.it' },
     ],
     alerte:
-      'Départ du City Terminal, au nord, et non de la gare : 2 km séparent les deux. Grille valable du 1er au 13 septembre, à reconfirmer au 379 333 79 79. L’arrêt Otranto Stazione FSE précède le port de 8 minutes. Repli en train FSE si la ligne ne roule pas.',
+      'Départ du City Terminal, au nord, et non de la gare : 2 km séparent les deux. Rouvrir le PDF la veille au soir, avec du réseau : une révision d’horaires ou une grève ne se voit qu’en ligne, jamais sur une grille imprimée. L’arrêt Otranto Stazione FSE précède le port de 8 minutes. Repli en train FSE si la ligne ne roule pas.',
   },
   {
     date: '2026-09-02',
@@ -239,7 +239,7 @@ export const ITINERAIRE: readonly Jour[] = [
       },
     ],
     alerte:
-      'Trois passages par jour seulement : viser l’aller de 09h00 et le retour de 17h59, au City Terminal. Grille valable du 1er au 13 septembre, à reconfirmer au 379 333 79 79. Si la ligne ne roule pas, la STP dessert Porto Cesareo par Leverano au départ de la gare. Pique-nique à préparer la veille à l’Eurospin.',
+      'Trois passages par jour seulement : viser l’aller de 09h00 et le retour de 17h59, au City Terminal. Rouvrir le PDF la veille au soir, avec du réseau, une grève ne se voit qu’en ligne. Si la ligne ne roule pas, la STP dessert Porto Cesareo par Leverano au départ de la gare. Pique-nique à préparer la veille à l’Eurospin.',
   },
   {
     date: '2026-09-03',

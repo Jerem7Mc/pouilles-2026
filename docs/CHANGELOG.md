@@ -41,7 +41,30 @@ Réserve assumée : figer des horaires dans les données accepte qu'ils bougent 
 D'où la consigne de reconfirmation et le numéro du call center affichés dans le journal.
 
 **Hors code** : PWA installée depuis Safari et testée en Mode Avion, les quatre onglets
-répondent hors-ligne. Il ne reste que la discipline de l'export du soir pendant le voyage.
+répondent hors-ligne.
+
+**Courses à Bari : mauvaise enseigne depuis le début.** Le Coop était placé Via Giulio Petroni,
+géocodage vérifié à 2 508 m de l'auberge, ce qui contredisait le « 2 minutes à pied » du plan.
+Overpass sur la zone montre six supermarchés à moins de 235 m de l'auberge. Le « 2 minutes »
+désignait le **Lidl de la Via Giuseppe Capruzzi, 200 m**, ajouté en `precision: 'poi'`. Le Coop
+est corrigé sur Via Paolo Lembo 17, à 557 m, mais gardé en `precision: 'rue'` : OpenStreetMap ne
+connaît aucun Coop à ce numéro, l'enseigne n'est pas corroborée. Trois autres adresses proposées
+ont été écartées par distance, 740 m et 826 m. Un test fige le classement Lidl avant Coop, pour
+que Petroni ne revienne pas.
+
+**Deux consignes de ma part étaient trop lourdes, corrigées dans l'interface.**
+
+- « Exporter une sauvegarde chaque soir » : c'est un relevé de dépenses, pas de la comptabilité.
+  Tous les 2 ou 3 jours suffit. Surtout, `restaure()` ne lit que du **texte collé**, il n'y a pas
+  d'import de fichier : le bouton Copier suivi d'un collage dans un mail est le seul chemin qui
+  boucle depuis un téléphone seul. Un JSON sur Drive obligerait à l'ouvrir et à tout recopier.
+  Le texte de l'écran Réglages disait l'inverse.
+- « Vérifier les horaires au City Terminal » : inutile, la grille officielle est en ligne et déjà
+  dans le journal. Ne restent que deux motifs de rouvrir le PDF la veille au soir, une révision
+  d'horaires ou une grève, qui ne se voient qu'en ligne. Les trois alertes sont reformulées.
+
+L'écran Réglages listait « à faire avant le départ », désormais périmé. Remplacé par trois
+consignes valables sur le terrain.
 
 ## 2026-07-30 — Écran phrases refait, antimémoire porté à 209 phrases
 

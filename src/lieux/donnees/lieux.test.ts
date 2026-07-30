@@ -67,11 +67,35 @@ describe('étapes', () => {
   })
 })
 
+describe('supermarchés de Bari', () => {
+  /** Distance en mètres entre deux positions, formule de haversine. */
+  function metres(a: { lat: number; lon: number }, b: { lat: number; lon: number }): number {
+    const rad = (angle: number) => (angle * Math.PI) / 180
+    const dLat = rad(b.lat - a.lat)
+    const dLon = rad(b.lon - a.lon)
+    const x =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2
+    return 2 * 6_371_000 * Math.asin(Math.sqrt(x))
+  }
+
+  it('place le Lidl à moins de 300 m de l’auberge, plus près que le Coop', () => {
+    // Le plan d'origine annonçait « 2 minutes à pied » et l'app pointait un Coop
+    // situé à 2,5 km, sur la Via Giulio Petroni. Ce test fige la correction :
+    // l'enseigne voisine de l'auberge est le Lidl, le Coop est un second choix.
+    const auberge = LIEUX.find((lieu) => lieu.id === 'host-bari-centrale')!
+    const lidl = LIEUX.find((lieu) => lieu.id === 'lidl-bari')!
+    const coop = LIEUX.find((lieu) => lieu.id === 'coop')!
+    expect(metres(auberge, lidl)).toBeLessThan(300)
+    expect(metres(auberge, lidl)).toBeLessThan(metres(auberge, coop))
+  })
+})
+
 describe('lienCarte', () => {
   it('envoie l’adresse en texte quand la position n’est qu’au niveau de la rue', () => {
     const coop = LIEUX.find((element) => element.nom === 'Coop')
     expect(coop?.precision).toBe('rue')
-    expect(lienCarte(coop!)).toBe('https://maps.apple.com/?q=Via%20Giulio%20Petroni%2022%2C%20Bari')
+    expect(lienCarte(coop!)).toBe('https://maps.apple.com/?q=Via%20Paolo%20Lembo%2017%2C%20Bari')
   })
 
   it('envoie les coordonnées quand la position est exacte', () => {
