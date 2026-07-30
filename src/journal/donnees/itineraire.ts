@@ -2,9 +2,16 @@ import { PREMIER_JOUR } from '../../partage/voyage'
 import type { Jour } from '../types'
 
 /**
- * Carnet de route figé au départ. Les montants sont ceux du plan prévisionnel,
- * en centimes ; l'écran de journal les confronte aux dépenses réelles saisies.
+ * Carnet de route figé au départ, montants en centimes.
+ *
+ * `transportPrevu` reprend le plan tel quel, ses tarifs sont vérifiables.
+ * `repasPrevu` est en revanche relevé à 25 € par jour partout : le plan
+ * d'origine ne comptait que deux repas quotidiens et tombait à 12 € certains
+ * jours, ce qui est intenable avec un petit-déjeuner, un déjeuner et un dîner.
+ * Mieux vaut un prévu réaliste qu'un écran qui affiche un dépassement chaque
+ * jour et qu'on finit par ignorer.
  */
+const REPAS_PAR_JOUR = 2_500
 export const ITINERAIRE: readonly Jour[] = [
   {
     date: '2026-08-24',
@@ -18,7 +25,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 530,
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
-    repasPrevu: 600,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-25',
@@ -32,7 +39,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 1140,
     ouManger:
       'Restaurant La Lopa, midi et soir : fave e cicorie (purée de fèves à l’huile d’olive, chicorée sauvage, peperoni cruschi).',
-    repasPrevu: 2400,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-26',
@@ -45,7 +52,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 720,
     ouManger:
       'Friterie marine Peschef sur le port : poulpe grillé ou grande salade de fruits de mer, huile d’olive et citron.',
-    repasPrevu: 1800,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-27',
@@ -59,7 +66,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 960,
     ouManger:
       'Pescaria à Polignano : panino con polpo fritto (poulpe frit, figues, chicorée). Demander impérativement à retirer la crème de ricotta.',
-    repasPrevu: 2400,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-28',
@@ -73,7 +80,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 1300,
     ouManger:
       'Boulangerie d’Ostuni : puccia au feu de bois garnie de légumes grillés, thon à l’huile et câpres. Préciser « senza formaggio ».',
-    repasPrevu: 1200,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-29',
@@ -87,7 +94,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 1000,
     ouManger:
       'Grand cornet de taralli artisanaux (farine, vin blanc, huile d’olive) en boulangerie, avec tomates cerises et fruits frais.',
-    repasPrevu: 800,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-30',
@@ -101,7 +108,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 1180,
     ouManger:
       'La Puccia, Viale Giacomo Leopardi : puccia leccese sur mesure, prosciutto crudo, tomates séchées, olives, roquette. Sans fromage ni crème.',
-    repasPrevu: 1400,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-08-31',
@@ -114,7 +121,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 1000,
     ouManger:
       'En trattoria : orecchiette con cime di rapa (ail, huile d’olive, anchois). Bien préciser « senza formaggio », certains en saupoudrent au service.',
-    repasPrevu: 1800,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-09-01',
@@ -128,7 +135,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 800,
     ouManger:
       'Frise à emporter : pains secs réhydratés, tomates fraîches frottées, huile d’olive extra-vierge et origan.',
-    repasPrevu: 1000,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-09-02',
@@ -141,7 +148,7 @@ export const ITINERAIRE: readonly Jour[] = [
     transportPrevu: 700,
     ouManger:
       'Pique-nique autonome préparé à l’Eurospin voisin de l’auberge (pain de campagne, prosciutto crudo, olives, tomates), pour éviter les tarifs des paillotes.',
-    repasPrevu: 700,
+    repasPrevu: REPAS_PAR_JOUR,
   },
   {
     date: '2026-09-03',
@@ -154,7 +161,7 @@ export const ITINERAIRE: readonly Jour[] = [
       'Train régional Trenitalia (Lecce vers Bari) 11,80 €, navette Ferrotramviaria vers l’aéroport 5,30 €, consigne de gare 6,00 €.',
     transportPrevu: 2310,
     ouManger: 'Derniers en-cas de rue à Bari : parts de focaccia ou taralli avant l’embarquement.',
-    repasPrevu: 1000,
+    repasPrevu: REPAS_PAR_JOUR,
   },
 ]
 

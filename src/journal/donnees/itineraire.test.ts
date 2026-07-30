@@ -12,9 +12,14 @@ describe('itinéraire', () => {
     expect(total).toBe(11_640)
   })
 
-  it('reproduit le total nourriture du plan : 151,00 €', () => {
+  it('prévoit 25 € de repas par jour, soit 275 € au total', () => {
+    // Relevé volontairement au-dessus du plan d'origine, qui ne comptait que
+    // deux repas quotidiens et descendait à 12 € certains jours.
+    for (const jour of ITINERAIRE) {
+      expect(jour.repasPrevu, jour.date).toBe(2_500)
+    }
     const total = ITINERAIRE.reduce((somme, jour) => somme + jour.repasPrevu, 0)
-    expect(total).toBe(15_100)
+    expect(total).toBe(27_500)
   })
 
   it('n’a aucune journée incomplète', () => {

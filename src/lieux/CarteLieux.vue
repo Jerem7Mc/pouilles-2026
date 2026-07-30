@@ -25,12 +25,17 @@ function suitReseau() {
   enLigne.value = navigator.onLine
 }
 
-/** Couleurs alignées sur le thème, une par type de lieu. */
+/**
+ * Une couleur par type de lieu. Le transport et les sites reçoivent les deux
+ * teintes les plus saturées : ce sont eux qu'on cherche sur la carte le matin.
+ */
 const COULEURS: Record<TypeLieu, string> = {
-  hebergement: '#c2410c',
-  supermarche: '#0e7490',
-  glacier: '#7c3aed',
+  transport: '#1d4ed8',
+  site: '#c2410c',
+  hebergement: '#7c3aed',
   manger: '#4d7c0f',
+  supermarche: '#0e7490',
+  glacier: '#be185d',
 }
 
 /**
@@ -165,7 +170,7 @@ watch(() => [props.lieux, props.etapes], dessine, { deep: false })
           aria-hidden="true"
         />
         <Icone :nom="valeur.icone" :taille="13" />
-        {{ valeur.label }}
+        {{ valeur.court }}
       </li>
       <li class="flex items-center gap-1">
         <span class="size-2.5 shrink-0 rounded-full bg-encre" aria-hidden="true" />

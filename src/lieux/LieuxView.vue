@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
-import { JOURS, jourActif, libelleJour } from '../partage/voyage'
+import { JOURS, jourActif, libelleJourCourt } from '../partage/voyage'
 import { ETAPES, etape } from './donnees/etapes'
 import { LIBELLES_PRECISION, LIBELLES_TYPE, LIEUX, lienCarte } from './donnees/lieux'
 import type { TypeLieu } from './donnees/lieux'
@@ -78,24 +78,24 @@ function reinitialise() {
     <section class="bloc">
       <p class="micro">Filtrer</p>
 
-      <div class="rangee-defilante -mx-4 mt-2.5 px-4">
-        <div class="flex gap-1.5">
-          <button
-            v-for="type in TYPES"
-            :key="type"
-            type="button"
-            class="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-bold"
-            :class="filtreType === type ? 'bg-encre text-sable' : 'bg-white text-encre-doux'"
-            :aria-pressed="filtreType === type"
-            @click="filtreType = filtreType === type ? null : type"
-          >
-            <Icone :nom="LIBELLES_TYPE[type].icone" :taille="15" />
-            {{ LIBELLES_TYPE[type].label }}
-          </button>
-        </div>
+      <!-- Grille plutôt que rangée défilante : les six types sont visibles d'un
+           seul coup d'œil, aucun n'est coupé au bord de l'écran. -->
+      <div class="mt-2.5 grid grid-cols-3 gap-1.5">
+        <button
+          v-for="type in TYPES"
+          :key="type"
+          type="button"
+          class="flex min-h-11 items-center justify-center gap-1 rounded-xl px-1 text-xs font-bold"
+          :class="filtreType === type ? 'bg-encre text-sable' : 'bg-white text-encre-doux'"
+          :aria-pressed="filtreType === type"
+          @click="filtreType = filtreType === type ? null : type"
+        >
+          <Icone :nom="LIBELLES_TYPE[type].icone" :taille="15" />
+          {{ LIBELLES_TYPE[type].court }}
+        </button>
       </div>
 
-      <div class="mt-1.5 flex gap-1.5">
+      <div class="mt-1.5 grid grid-cols-2 gap-1.5">
         <button
           v-for="ville in VILLES"
           :key="ville"
@@ -107,19 +107,19 @@ function reinitialise() {
         >
           {{ ville }}
         </button>
-
-        <select
-          :value="filtreJour ?? ''"
-          aria-label="Filtrer par journée du voyage"
-          class="min-h-11 min-w-0 flex-1 rounded-xl bg-white px-2 text-xs font-bold text-encre"
-          @change="choisitJour"
-        >
-          <option value="">Toutes les journées</option>
-          <option v-for="jour in JOURS" :key="jour" :value="jour">
-            {{ libelleJour(jour) }}{{ etape(jour) ? ` · ${etape(jour)?.ville}` : '' }}
-          </option>
-        </select>
       </div>
+
+      <select
+        :value="filtreJour ?? ''"
+        aria-label="Filtrer par journée du voyage"
+        class="mt-1.5 min-h-11 w-full rounded-xl bg-white px-2 text-xs font-bold text-encre"
+        @change="choisitJour"
+      >
+        <option value="">Toutes les journées</option>
+        <option v-for="jour in JOURS" :key="jour" :value="jour">
+          {{ libelleJourCourt(jour) }}{{ etape(jour) ? ` · ${etape(jour)?.ville}` : '' }}
+        </option>
+      </select>
 
       <button
         v-if="actif"

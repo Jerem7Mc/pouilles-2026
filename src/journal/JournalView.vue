@@ -68,9 +68,11 @@ const RUBRIQUES = [
     <article v-if="jour">
       <header class="bloc">
         <p class="micro">Jour {{ numero }} sur {{ JOURS.length }} · {{ libelleJour(jour.date) }}</p>
-        <h1 class="mt-1.5 text-3xl font-bold leading-tight tracking-tight text-balance">
+        <!-- h2 et non h1 : le titre de page est déjà porté par l'en-tête de
+             l'application, deux h1 sur un même document est une erreur. -->
+        <h2 class="mt-1.5 text-3xl font-bold leading-tight tracking-tight text-balance">
           {{ jour.titre }}
-        </h1>
+        </h2>
         <p class="mt-2 text-sm text-encre-doux">{{ jour.base }} · {{ jour.hebergement }}</p>
       </header>
 

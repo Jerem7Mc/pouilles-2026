@@ -1,6 +1,7 @@
 import {
   BedDouble,
   BookOpen,
+  Bus,
   Check,
   Compass,
   Copy,
@@ -11,10 +12,12 @@ import {
   Handshake,
   Heart,
   IceCreamCone,
+  Landmark,
   Languages,
   Map,
   MapPin,
   MilkOff,
+  Plane,
   Search,
   Settings,
   ShoppingBasket,
@@ -25,6 +28,7 @@ import {
   Trash2,
   Utensils,
   UtensilsCrossed,
+  Waves,
   Wallet,
   WifiOff,
 } from 'lucide-vue-next'
@@ -52,7 +56,9 @@ export const ICONES = {
   depenses: Wallet,
   reglages: Settings,
 
-  // Types de lieux
+  // Types de lieux. La clé `transport` est déjà déclarée plus haut pour la
+  // catégorie de dépense du même nom, et partage volontairement son icône.
+  site: Landmark,
   hebergement: BedDouble,
   supermarche: ShoppingCart,
   glacier: IceCreamCone,
@@ -69,6 +75,9 @@ export const ICONES = {
   // Actions et états
   carte: Map,
   recherche: Search,
+  bus: Bus,
+  avion: Plane,
+  plage: Waves,
   horsLigne: WifiOff,
   supprimer: Trash2,
   copier: Copy,

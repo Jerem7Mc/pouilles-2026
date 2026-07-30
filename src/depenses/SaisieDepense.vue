@@ -93,21 +93,24 @@ function enregistre(categorie: CategorieId) {
       </select>
     </div>
 
-    <div class="rangee-defilante -mx-4 mt-2.5 px-4">
-      <div class="flex gap-1.5">
-        <button
-          v-for="categorie in CATEGORIES"
-          :key="categorie.id"
-          type="button"
-          :disabled="!pret"
-          class="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-bold transition active:scale-95 disabled:opacity-40"
-          :class="pret ? 'bg-terre text-white' : 'bg-white text-encre-doux'"
-          @click="enregistre(categorie.id)"
-        >
-          <Icone :nom="categorie.icone" :taille="16" />
-          {{ categorie.label }}
-        </button>
-      </div>
+    <!-- Les sept catégories tiennent sur une seule ligne : aucun défilement
+         horizontal, donc aucune option cachée au moment de valider. -->
+    <div class="mt-2.5 grid grid-cols-7 gap-1">
+      <button
+        v-for="categorie in CATEGORIES"
+        :key="categorie.id"
+        type="button"
+        :disabled="!pret"
+        class="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-lg px-0.5 pb-1 pt-1.5 transition active:scale-95 disabled:opacity-40"
+        :class="pret ? 'bg-terre text-white' : 'bg-white text-encre-doux'"
+        :title="categorie.label"
+        @click="enregistre(categorie.id)"
+      >
+        <Icone :nom="categorie.icone" :taille="18" />
+        <span class="text-[0.55rem] font-bold leading-none tracking-tight">
+          {{ categorie.court }}
+        </span>
+      </button>
     </div>
 
     <p

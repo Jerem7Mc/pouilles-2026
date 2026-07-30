@@ -82,8 +82,9 @@ src/
 scripts/        generer-icones.mjs (génère les PNG et le favicon, zéro dépendance)
 ```
 
-Ordre des onglets : Journal, Phrases, Lieux, Dépenses. La route d'accueil `/` reste malgré
-tout l'écran de saisie des dépenses, pour tenir l'objectif des cinq secondes depuis l'icône.
+Les six types de lieux sont ordonnés du plus utile au moins utile sur le terrain :
+`transport`, `site`, `hebergement`, `manger`, `supermarche`, `glacier`. Les glaciers ferment la
+liste : c'est une commodité liée à l'intolérance au lait de vache, pas un objectif de voyage.
 
 Les fichiers `donnees/` sont des listes littérales figées, exemptés de `max-lines`.
 
@@ -97,16 +98,23 @@ Enveloppes Record<CategorieId, number>
 ```
 
 Sept catégories : `transport`, `repas`, `courses`, `glaces`, `visites`, `souvenirs`, `divers`.
-Enveloppes par défaut : 450 € au total, contre 267,40 € au plan de voyage initial qui oubliait
-les glaces, les entrées de sites, les courses, les souvenirs et toute marge d'imprévu.
+Enveloppes par défaut : **565 €** au total, contre 267,40 € au plan de voyage initial. Deux
+écarts assumés : le plan oubliait glaces, entrées de sites, courses, souvenirs et marge, et il
+ne comptait que **deux repas par jour**, tombant à 12 € certains jours. Les repas sont donc
+calés sur 25 € par jour, petit-déjeuner compris, soit 275 €. `repasPrevu` de l'itinéraire suit
+la même valeur : un prévu irréaliste produit un écran rouge tous les jours, qu'on finit par
+ignorer.
 
 Clés de stockage versionnées : `pouilles2026.<nom>.v1`. `ecrire` **remonte** son échec (quota,
 stockage indisponible) au lieu de l'avaler, et l'interface l'affiche.
 
 ## 5. Routes
 
-`/` dépenses · `/journal` carnet de route · `/phrases` italien · `/lieux` adresses et carte ·
-`/reglages` enveloppes et sauvegarde. Tout chemin inconnu redirige vers `/`.
+`/journal` carnet de route (**et la racine `/` y redirige**) · `/phrases` italien ·
+`/lieux` carte et adresses · `/depenses` saisie et budget · `/reglages` enveloppes et
+sauvegarde. Tout chemin inconnu redirige vers le journal.
+
+Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
 
 ## 6. Roadmap
 
@@ -120,10 +128,17 @@ stockage indisponible) au lieu de l'avaler, et l'interface l'affiche.
 ## 7. Règles de développement
 
 - Aucune donnée ne quitte l'appareil. Pas de backend, pas de compte, pas de télémétrie.
-- **Aucune coordonnée inventée.** Les positions viennent d'un géocodage Nominatim figé dans
-  `donnees/`, avec un champ `precision` (`poi`, `rue`, `ville`) affiché dans l'interface. Le
-  texte libre de Nominatim est peu fiable dans le Sud : utiliser les requêtes structurées
-  (`city=`, `street=`) et vérifier chaque résultat contre la boîte englobante du voyage.
+- **Aucune coordonnée inventée**, et un champ `precision` (`poi`, `rue`, `ville`) affiché
+  dans l'interface. Deux outils selon la nature du point :
+  - gares et gares routières → **Overpass**, sur les tags `railway=station` et
+    `amenity=bus_station`. Nominatim en texte libre renvoyait une station-service pour
+    « Stazione di Polignano » et une trattoria pour « Stazione di Gallipoli ».
+  - sites et adresses → Nominatim, en requête structurée (`city=`, `street=`), avec contrôle du
+    **type d'objet** et de la distance au centre-ville. Ne jamais valider sur le nom de ville
+    seul : « Trani » apparaît dans la province « Barletta-Andria-Trani », ce qui avait laissé
+    passer la gare d'Andria.
+- **Aucun défilement horizontal pour choisir.** Catégories de dépense et types de lieux sont en
+  grille : une option hors écran est une option qu'on n'utilise pas.
 - **La carte OSM exige le réseau.** La politique d'usage des tuiles interdit le préchargement
   massif : `CarteLieux.vue` bascule sur l'image de carte quand `navigator.onLine` est faux.
 - La logique de budget vit dans `calculs.ts`, en fonctions pures et testées. Les composants

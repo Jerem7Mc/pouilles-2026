@@ -1,5 +1,52 @@
 # Journal de sessions
 
+## 2026-07-30 — Carte utile, budget repas réaliste, accueil sur le journal
+
+**Demandé**
+
+Placer sur la carte les points de transport, les lieux de la journée et les incontournables,
+les glaciers n'étant qu'une commodité. Relever le budget repas à 20-25 € par jour. Arriver sur
+le journal et non sur les dépenses. Voir les sept catégories de dépense sans défilement.
+Travailler en local, sans pousser sur Vercel.
+
+**Fait**
+
+- 51 lieux au lieu de 17 : 12 points de transport (gares, terminaux, aéroport), 22 sites, et
+  les adresses existantes. Deux nouveaux types `transport` et `site`, placés en tête de liste,
+  les glaciers relégués en dernier.
+- Budget repas porté de 160 à 275 €, soit 25 € par jour petit-déjeuner compris. Budget total à
+  565 €. `repasPrevu` de l'itinéraire aligné sur la même valeur.
+- La racine `/` redirige vers le journal, les dépenses passent sur `/depenses`.
+- Les sept catégories du pavé de saisie en grille de sept colonnes, et les six types de lieux en
+  grille de trois : plus aucune option hors écran.
+- Titre du jour passé de `h1` à `h2` : il y avait deux `h1` sur la même page.
+
+**Outillage de géocodage**
+
+Nominatim en texte libre s'est révélé inutilisable pour les gares : station-service Q8 pour
+« Stazione di Polignano », borne de recharge e-bike pour Monopoli, Trattoria La Stazione pour
+Gallipoli, gare d'Andria pour Trani, gare de Casarano pour Lecce. Les gares viennent désormais
+d'**Overpass**, interrogé sur les tags `railway=station` et `amenity=bus_station`. Le contrôle
+par nom de ville était par ailleurs trop faible, « Trani » figurant dans la province
+« Barletta-Andria-Trani » : la validation porte maintenant sur le type d'objet et la distance
+au centre-ville.
+
+**Découvertes utiles pour le voyage**
+
+- La gare d'Ostuni est à 2,8 km du centre historique : la navette STP est indispensable.
+- À Lecce, la gare ferroviaire et le City Terminal Bus sont à 2 km l'un de l'autre et dans des
+  directions opposées. Gallipoli part de la gare, Otrante et Porto Cesareo du terminal.
+
+**Vérifications**
+
+69 tests verts. Les tests de rythme ont été réécrits pour dériver leurs seuils du budget courant
+au lieu de montants codés en dur : ajuster une enveloppe ne les casse plus. Parcours Playwright
+en local avec l'horloge au 27/08 : racine vers le journal, 7 catégories toutes dans l'écran,
+filtre par type qui ne laisse que la section attendue, aucun débordement horizontal sur les cinq
+routes, zéro erreur console.
+
+Non déployé, conformément à la consigne de rester en local.
+
 ## 2026-07-30 — Refonte visuelle, direction « carnet + pavé du pouce »
 
 Trois directions ont été maquettées et comparées dans le navigateur avant tout code. Jérém a

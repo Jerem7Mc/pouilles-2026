@@ -4,6 +4,8 @@ import type { CategorieId, Enveloppes } from './types'
 export interface Categorie {
   id: CategorieId
   label: string
+  /** Libellé abrégé, pour la grille de sept colonnes du pavé de saisie. */
+  court: string
   icone: NomIcone
   /**
    * Enveloppe par défaut en centimes. Calée sur le plan de voyage puis
@@ -19,6 +21,7 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'transport',
     label: 'Transport',
+    court: 'Transp.',
     icone: 'transport',
     enveloppeDefaut: 13_000,
     base: '116,40 € de trains et bus prévus, plus une marge pour les navettes et les erreurs de billet',
@@ -26,13 +29,15 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'repas',
     label: 'Repas',
+    court: 'Repas',
     icone: 'repas',
-    enveloppeDefaut: 16_000,
-    base: '151 € de repas prévus au plan, plus une marge',
+    enveloppeDefaut: 27_500,
+    base: '25 € par jour sur 11 jours, petit-déjeuner compris. Le plan tablait sur 151 € pour deux repas quotidiens seulement, et descendait à 12 € certains jours',
   },
   {
     id: 'courses',
     label: 'Courses',
+    court: 'Courses',
     icone: 'courses',
     enveloppeDefaut: 3_000,
     base: 'Eau, petits-déjeuners et pique-niques à la Coop, chez Eurospin et Conad',
@@ -40,6 +45,7 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'glaces',
     label: 'Glaces',
+    court: 'Glaces',
     icone: 'glaces',
     enveloppeDefaut: 3_500,
     base: 'Environ 3 € par jour, six glaciers sans laitage repérés à Bari et Lecce',
@@ -47,6 +53,7 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'visites',
     label: 'Visites',
+    court: 'Visites',
     icone: 'visites',
     enveloppeDefaut: 4_500,
     base: 'Églises rupestres de Matera, château d’Otrante, sites de Lecce',
@@ -54,6 +61,7 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'souvenirs',
     label: 'Souvenirs',
+    court: 'Souv.',
     icone: 'souvenirs',
     enveloppeDefaut: 4_000,
     base: 'Pâtes sèches, taralli et huile achetés en supermarché plutôt qu’en boutique',
@@ -61,6 +69,7 @@ export const CATEGORIES: readonly Categorie[] = [
   {
     id: 'divers',
     label: 'Divers',
+    court: 'Divers',
     icone: 'divers',
     enveloppeDefaut: 1_000,
     base: 'Pharmacie, consigne, imprévus',
