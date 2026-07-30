@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { JOURS } from '../../partage/voyage'
+import { ICONES } from '../../partage/icones'
 import { ETAPES } from './etapes'
-import { LIEUX, lienCarte } from './lieux'
+import { LIBELLES_TYPE, LIEUX, lienCarte } from './lieux'
+import type { TypeLieu } from './lieux'
 
 /** Boîte englobante Pouilles et Basilicate, large mais suffisante pour piéger une inversion. */
 const ZONE = { latMin: 39.7, latMax: 41.4, lonMin: 16.3, lonMax: 18.6 }
@@ -88,6 +90,17 @@ describe('supermarchés de Bari', () => {
     const coop = LIEUX.find((lieu) => lieu.id === 'coop')!
     expect(metres(auberge, lidl)).toBeLessThan(300)
     expect(metres(auberge, lidl)).toBeLessThan(metres(auberge, coop))
+  })
+})
+
+describe('légende de la carte', () => {
+  it('donne une icône à chacun des six types, sans quoi un marqueur serait vide', () => {
+    // Le marqueur porte désormais le glyphe du type : un type sans icône
+    // produirait une pastille muette, exactement le défaut qu'on corrige.
+    for (const type of Object.keys(LIBELLES_TYPE) as TypeLieu[]) {
+      expect(LIBELLES_TYPE[type].icone, type).toBeTruthy()
+      expect(ICONES[LIBELLES_TYPE[type].icone], type).toBeDefined()
+    }
   })
 })
 

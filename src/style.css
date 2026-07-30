@@ -17,6 +17,16 @@
   --color-alerte: #b91c1c;
   --color-attention: #b45309;
 
+  /* Marqueurs de la carte, une teinte par type de lieu. Le transport et les
+     sites reçoivent les deux plus saturées : ce sont eux qu'on cherche le
+     matin. Le glyphe porte le sens, la couleur ne fait que regrouper. */
+  --color-carte-transport: #1d4ed8;
+  --color-carte-site: #c2410c;
+  --color-carte-hebergement: #7c3aed;
+  --color-carte-manger: #4d7c0f;
+  --color-carte-supermarche: #0f766e;
+  --color-carte-glacier: #be185d;
+
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 

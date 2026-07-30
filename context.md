@@ -74,6 +74,10 @@ développement Vite fait son propre repli SPA et masque le problème.
   à ce numéro, l'enseigne reste à confirmer sur place. Un test fige le classement.
 - **Budget** : enveloppes par défaut à **565 €**, contre 267,40 € au plan initial. Les repas
   sont passés à 25 € par jour, petit-déjeuner compris. Réglable dans l'écran Réglages.
+- **Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six
+  teintes se confondaient deux à deux. Les couleurs vivent dans `@theme` de `style.css`, en
+  `--color-carte-*`, jamais en dur dans un composant. `lieux/marqueurs.ts` construit les
+  pastilles à partir du registre d'icônes.
 - **La carte interactive exige du réseau.** Hors-ligne, l'écran Lieux bascule sur la carte en
   image. Liste des adresses, phrases et dépenses restent disponibles sans réseau.
 

@@ -1,5 +1,35 @@
 # Journal de sessions
 
+## 2026-07-30 — Marqueurs de carte porteurs de sens, section Rencontres corrigée
+
+**La couleur seule ne suffisait pas.** Six teintes à 26 px se confondaient deux à deux en
+usage réel, et il fallait ouvrir la bulle pour savoir si un point était une gare ou un
+supermarché. Chaque marqueur porte maintenant le glyphe de son type, pris dans le registre
+`partage/icones.ts` : le type se lit sans appuyer, et la carte reste utilisable pour un œil qui
+distingue mal les couleurs. La légende reproduit exactement le marqueur, glyphe compris.
+
+Leaflet attend une chaîne HTML là où le reste de l'app manipule des composants Vue. Plutôt que
+de recopier les tracés Lucide, le composant du registre est rendu dans un élément détaché et son
+balisage récupéré, mémorisé une fois par type. Six rendus au total. Le registre reste la source
+unique des icônes, conformément à la règle du projet.
+
+Deux effets de bord assumés, tous deux dans le sens des règles du projet :
+
+- `CarteLieux.vue` passait de 211 à 172 lignes par extraction de `lieux/marqueurs.ts`. Le
+  fichier frôlait le plafond `max-lines`, l'ajout aurait dû le faire sauter.
+- Les six couleurs de marqueurs étaient des hexadécimaux **dans le composant**, ce que la règle
+  interdit. Elles rejoignent le `@theme` de `style.css` et sont lues en `var(--color-carte-*)`.
+  `supermarche` passe de `#0e7490` à `#0f766e`, la paire qui se confondait le plus avec le bleu
+  du transport.
+
+Vérifié au navigateur, pas seulement au test : six marqueurs sur six portent un `<svg>`, six
+glyphes dans la légende, aucune erreur console. Un test de plus fige l'invariant, chaque type de
+lieu doit avoir une icône déclarée, sans quoi le marqueur serait une pastille muette.
+
+**Section Rencontres** : les phrases s'adressent à une femme, l'accord italien est porté par
+l'interlocutrice. `Sei molto bello` retiré, l'accord français de « dérangée » corrigé, et
+`Sei fidanzata?` ajoutée, qui manquait alors que c'est la question la plus utile de la section.
+
 ## 2026-07-30 — Horaires Salento in Bus retrouvés, dernière journée sécurisée
 
 Audit de reprise sur un dépôt propre. Le code n'avait rien à se reprocher, mais les données
