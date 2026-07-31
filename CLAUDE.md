@@ -57,7 +57,13 @@ registre, pour que le bundle ne prenne que celles utilisées.
 
 Toutes les couleurs et la police sont déclarées dans `@theme` de `src/style.css` :
 `sable`, `sable-fonce`, `encre`, `encre-doux`, `terre`, `terre-clair`, `mer`, `olive`,
-`alerte`, `attention`. **Jamais de valeur hexadécimale dans un composant.**
+`alerte`, `attention`, plus les six `carte-*` des marqueurs. **Jamais de valeur hexadécimale
+dans un composant**, y compris dans une chaîne HTML passée à Leaflet : utiliser `var(--color-…)`.
+
+**Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six
+teintes à 26 px se confondent deux à deux au soleil, et le type devait être lisible sans appui.
+`lieux/marqueurs.ts` rend le composant du registre d'icônes dans un élément détaché et mémorise
+le balisage, une fois par type. Ne pas recopier de tracé Lucide ailleurs.
 
 Contraintes mobiles non négociables :
 
@@ -77,8 +83,8 @@ src/
   depenses/     calculs.ts (pur, testé), useDepenses.ts (état), composants
   journal/      donnees/itineraire.ts + JournalView
   phrases/      donnees/phrases.ts, PhrasesView (3 niveaux), FichePhrase
-  lieux/        donnees/lieux.ts, donnees/etapes.ts, CarteLieux.vue, LieuxView
-  reglages/     ReglagesView
+  lieux/        donnees/lieux.ts, donnees/etapes.ts, marqueurs.ts, CarteLieux.vue, LieuxView
+  reglages/     donnees/applications.ts, references.ts, ReglagesView
 scripts/        generer-icones.mjs (génère les PNG et le favicon, zéro dépendance)
 ```
 
@@ -105,8 +111,10 @@ calés sur 25 € par jour, petit-déjeuner compris, soit 275 €. `repasPrevu` 
 la même valeur : un prévu irréaliste produit un écran rouge tous les jours, qu'on finit par
 ignorer.
 
-Clés de stockage versionnées : `pouilles2026.<nom>.v1`. `ecrire` **remonte** son échec (quota,
-stockage indisponible) au lieu de l'avaler, et l'interface l'affiche.
+Clés de stockage versionnées : `pouilles2026.<nom>.v1`, pour `depenses`, `enveloppes` et
+`references`. `ecrire` **remonte** son échec (quota, stockage indisponible) au lieu de l'avaler,
+et l'interface l'affiche. L'export est en **version 2** et embarque les références ; la
+restauration accepte encore une sauvegarde de version 1, sans elles.
 
 ## 5. Routes
 
@@ -128,6 +136,8 @@ Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
   restauration, PWA hors-ligne.
 - **Phase 2, livrée** : carnet de route jour par jour avec prévu contre réel.
 - **Phase 3, livrée** : phrases italiennes cherchables, lieux et carte hors-ligne.
+- **Phase 4, livrée** : horaires Salento in Bus, bus urbains de Bari chiffrés, applications de
+  transport, références de réservation en local, glyphes sur les marqueurs.
 - **Reste à faire** : rien de prévu. Toute idée passe par `/nouveau-projet` ou
   `writing-plans` avant d'être codée.
 
@@ -170,6 +180,22 @@ Ordre des onglets : Journal, Phrases, Lieux, Dépenses.
   écartée, elle ne fausse jamais un total.
 - Seuils ESLint qui font foi : `max-lines` 200, `max-lines-per-function` 50, `complexity` 10,
   `max-depth` 3. Une violation est un signal de découpage, pas une règle à désactiver.
+- **Aucune donnée personnelle dans le dépôt : il est public.** Références de réservation,
+  identifiants, numéros de dossier se saisissent dans l'écran Réglages et vivent en
+  `localStorage`. Seuls les libellés des champs sont dans le code, et un test le vérifie. Un
+  historique Git ne s'efface pas par une suppression ultérieure. Les numéros de téléphone des
+  hébergeurs sont en revanche des lignes professionnelles publiées.
+- **L'itinéraire référence aussi son logement par identifiant** (`Jour.lieuHebergement`), absent
+  le seul jour du retour. Le nom en chaîne libre avait laissé passer une adresse périmée.
+- **Une valeur affichée ne se recopie jamais à la main.** Le bouton des enveloppes annonçait
+  450 € quand les défauts en totalisaient 565 : les totaux sont calculés depuis les données.
+- **Un test de calcul ne dépend pas d'une décision de budget.** L'arithmétique se vérifie sur des
+  enveloppes fictives ; seul le test dédié au total des enveloppes a vocation à changer avec elles.
+- **Un déménagement périme toutes les distances écrites.** Après tout changement de logement,
+  recalculer les notes de supermarchés, de gares et les textes de transport. Un test garantit
+  qu'un supermarché reste à moins de 400 m de chaque logement.
+- **Pas de verrou biométrique.** Écarté le 31/07/2026 : sans serveur, WebAuthn ne protège rien et
+  une passkey perdue en voyage couperait l'accès au relevé. Détail dans `context.md`.
 - Les images fournies par l'utilisateur ne sont pas retouchées pour retirer un filigrane.
 
 ## 8. Ordre d'exécution par feature

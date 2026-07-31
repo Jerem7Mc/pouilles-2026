@@ -1,18 +1,30 @@
 # Où on en est — Pouilles 2026
 
-Dernière mise à jour : 30/07/2026. Départ dans 25 jours.
+Dernière mise à jour : 31/07/2026. Départ dans 24 jours.
 
 ## État en une ligne
 
-**Tout est poussé et déployé.** `main` et `origin/main` sont alignés, la production est à jour
-et vérifiée. Aucun fichier non commité, `npm run verify` vert, 85 tests.
+**Tout est poussé et déployé.** `main` et `origin/main` sont alignés, la production est à jour et
+vérifiée par empreinte du bundle. Aucun fichier non commité, `npm run verify` vert, **98 tests**.
 
 ## Rien en attente
 
-Aucune décision en suspens, aucun travail commencé et non terminé. La prochaine session repart
-sur une base propre.
+Aucune décision en suspens, aucun travail commencé et non terminé. Les phases 1 à 3 sont livrées
+et rien de nouveau n'est prévu : toute idée passe par `writing-plans` avant d'être codée.
 
-Piège corrigé au dernier moment, à ne pas réintroduire : le premier `vercel.json` utilisait une
+**Écarté volontairement le 31/07/2026 : un verrou Face ID sur l'application.** Facile à coder en
+WebAuthn, mais sans serveur personne ne vérifie l'assertion : le verrou n'est qu'un écran devant
+des données qui restent en clair dans `localStorage`, lisibles depuis un onglet Safari ordinaire
+sur la même origine. Le rendre réel supposerait de chiffrer avec l'extension `prf`, mal supportée,
+et une passkey perdue rendrait les sauvegardes illisibles. Surtout, un verrou qui tombe pendant le
+voyage coupe l'accès au relevé de dépenses sans recours. Vérifié au passage : le « Exiger Face ID »
+d'iOS 18 ne s'applique pas aux applications web de l'écran d'accueil, seulement aux vraies apps.
+
+Ce qui reste du ressort de Jérém, hors code : saisir les trois références dans Réglages, exporter
+tous les 2 ou 3 jours pendant le voyage, reconfirmer les horaires Salento in Bus à l'arrivée le
+30 août, et vérifier l'enseigne du Coop de la Via Napoli sur place.
+
+Piège corrigé, à ne pas réintroduire : le premier `vercel.json` utilisait une
 expression régulière brute avec lookahead négatif, ce que Vercel n'interprète pas (il attend du
 path-to-regexp). Résultat, les cinq routes renvoyaient 404 en production alors que tout
 fonctionnait en local. La forme simple `"/(.*)"` est la bonne : Vercel sert les fichiers
