@@ -68,18 +68,22 @@ développement Vite fait son propre repli SPA et masque le problème.
   de la gare ferroviaire au sud, Otrante et Porto Cesareo du City Terminal au nord.
 - **La gare d'Ostuni est à 2,8 km du centre historique.** La navette STP n'est pas optionnelle.
 - **Logements changés le 31/07/2026**, les anciens sont annulés et n'apparaissent plus nulle part.
-  - **Bari : The Queen Room Bari**, Via Brigata Regina 88, quartier Libertà. 489 €, 6 nuits.
-    **1,8 km de Bari Centrale, 22 minutes à pied** : c'est le vrai changement, l'ancien était à
-    200 m. Cinq matins de départ en excursion partent de cette marche.
-  - **Lecce : Mammasisi Rooms**, Via Richel Rubichi 3, centre historique, rue piétonne. 228 €,
-    4 nuits. 1,1 km de la gare, 1,2 km du City Terminal, dans l'autre sens.
-  - Aucun des deux n'est répertorié dans OpenStreetMap, et aucun des deux numéros de rue n'est
-    cartographié : les deux sont en `precision: 'rue'`. Bari est calé sur le n°79 voisin.
-- **Courses à Bari, recalculées après le déménagement.** Le **Coop de la Via Napoli est à 191 m**
-  du nouveau logement, confirmé par Overpass, en `precision: 'poi'`. Le Dok de la Via Brigata
-  Regina 12 sert de repli à 354 m. Le Lidl et le Famila restent, mais à 1,8 et 2 km : ce sont
-  ceux de la gare, à faire au retour d'excursion. Un test garantit qu'un supermarché reste à
-  moins de 300 m du logement, quel que soit le prochain déménagement.
+  - **Bari : The Queen Room Bari**, Via Brigata Regina 88, quartier Libertà, angle Via Napoli,
+    près du port. 489 €, 6 nuits. **1,9 km de Bari Centrale, 24 minutes à pied** : c'est le vrai
+    changement, l'ancien était à 200 m. Cinq matins d'excursion partent de cette marche, prévoir
+    le bus urbain. Aucun arrêt ferroviaire proche n'a pu être corroboré dans OpenStreetMap.
+  - **Lecce : Mammasisi Rooms**, Via Richel Rubichi 3, entre la Piazza Sant'Oronzo et la Via XXV
+    Luglio, rue piétonne. 228 €, 4 nuits. 1,1 km de la gare, 1,2 km du City Terminal, à l'opposé.
+  - Aucun des deux n'est répertorié dans OpenStreetMap, aucun des deux numéros n'est cartographié :
+    les deux sont en `precision: 'rue'`, positions relevées sur les captures des réservations.
+- **Courses, recalculées deux fois après les déménagements.** Bari : **Coop Via Napoli à 147 m**,
+  confirmé par Overpass en `precision: 'poi'`, Dok à 503 m en repli ; Lidl et Famila sont à 1,9 et
+  2,2 km, ce sont ceux de la gare. Lecce : **Sconto Più à 354 m**, c'est là que se prépare le
+  pique-nique de Porto Cesareo ; l'Eurospin, jadis « à 5 minutes », est à 1,1 km. Un test garantit
+  qu'un supermarché reste à moins de 400 m de **chaque** logement.
+- **Applications de transport dans Réglages**, une donnée par `reglages/donnees/applications.ts`,
+  liens vérifiés. L'app des bus de Bari est **MUVT** (`muvt.app`), pas « Muvin » : le domaine
+  `muvin.it` répond mais n'est pas un service barese, un test interdit ce mot dans les liens.
 - **Budget** : enveloppes par défaut à **565 €**, contre 267,40 € au plan initial. Les repas
   sont passés à 25 € par jour, petit-déjeuner compris. Réglable dans l'écran Réglages.
 - **Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six

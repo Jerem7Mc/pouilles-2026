@@ -1,5 +1,40 @@
 # Journal de sessions
 
+## 2026-07-31 — Applications de transport, positions recalées sur les réservations
+
+**Nouvel écran dans Réglages : les applications à installer avant de partir.** Cinq entrées, une
+donnée par `reglages/donnees/applications.ts`, chaque lien vérifié joignable : Trenitalia,
+Ferrovie Appulo Lucane, MUVT, DropTicket, Biglietteria Cotrap. Chacune porte son rôle **sur ce
+voyage précis**, pas ses fonctionnalités générales : « la seule pour Matera, le 25 août » est
+utilisable, « application de mobilité multimodale » ne l'est pas.
+
+**Correction : l'application de Bari n'est pas « Muvin », c'est MUVT.** Le domaine `muvin.it`
+existe et répond, mais ce n'est pas un service de transport barese ; l'application officielle de
+l'AMTAB est MUVT, `muvt.app`, et DropTicket est l'autre app autorisée sur le réseau. Un lien vers
+muvin aurait envoyé acheter le mauvais titre. Un test interdit ce domaine, comme pour
+salentoinbus.
+
+**Positions recalées sur les captures des réservations.** Le point de Bari était calé sur le n°79,
+au milieu de la rue ; la carte de la réservation le place à l'extrémité nord, à l'angle de la Via
+Napoli, près du port. Nouvelle distance à Bari Centrale : **1,9 km, 24 minutes**, contre 1,8 km
+estimé. Lecce est confirmé entre la Piazza Sant'Oronzo et la Via XXV Luglio, à 1,1 km de la gare.
+
+Aucun arrêt ferroviaire n'a pu être corroboré près du logement de Bari : les libellés visibles sur
+la capture (Crispi, Brigata Bari, Quintino Sella) ne correspondent à aucune gare ni halte dans
+OpenStreetMap. Rien n'a donc été écrit à ce sujet, et le bus urbain reste la réponse, d'où MUVT.
+
+**Le déplacement du point a périmé une deuxième série de distances.** Recalculées, toutes :
+Coop 147 m, Dok 503 m, Lidl 1,9 km, Famila 2,2 km. Et surtout, à Lecce, **l'Eurospin n'est plus
+à 5 minutes du logement mais à 1,1 km**. Le pique-nique de Porto Cesareo, qui s'y préparait la
+veille au soir, se prépare désormais au **Sconto Più, à 354 m**, ajouté aux lieux. Trois textes
+en dépendaient : la note du lieu, le repas du 2 septembre et son alerte. Deux notes de gares
+annonçaient encore « à 200 m de l'hôtel » et « 15 à 20 minutes jusqu'à l'auberge », corrigées, et
+la description de l'enveloppe Courses citait des enseignes devenues hors de portée.
+
+Le test de proximité passe de « un supermarché à moins de 300 m du logement de Bari » à « un
+supermarché à moins de 400 m de **chaque** logement ». Le premier n'aurait pas vu l'Eurospin
+s'éloigner à Lecce.
+
 ## 2026-07-31 — Changement des deux logements, et tout ce que ça périme
 
 Les deux hébergements ont changé : **The Queen Room Bari**, Via Brigata Regina 88, et

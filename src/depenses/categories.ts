@@ -40,7 +40,7 @@ export const CATEGORIES: readonly Categorie[] = [
     court: 'Courses',
     icone: 'courses',
     enveloppeDefaut: 3_000,
-    base: 'Eau, petits-déjeuners et pique-niques à la Coop, chez Eurospin et Conad',
+    base: 'Eau, petits-déjeuners et pique-niques, à la Coop à Bari et au Sconto Più à Lecce',
   },
   {
     id: 'glaces',

@@ -81,14 +81,17 @@ describe('supermarchés de Bari', () => {
     return 2 * 6_371_000 * Math.asin(Math.sqrt(x))
   }
 
-  it('garde un supermarché à moins de 300 m du logement de Bari', () => {
-    // Le logement a changé de quartier une fois, et chaque déménagement périme
-    // les distances écrites dans les notes. Ce test échoue si le prochain
-    // changement laisse le voyageur sans commerce à portée de pied.
-    const logement = LIEUX.find((lieu) => lieu.id === 'the-queen-room-bari')!
-    const courses = LIEUX.filter((lieu) => lieu.type === 'supermarche' && lieu.ville === 'Bari')
-    const plusProche = Math.min(...courses.map((lieu) => metres(logement, lieu)))
-    expect(plusProche).toBeLessThan(300)
+  it('garde un supermarché à moins de 400 m de chaque logement', () => {
+    // Les logements ont changé de quartier une fois, et chaque déménagement
+    // périme les distances écrites dans les notes. Ce test échoue si le
+    // prochain changement laisse le voyageur sans commerce à portée de pied.
+    for (const logement of LIEUX.filter((lieu) => lieu.type === 'hebergement')) {
+      const courses = LIEUX.filter(
+        (lieu) => lieu.type === 'supermarche' && lieu.ville === logement.ville,
+      )
+      const plusProche = Math.min(...courses.map((lieu) => metres(logement, lieu)))
+      expect(plusProche, logement.nom).toBeLessThan(400)
+    }
   })
 })
 

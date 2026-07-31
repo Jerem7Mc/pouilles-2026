@@ -21,7 +21,7 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Bagages à l’hôtel à partir de 13 h. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
     transport:
-      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,8 km, quartier Libertà : 22 minutes à pied, ou un bus urbain avec les bagages.',
+      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,9 km, quartier Libertà : 24 minutes à pied, ou un bus urbain avec les bagages.',
     transportPrevu: 530,
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
@@ -140,7 +140,7 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Matinée de transfert. Après-midi à Lecce, la Florence du Sud : théâtre romain, palais, Piazza del Duomo.',
     transport:
-      'Train régional direct Bari Centrale vers Lecce (Trenitalia), puis 1,1 km jusqu’au logement, 14 minutes à pied par le centre historique.',
+      'Train régional direct Bari Centrale vers Lecce (Trenitalia), puis 1,1 km jusqu’au logement, 13 minutes à pied par le centre historique.',
     transportPrevu: 1180,
     ouManger:
       'La Puccia, Viale Giacomo Leopardi : puccia leccese sur mesure, prosciutto crudo, tomates séchées, olives, roquette. Sans fromage ni crème.',
@@ -219,7 +219,7 @@ export const ITINERAIRE: readonly Jour[] = [
       'Ligne 104 Salento in Bus, opérée par CHIFFI, au départ du City Terminal de Lecce à 09h00, arrivée Via Garibaldi à 09h56. Retours à 07h29, 12h59 et 17h59, le dernier rentre à Lecce à 18h55. Billet à bord, espèces ou carte.',
     transportPrevu: 700,
     ouManger:
-      'Pique-nique autonome préparé à l’Eurospin voisin de l’auberge (pain de campagne, prosciutto crudo, olives, tomates), pour éviter les tarifs des paillotes.',
+      'Pique-nique autonome préparé au Sconto Più, à 350 m du logement (pain de campagne, prosciutto crudo, olives, tomates), pour éviter les tarifs des paillotes.',
     repasPrevu: REPAS_PAR_JOUR,
     lieuxTransport: ['city-terminal-bus-lecce'],
     lieuxSites: ['plage-de-porto-cesareo'],
@@ -239,7 +239,7 @@ export const ITINERAIRE: readonly Jour[] = [
       },
     ],
     alerte:
-      'Trois passages par jour seulement : viser l’aller de 09h00 et le retour de 17h59, au City Terminal. Rouvrir le PDF la veille au soir, avec du réseau, une grève ne se voit qu’en ligne. Si la ligne ne roule pas, la STP dessert Porto Cesareo par Leverano au départ de la gare. Pique-nique à préparer la veille à l’Eurospin.',
+      'Trois passages par jour seulement : viser l’aller de 09h00 et le retour de 17h59, au City Terminal. Rouvrir le PDF la veille au soir, avec du réseau, une grève ne se voit qu’en ligne. Si la ligne ne roule pas, la STP dessert Porto Cesareo par Leverano au départ de la gare. Pique-nique à préparer la veille au Sconto Più, à 350 m du logement.',
   },
   {
     date: '2026-09-03',
