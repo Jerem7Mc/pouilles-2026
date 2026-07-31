@@ -17,11 +17,11 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-24',
     titre: 'Bienvenue à Bari',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'Bagages à l’hôtel à partir de 13 h. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
     transport:
-      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. L’hôtel est à 200 m de la gare.',
+      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,8 km, quartier Libertà : 22 minutes à pied, ou un bus urbain avec les bagages.',
     transportPrevu: 530,
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
@@ -42,7 +42,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-25',
     titre: 'Les Sassi de Matera',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'Journée entière dans la cité de pierre : églises rupestres, habitations troglodytes, panorama depuis la Piazza Pascoli.',
     transport:
@@ -60,7 +60,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-26',
     titre: 'Le port de Trani',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'Air marin à Trani : la cathédrale blanche posée au ras de l’eau, le fort historique et le port de pêche.',
     transport: 'Train régional direct, réservable sur l’application ou le site Trenitalia.',
@@ -77,7 +77,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-27',
     titre: 'Polignano a Mare et Monopoli',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'Matinée à Polignano pour la crique de Lama Monachile et les falaises. Après-midi à Monopoli : baignade à la Cala Porta Vecchia et centre fortifié.',
     transport:
@@ -95,7 +95,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-28',
     titre: 'La perle blanche d’Ostuni',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'La ville blanche juchée sur sa colline : labyrinthe de ruelles chaulées et vue sur les plaines d’oliviers jusqu’à la mer.',
     transport:
@@ -115,7 +115,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-29',
     titre: 'Les trulli d’Alberobello',
     base: 'Bari',
-    hebergement: 'Host Bari Centrale',
+    hebergement: 'The Queen Room Bari',
     aFaire:
       'Les 1500 maisons à toit conique. Se concentrer sur le quartier résidentiel préservé de Rione Aia Piccola pour éviter les foules du samedi.',
     transport:
@@ -136,11 +136,11 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-30',
     titre: 'Descente vers le Sud profond',
     base: 'Lecce',
-    hebergement: 'Lobby Collective Hostel Lecce',
+    hebergement: 'Mammasisi Rooms',
     aFaire:
       'Matinée de transfert. Après-midi à Lecce, la Florence du Sud : théâtre romain, palais, Piazza del Duomo.',
     transport:
-      'Train régional direct Bari Centrale vers Lecce (Trenitalia), puis 15 à 20 minutes de marche jusqu’à l’auberge ou bus urbain.',
+      'Train régional direct Bari Centrale vers Lecce (Trenitalia), puis 1,1 km jusqu’au logement, 14 minutes à pied par le centre historique.',
     transportPrevu: 1180,
     ouManger:
       'La Puccia, Viale Giacomo Leopardi : puccia leccese sur mesure, prosciutto crudo, tomates séchées, olives, roquette. Sans fromage ni crème.',
@@ -162,7 +162,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-31',
     titre: 'Gallipoli, perle ionienne',
     base: 'Lecce',
-    hebergement: 'Lobby Collective Hostel Lecce',
+    hebergement: 'Mammasisi Rooms',
     aFaire:
       'Vieille ville fortifiée bâtie sur une île de pêcheurs, puis baignade sur la Spiaggia della Purità au pied des remparts.',
     transport: 'Bus ou train local FSE au départ de Lecce, réservable sur Trenitalia.',
@@ -182,7 +182,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-09-01',
     titre: 'Otrante et la côte adriatique',
     base: 'Lecce',
-    hebergement: 'Lobby Collective Hostel Lecce',
+    hebergement: 'Mammasisi Rooms',
     aFaire:
       'Château fortifié d’Otrante et sa cathédrale, baignade dans l’eau transparente près des remparts du port.',
     transport:
@@ -212,7 +212,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-09-02',
     titre: 'Porto Cesareo, les Caraïbes des Pouilles',
     base: 'Lecce',
-    hebergement: 'Lobby Collective Hostel Lecce',
+    hebergement: 'Mammasisi Rooms',
     aFaire:
       'Journée farniente sur les plages de sable blanc et l’eau turquoise du golfe de Tarente.',
     transport:

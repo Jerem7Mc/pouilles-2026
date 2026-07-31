@@ -81,15 +81,14 @@ describe('supermarchés de Bari', () => {
     return 2 * 6_371_000 * Math.asin(Math.sqrt(x))
   }
 
-  it('place le Lidl à moins de 300 m de l’auberge, plus près que le Coop', () => {
-    // Le plan d'origine annonçait « 2 minutes à pied » et l'app pointait un Coop
-    // situé à 2,5 km, sur la Via Giulio Petroni. Ce test fige la correction :
-    // l'enseigne voisine de l'auberge est le Lidl, le Coop est un second choix.
-    const auberge = LIEUX.find((lieu) => lieu.id === 'host-bari-centrale')!
-    const lidl = LIEUX.find((lieu) => lieu.id === 'lidl-bari')!
-    const coop = LIEUX.find((lieu) => lieu.id === 'coop')!
-    expect(metres(auberge, lidl)).toBeLessThan(300)
-    expect(metres(auberge, lidl)).toBeLessThan(metres(auberge, coop))
+  it('garde un supermarché à moins de 300 m du logement de Bari', () => {
+    // Le logement a changé de quartier une fois, et chaque déménagement périme
+    // les distances écrites dans les notes. Ce test échoue si le prochain
+    // changement laisse le voyageur sans commerce à portée de pied.
+    const logement = LIEUX.find((lieu) => lieu.id === 'the-queen-room-bari')!
+    const courses = LIEUX.filter((lieu) => lieu.type === 'supermarche' && lieu.ville === 'Bari')
+    const plusProche = Math.min(...courses.map((lieu) => metres(logement, lieu)))
+    expect(plusProche).toBeLessThan(300)
   })
 })
 
@@ -106,9 +105,11 @@ describe('légende de la carte', () => {
 
 describe('lienCarte', () => {
   it('envoie l’adresse en texte quand la position n’est qu’au niveau de la rue', () => {
-    const coop = LIEUX.find((element) => element.nom === 'Coop')
-    expect(coop?.precision).toBe('rue')
-    expect(lienCarte(coop!)).toBe('https://maps.apple.com/?q=Via%20Paolo%20Lembo%2017%2C%20Bari')
+    const famila = LIEUX.find((element) => element.nom === 'Famila')
+    expect(famila?.precision).toBe('rue')
+    expect(lienCarte(famila!)).toBe(
+      'https://maps.apple.com/?q=Corso%20Benedetto%20Croce%20150%2C%20Bari',
+    )
   })
 
   it('envoie les coordonnées quand la position est exacte', () => {

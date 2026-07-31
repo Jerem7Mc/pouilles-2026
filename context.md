@@ -67,11 +67,19 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **Gare et terminal de bus de Lecce sont à 2 km, dans des directions opposées.** Gallipoli part
   de la gare ferroviaire au sud, Otrante et Porto Cesareo du City Terminal au nord.
 - **La gare d'Ostuni est à 2,8 km du centre historique.** La navette STP n'est pas optionnelle.
-- **Courses à Bari : c'est le Lidl, pas le Coop.** Résolu le 30/07/2026. Le Coop était placé Via
-  Giulio Petroni, à 2 508 m de l'auberge. Le « 2 minutes à pied » du plan désignait en fait le
-  **Lidl de la Via Giuseppe Capruzzi, à 200 m**, vérifié par Overpass. Le Coop est corrigé sur
-  Via Paolo Lembo 17, à 557 m, mais en `precision: 'rue'` : OpenStreetMap ne connaît aucun Coop
-  à ce numéro, l'enseigne reste à confirmer sur place. Un test fige le classement.
+- **Logements changés le 31/07/2026**, les anciens sont annulés et n'apparaissent plus nulle part.
+  - **Bari : The Queen Room Bari**, Via Brigata Regina 88, quartier Libertà. 489 €, 6 nuits.
+    **1,8 km de Bari Centrale, 22 minutes à pied** : c'est le vrai changement, l'ancien était à
+    200 m. Cinq matins de départ en excursion partent de cette marche.
+  - **Lecce : Mammasisi Rooms**, Via Richel Rubichi 3, centre historique, rue piétonne. 228 €,
+    4 nuits. 1,1 km de la gare, 1,2 km du City Terminal, dans l'autre sens.
+  - Aucun des deux n'est répertorié dans OpenStreetMap, et aucun des deux numéros de rue n'est
+    cartographié : les deux sont en `precision: 'rue'`. Bari est calé sur le n°79 voisin.
+- **Courses à Bari, recalculées après le déménagement.** Le **Coop de la Via Napoli est à 191 m**
+  du nouveau logement, confirmé par Overpass, en `precision: 'poi'`. Le Dok de la Via Brigata
+  Regina 12 sert de repli à 354 m. Le Lidl et le Famila restent, mais à 1,8 et 2 km : ce sont
+  ceux de la gare, à faire au retour d'excursion. Un test garantit qu'un supermarché reste à
+  moins de 300 m du logement, quel que soit le prochain déménagement.
 - **Budget** : enveloppes par défaut à **565 €**, contre 267,40 € au plan initial. Les repas
   sont passés à 25 € par jour, petit-déjeuner compris. Réglable dans l'écran Réglages.
 - **Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six

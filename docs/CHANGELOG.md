@@ -1,5 +1,41 @@
 # Journal de sessions
 
+## 2026-07-31 — Changement des deux logements, et tout ce que ça périme
+
+Les deux hébergements ont changé : **The Queen Room Bari**, Via Brigata Regina 88, et
+**Mammasisi Rooms**, Via Richel Rubichi 3 à Lecce. Toute trace des précédents est retirée, y
+compris leurs identifiants de lieu.
+
+Ni l'un ni l'autre n'est répertorié dans OpenStreetMap, et aucun des deux numéros n'est
+cartographié : les deux sont en `precision: 'rue'`, ce que l'interface affiche. Bari est calé sur
+le n°79 voisin, seul point réel de la rue à ce niveau de numérotation. Le n°104 relevé par OSM
+contredit la progression des numéros pairs, la rue est donc numérotée par tronçons et une
+extrapolation aurait été fausse.
+
+**Le vrai changement est la distance à la gare de Bari : 200 m avant, 1,8 km maintenant**, soit
+22 minutes à pied. Cinq matins de départ en excursion commencent désormais par cette marche.
+C'est écrit dans la note du lieu et dans le transport du premier jour, parce que ça ne se devine
+pas sur une carte à ce niveau de zoom. Lecce est à 1,1 km de sa gare et 1,2 km du City Terminal,
+dans des directions opposées.
+
+**Le déménagement a périmé l'analyse des supermarchés faite la veille.** Le Lidl retenu comme
+« le plus proche, 200 m » est à 1,8 km du nouveau logement. Recalcul par Overpass autour de la
+nouvelle adresse :
+
+- **Coop, Via Napoli, 191 m**, tagué dans OSM, en `precision: 'poi'`. Ironie du dossier : après
+  deux adresses de Coop non corroborées, c'est un Coop qui se retrouve voisin.
+- **Supermercati Dok, Via Brigata Regina 12, 354 m**, dans la rue du logement, comme repli
+  pendant la pause de l'après-midi.
+- Lidl et Famila conservés mais requalifiés : ce sont les supermarchés **de la gare**, à faire au
+  retour d'excursion, plus ceux du soir.
+
+Le test figeait « le Lidl à moins de 300 m », ce qui était un fait, pas un invariant. Remplacé
+par la règle qui compte : **un supermarché à moins de 300 m du logement de Bari**, quel qu'il
+soit. Un test qui encode le nom d'une enseigne casse à chaque déménagement sans rien protéger.
+
+Le test de `lienCarte` prenait le Coop comme exemple de position au niveau de la rue. Le Coop
+étant passé en `poi`, il s'appuie désormais sur le Famila.
+
 ## 2026-07-30 — Marqueurs de carte porteurs de sens, section Rencontres corrigée
 
 **La couleur seule ne suffisait pas.** Six teintes à 26 px se confondaient deux à deux en
