@@ -2,12 +2,14 @@
 import Icone from '../partage/Icone.vue'
 import ReglageEnveloppes from '../depenses/ReglageEnveloppes.vue'
 import SauvegardeDonnees from '../depenses/SauvegardeDonnees.vue'
+import ReferencesReservation from './ReferencesReservation.vue'
 import { APPLICATIONS } from './donnees/applications'
 </script>
 
 <template>
   <div>
     <ReglageEnveloppes />
+    <ReferencesReservation />
     <SauvegardeDonnees />
 
     <section class="bloc">

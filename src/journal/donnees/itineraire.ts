@@ -19,9 +19,9 @@ export const ITINERAIRE: readonly Jour[] = [
     base: 'Bari',
     lieuHebergement: 'the-queen-room-bari',
     aFaire:
-      'Bagages au logement à partir de 16 h, pas avant : viser la vieille ville en attendant, sac sur le dos. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
+      'Atterrissage à 13h40, mais le logement n’ouvre qu’à 16 h : deux heures à tenir sac au dos, autant les passer dans Bari Vecchia plutôt qu’à attendre devant la porte. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
     transport:
-      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,9 km, quartier Libertà : bus AMTAB ligne 1 depuis Bari Centrale, arrêt à 250 m, 1,20 € le titre de 90 minutes. À pied ce sont 24 minutes, déconseillé avec les bagages.',
+      'Vol Ryanair FR2007, Toulouse 11h35, Bari 13h40. Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,9 km, quartier Libertà : bus AMTAB ligne 1 depuis Bari Centrale, arrêt à 250 m, 1,20 € le titre de 90 minutes. À pied ce sont 24 minutes, déconseillé avec les bagages.',
     transportPrevu: 650,
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
@@ -249,7 +249,7 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Matinée tranquille à Lecce, derniers souvenirs comestibles au supermarché plutôt qu’en boutique. Train pour Bari en début d’après-midi, sac à la consigne automatique de Bari Centrale, dernières heures en ville, puis aéroport pour le vol de 20 h 40.',
     transport:
-      'Train régional Trenitalia (Lecce vers Bari) 11,80 €, navette Ferrotramviaria vers l’aéroport 5,30 €, consigne de gare 6,00 €.',
+      'Train régional Trenitalia (Lecce vers Bari) 11,80 €, navette Ferrotramviaria vers l’aéroport 5,30 €, consigne de gare 6,00 €. Vol Ryanair FR2008, Bari 20h40, Toulouse 23h00 : être à l’aéroport à 18h40, donc quitter Bari Centrale vers 18h00.',
     transportPrevu: 2310,
     ouManger: 'Derniers en-cas de rue à Bari : parts de focaccia ou taralli avant l’embarquement.',
     repasPrevu: REPAS_PAR_JOUR,

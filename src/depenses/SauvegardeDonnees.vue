@@ -3,8 +3,10 @@ import { computed, ref } from 'vue'
 import Icone from '../partage/Icone.vue'
 import { isoDuJour } from '../partage/voyage'
 import { useDepenses } from './useDepenses'
+import { useReferences } from '../reglages/references'
 
 const { depenses, enveloppes, importer, toutEffacer } = useDepenses()
+const { references, importer: importerReferences } = useReferences()
 
 const message = ref('')
 const collage = ref('')
@@ -12,7 +14,13 @@ const confirmeEffacement = ref(false)
 
 const sauvegarde = computed(() =>
   JSON.stringify(
-    { version: 1, exporteLe: isoDuJour(), enveloppes: enveloppes.value, depenses: depenses.value },
+    {
+      version: 2,
+      exporteLe: isoDuJour(),
+      enveloppes: enveloppes.value,
+      references: references.value,
+      depenses: depenses.value,
+    },
     null,
     2,
   ),
@@ -44,24 +52,36 @@ function telecharge() {
   URL.revokeObjectURL(url)
 }
 
+/** Décrit ce qui a été réinjecté, dépenses et références confondues. */
+function bilan(depensesAjoutees: number, referencesAjoutees: number): string {
+  const morceaux: string[] = []
+  if (depensesAjoutees > 0) {
+    morceaux.push(`${depensesAjoutees} dépense${depensesAjoutees > 1 ? 's' : ''}`)
+  }
+  if (referencesAjoutees > 0) {
+    morceaux.push(`${referencesAjoutees} référence${referencesAjoutees > 1 ? 's' : ''}`)
+  }
+  return morceaux.length === 0
+    ? 'Rien à restaurer, tout est déjà présent'
+    : `${morceaux.join(' et ')} restaurées`
+}
+
 function restaure() {
   try {
     const contenu: unknown = JSON.parse(collage.value)
-    const liste =
-      typeof contenu === 'object' && contenu !== null && 'depenses' in contenu
-        ? (contenu as { depenses: unknown }).depenses
-        : contenu
+    const objet =
+      typeof contenu === 'object' && contenu !== null ? (contenu as Record<string, unknown>) : null
+    const liste = objet && 'depenses' in objet ? objet.depenses : contenu
     if (!Array.isArray(liste)) {
       annonce('Ce contenu ne ressemble pas à une sauvegarde')
       return
     }
     const ajoutees = importer(liste)
+    // Les sauvegardes de version 1 n'ont pas de références : absentes, elles
+    // ne restaurent rien plutôt que d'échouer.
+    const referencesAjoutees = importerReferences(objet?.references)
     collage.value = ''
-    annonce(
-      ajoutees === 0
-        ? 'Rien à restaurer, ces dépenses sont déjà présentes'
-        : `${ajoutees} dépense${ajoutees > 1 ? 's' : ''} restaurée${ajoutees > 1 ? 's' : ''}`,
-    )
+    annonce(bilan(ajoutees, referencesAjoutees))
   } catch {
     annonce('JSON illisible')
   }

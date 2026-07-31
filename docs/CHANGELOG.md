@@ -1,5 +1,29 @@
 # Journal de sessions
 
+## 2026-07-31 — Références de réservation en local, horaires de vol
+
+**Les références de réservation se saisissent dans l'application, jamais dans le dépôt.** Le
+dépôt est public : seuls les **libellés** des emplacements vivent dans `reglages/references.ts`,
+les valeurs sont tapées par l'utilisateur et stockées sous `pouilles2026.references.v1`, comme
+les dépenses. Trois emplacements : les deux logements et la référence Ryanair commune aux deux
+vols. Un test échoue si un champ porte autre chose qu'un identifiant, un libellé et une aide,
+c'est-à-dire le jour où une valeur réelle se glisserait dans le code.
+
+`nettoieReferences` écarte les clés inconnues, les valeurs non textuelles et les chaînes vides :
+une sauvegarde restaurée peut venir d'une version antérieure ou avoir été éditée à la main.
+
+**L'export passe en version 2** et embarque les références. La restauration les réinjecte sans
+écraser ce qui est déjà saisi, et une sauvegarde de version 1, sans références, ne restaure que
+les dépenses au lieu d'échouer. Le message de fin annonce désormais les deux natures restaurées.
+
+**Horaires de vol intégrés.** FR2007 Toulouse 11h35 vers Bari 13h40 le 24 août, FR2008 Bari 20h40
+vers Toulouse 23h00 le 3 septembre, dans le carnet et sur le lieu « Aéroport de Bari ».
+
+Le rapprochement des deux sources donne la contrainte réelle du premier jour : **atterrissage à
+13h40, logement ouvert à 16 h**. Deux heures sac au dos, écrites noir sur blanc dans la journée
+plutôt que découvertes sur place. Au retour, l'obligation inverse : être à l'aéroport à 18h40,
+donc quitter Bari Centrale vers 18h00.
+
 ## 2026-07-31 — Bus urbains de Bari chiffrés, données d'arrivée des logements
 
 **La ligne 1 d'AMTAB relie le logement à Bari Centrale.** Trouvée par Overpass en croisant les

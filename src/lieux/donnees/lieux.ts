@@ -77,7 +77,7 @@ export const LIEUX: readonly Lieu[] = [
     type: 'transport',
     ville: 'Bari',
     adresse: 'Aeroporto di Bari Karol Wojtyła, Palese',
-    note: 'Arrivée le 24 et départ le 3 septembre, vol à 20 h 40. La navette Ferrotramviaria part du sous-sol du terminal, 5,30 € vers Bari Centrale.',
+    note: 'Arrivée le 24 août par le FR2007, atterrissage 13h40. Départ le 3 septembre par le FR2008 à 20h40, être sur place à 18h40. La navette Ferrotramviaria part du sous-sol du terminal, 5,30 € vers Bari Centrale.',
     lat: 41.13689,
     lon: 16.76004,
     precision: 'poi',

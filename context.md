@@ -96,9 +96,13 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **Budget** : enveloppes par défaut à **585 €**, contre 267,40 € au plan initial. Les repas
   sont à 25 € par jour, petit-déjeuner compris, et le transport est passé à 150 € quand les bus
   urbains de Bari ont été chiffrés (plan à 130,80 €). Réglable dans l'écran Réglages.
-- **Les références de réservation ne sont pas dans le dépôt, et ne doivent pas y entrer** : il
-  est public. Une référence associée à un nom permet de consulter ou d'annuler la réservation, et
-  un historique Git ne s'efface pas. Les garder dans le portefeuille Apple ou une note chiffrée.
+- **Vols** : FR2007 Toulouse 11h35, Bari **13h40** le 24 août. FR2008 Bari **20h40**, Toulouse
+  23h00 le 3 septembre. Contrainte du premier jour : atterrissage 13h40, logement à 16 h, deux
+  heures sac au dos. Contrainte du dernier : aéroport à 18h40, donc quitter Bari Centrale à 18h00.
+- **Les références de réservation ne sont pas dans le dépôt, et ne doivent jamais y entrer** : il
+  est public, et un historique Git ne s'efface pas. Elles se saisissent dans l'écran Réglages,
+  vivent en `localStorage` sous `pouilles2026.references.v1` et partent dans l'export, passé en
+  version 2. Seuls les libellés des trois emplacements sont dans le code, et un test le garantit.
 - **Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six
   teintes se confondaient deux à deux. Les couleurs vivent dans `@theme` de `style.css`, en
   `--color-carte-*`, jamais en dur dans un composant. `lieux/marqueurs.ts` construit les
