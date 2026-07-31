@@ -17,7 +17,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-24',
     titre: 'Bienvenue à Bari',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Bagages à l’hôtel à partir de 13 h. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
     transport:
@@ -42,7 +42,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-25',
     titre: 'Les Sassi de Matera',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Journée entière dans la cité de pierre : églises rupestres, habitations troglodytes, panorama depuis la Piazza Pascoli.',
     transport:
@@ -60,7 +60,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-26',
     titre: 'Le port de Trani',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Air marin à Trani : la cathédrale blanche posée au ras de l’eau, le fort historique et le port de pêche.',
     transport: 'Train régional direct, réservable sur l’application ou le site Trenitalia.',
@@ -77,7 +77,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-27',
     titre: 'Polignano a Mare et Monopoli',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Matinée à Polignano pour la crique de Lama Monachile et les falaises. Après-midi à Monopoli : baignade à la Cala Porta Vecchia et centre fortifié.',
     transport:
@@ -95,7 +95,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-28',
     titre: 'La perle blanche d’Ostuni',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'La ville blanche juchée sur sa colline : labyrinthe de ruelles chaulées et vue sur les plaines d’oliviers jusqu’à la mer.',
     transport:
@@ -115,7 +115,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-29',
     titre: 'Les trulli d’Alberobello',
     base: 'Bari',
-    hebergement: 'The Queen Room Bari',
+    lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Les 1500 maisons à toit conique. Se concentrer sur le quartier résidentiel préservé de Rione Aia Piccola pour éviter les foules du samedi.',
     transport:
@@ -136,7 +136,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-30',
     titre: 'Descente vers le Sud profond',
     base: 'Lecce',
-    hebergement: 'Mammasisi Rooms',
+    lieuHebergement: 'mammasisi-rooms',
     aFaire:
       'Matinée de transfert. Après-midi à Lecce, la Florence du Sud : théâtre romain, palais, Piazza del Duomo.',
     transport:
@@ -162,7 +162,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-08-31',
     titre: 'Gallipoli, perle ionienne',
     base: 'Lecce',
-    hebergement: 'Mammasisi Rooms',
+    lieuHebergement: 'mammasisi-rooms',
     aFaire:
       'Vieille ville fortifiée bâtie sur une île de pêcheurs, puis baignade sur la Spiaggia della Purità au pied des remparts.',
     transport: 'Bus ou train local FSE au départ de Lecce, réservable sur Trenitalia.',
@@ -182,7 +182,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-09-01',
     titre: 'Otrante et la côte adriatique',
     base: 'Lecce',
-    hebergement: 'Mammasisi Rooms',
+    lieuHebergement: 'mammasisi-rooms',
     aFaire:
       'Château fortifié d’Otrante et sa cathédrale, baignade dans l’eau transparente près des remparts du port.',
     transport:
@@ -212,7 +212,7 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-09-02',
     titre: 'Porto Cesareo, les Caraïbes des Pouilles',
     base: 'Lecce',
-    hebergement: 'Mammasisi Rooms',
+    lieuHebergement: 'mammasisi-rooms',
     aFaire:
       'Journée farniente sur les plages de sable blanc et l’eau turquoise du golfe de Tarente.',
     transport:
@@ -245,9 +245,8 @@ export const ITINERAIRE: readonly Jour[] = [
     date: '2026-09-03',
     titre: 'Retour à Toulouse',
     base: 'Lecce',
-    hebergement: 'Départ, vol à 20 h 40',
     aFaire:
-      'Matinée tranquille à Lecce, derniers souvenirs comestibles au supermarché plutôt qu’en boutique. Train pour Bari en début d’après-midi, sac à la consigne automatique de Bari Centrale, dernières heures en ville, puis aéroport.',
+      'Matinée tranquille à Lecce, derniers souvenirs comestibles au supermarché plutôt qu’en boutique. Train pour Bari en début d’après-midi, sac à la consigne automatique de Bari Centrale, dernières heures en ville, puis aéroport pour le vol de 20 h 40.',
     transport:
       'Train régional Trenitalia (Lecce vers Bari) 11,80 €, navette Ferrotramviaria vers l’aéroport 5,30 €, consigne de gare 6,00 €.',
     transportPrevu: 2310,

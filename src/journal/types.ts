@@ -9,7 +9,15 @@ export interface Jour {
   date: string
   titre: string
   base: 'Bari' | 'Lecce'
-  hebergement: string
+  /**
+   * Identifiant du lieu où l'on dort ce soir-là, absent le jour du retour.
+   *
+   * Un identifiant et non un nom : le carnet affichait autrefois une chaîne
+   * libre, qui a survécu telle quelle à un changement de logement et affichait
+   * donc une adresse périmée. Le nom et l'adresse viennent maintenant de
+   * `lieux.ts`, source unique, et un test vérifie la référence.
+   */
+  lieuHebergement?: string
   aFaire: string
   transport: string
   /** Coût de transport prévu au plan, en centimes. */

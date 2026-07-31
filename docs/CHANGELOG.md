@@ -1,5 +1,26 @@
 # Journal de sessions
 
+## 2026-07-31 — Le logement devient un lieu référencé, plus une chaîne libre
+
+Le carnet portait le logement en texte libre : `hebergement: 'Host Bari Centrale'`, répété sur
+chaque journée. C'était la **seule rubrique du carnet à ne pas référencer un lieu par
+identifiant**, contrairement à la règle du projet, et elle en a payé le prix : au changement
+d'hébergement, seul le nom a été remplacé, sans l'adresse, que le journal n'affichait de toute
+façon pas. Le voyageur voyait un nom sans adresse et sans lien vers la carte.
+
+`Jour.hebergement: string` devient `Jour.lieuHebergement?: string`, un identifiant de lieu.
+L'en-tête de journée affiche désormais **le nom et l'adresse**, résolus depuis `lieux.ts`, dans un
+lien qui ouvre la carte centrée sur le logement. Nom et adresse ne peuvent plus diverger de la
+carte, puisqu'il n'en existe qu'une source.
+
+Le champ est optionnel : le jour du retour ne dort nulle part. L'heure du vol, qui vivait dans
+cette chaîne, rejoint le déroulé de la journée.
+
+Trois tests couvrent le nouveau champ : la référence doit exister, elle doit pointer sur un lieu
+de type `hebergement` situé dans la ville de base du jour, et elle doit être rattachée à cette
+journée. Le jour du retour doit au contraire ne rien déclarer. Les deux tests existants qui
+validaient les références de lieux prennent le nouveau champ en compte.
+
 ## 2026-07-31 — Applications de transport, positions recalées sur les réservations
 
 **Nouvel écran dans Réglages : les applications à installer avant de partir.** Cinq entrées, une

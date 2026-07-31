@@ -46,10 +46,29 @@ describe('itinéraire', () => {
 describe('liens vers les lieux', () => {
   it('ne référence que des identifiants de lieux existants', () => {
     for (const jour of ITINERAIRE) {
-      for (const id of [...jour.lieuxTransport, ...jour.lieuxSites, ...jour.lieuxManger]) {
+      const ids = [...jour.lieuxTransport, ...jour.lieuxSites, ...jour.lieuxManger]
+      if (jour.lieuHebergement) ids.push(jour.lieuHebergement)
+      for (const id of ids) {
         expect(lieuParId(id), `${jour.date} référence un lieu inconnu : ${id}`).toBeDefined()
       }
     }
+  })
+
+  it('donne un logement à chaque nuit du voyage, sauf le jour du retour', () => {
+    // Le carnet portait autrefois le nom du logement en chaîne libre, qui a
+    // survécu tel quel à un changement d'hébergement. Passer par un
+    // identifiant rend la divergence impossible, ce test la rend visible.
+    const nuits = ITINERAIRE.slice(0, -1)
+    for (const jour of nuits) {
+      const lieu = lieuParId(jour.lieuHebergement ?? '')
+      expect(lieu, `${jour.date} sans logement`).toBeDefined()
+      expect(lieu?.type, jour.date).toBe('hebergement')
+      expect(lieu?.ville, jour.date).toBe(jour.base)
+    }
+    expect(
+      ITINERAIRE.at(-1)?.lieuHebergement,
+      'le jour du retour ne dort nulle part',
+    ).toBeUndefined()
   })
 
   it('donne au moins un point de transport à chaque journée', () => {
@@ -63,6 +82,7 @@ describe('liens vers les lieux', () => {
     // sinon un filtre par date le masquerait alors que le journal y renvoie.
     for (const jour of ITINERAIRE) {
       const ids = [...jour.lieuxTransport, ...jour.lieuxSites, ...jour.lieuxManger]
+      if (jour.lieuHebergement) ids.push(jour.lieuHebergement)
       for (const id of ids) {
         const lieu = lieuParId(id)
         expect(lieu?.jours, `${id} n’est pas rattaché au ${jour.date}`).toContain(jour.date)

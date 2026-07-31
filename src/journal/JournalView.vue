@@ -5,7 +5,7 @@ import { formatEuros } from '../partage/monnaie'
 import { JOURS, jourActif, libelleJour, libelleJourCourt } from '../partage/voyage'
 import { totalParDate } from '../depenses/calculs'
 import { useDepenses } from '../depenses/useDepenses'
-import { lieuxParIds } from '../lieux/donnees/lieux'
+import { lieuParId, lieuxParIds } from '../lieux/donnees/lieux'
 import { ITINERAIRE } from './donnees/itineraire'
 import RubriqueJour from './RubriqueJour.vue'
 
@@ -26,6 +26,13 @@ onMounted(() => {
 
 const jour = computed(() => ITINERAIRE.find((etape) => etape.date === selection.value))
 const numero = computed(() => JOURS.indexOf(selection.value) + 1)
+
+// Le logement du soir, résolu depuis les lieux : nom et adresse ne peuvent
+// donc pas diverger de la carte, ce qui était le cas quand le carnet portait
+// une chaîne libre.
+const hebergement = computed(() =>
+  jour.value?.lieuHebergement ? lieuParId(jour.value.lieuHebergement) : undefined,
+)
 
 const prevu = computed(() => (jour.value ? jour.value.transportPrevu + jour.value.repasPrevu : 0))
 const reel = computed(() => totalParDate(depenses.value)[selection.value] ?? 0)
@@ -69,7 +76,21 @@ const ecart = computed(() => reel.value - prevu.value)
         <h2 class="mt-1.5 text-3xl font-bold leading-tight tracking-tight text-balance">
           {{ jour.titre }}
         </h2>
-        <p class="mt-2 text-sm text-encre-doux">{{ jour.base }} · {{ jour.hebergement }}</p>
+        <p class="mt-2 text-sm text-encre-doux">Base à {{ jour.base }}</p>
+
+        <!-- L'adresse est affichée, pas seulement le nom : c'est ce qu'on lit à
+             un chauffeur de taxi ou qu'on recopie le soir en rentrant. -->
+        <RouterLink
+          v-if="hebergement"
+          :to="{ name: 'lieux', query: { lieu: hebergement.id } }"
+          class="mt-1 flex min-h-11 items-center gap-2 text-sm"
+        >
+          <Icone nom="hebergement" :taille="16" class="shrink-0 text-terre" />
+          <span>
+            <span class="font-semibold">{{ hebergement.nom }}</span>
+            <span class="text-encre-doux"> · {{ hebergement.adresse }}</span>
+          </span>
+        </RouterLink>
 
         <p
           v-if="jour.alerte"

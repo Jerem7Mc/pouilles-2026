@@ -81,6 +81,11 @@ développement Vite fait son propre repli SPA et masque le problème.
   2,2 km, ce sont ceux de la gare. Lecce : **Sconto Più à 354 m**, c'est là que se prépare le
   pique-nique de Porto Cesareo ; l'Eurospin, jadis « à 5 minutes », est à 1,1 km. Un test garantit
   qu'un supermarché reste à moins de 400 m de **chaque** logement.
+- **Le logement est un lieu référencé par identifiant**, `Jour.lieuHebergement`, plus une chaîne
+  libre. L'en-tête du journal affiche nom et adresse depuis `lieux.ts` et ouvre la carte au clic.
+  Absent le jour du retour, c'est voulu, et un test le vérifie. C'était la dernière rubrique du
+  carnet à échapper à la règle « référencer par identifiant, jamais par nom », et elle avait
+  effectivement laissé passer une adresse périmée après un changement de logement.
 - **Applications de transport dans Réglages**, une donnée par `reglages/donnees/applications.ts`,
   liens vérifiés. L'app des bus de Bari est **MUVT** (`muvt.app`), pas « Muvin » : le domaine
   `muvin.it` répond mais n'est pas un service barese, un test interdit ce mot dans les liens.
