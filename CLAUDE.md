@@ -98,7 +98,7 @@ Enveloppes Record<CategorieId, number>
 ```
 
 Sept catégories : `transport`, `repas`, `courses`, `glaces`, `visites`, `souvenirs`, `divers`.
-Enveloppes par défaut : **565 €** au total, contre 267,40 € au plan de voyage initial. Deux
+Enveloppes par défaut : **585 €** au total, contre 267,40 € au plan de voyage initial. Deux
 écarts assumés : le plan oubliait glaces, entrées de sites, courses, souvenirs et marge, et il
 ne comptait que **deux repas par jour**, tombant à 12 € certains jours. Les repas sont donc
 calés sur 25 € par jour, petit-déjeuner compris, soit 275 €. `repasPrevu` de l'itinéraire suit

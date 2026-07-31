@@ -1,5 +1,49 @@
 # Journal de sessions
 
+## 2026-07-31 — Bus urbains de Bari chiffrés, données d'arrivée des logements
+
+**La ligne 1 d'AMTAB relie le logement à Bari Centrale.** Trouvée par Overpass en croisant les
+relations `route=bus` desservant un arrêt à moins de 250 m du logement et un arrêt à moins de
+300 m de la gare : la ligne 1, Bari Centrale ↔ Santo Spirito, satisfait les deux. Le carnet
+disait « ou un bus urbain », ce qui ne s'utilise pas avec une valise à la main.
+
+Tarif AMTAB vérifié sur la grille officielle : **1,20 € les 90 minutes**, 2,50 € la journée. Le
+titre journalier n'est pas rentable ici, deux trajets espacés de plus de 90 minutes coûtent
+2,40 €. Douze trajets au total : un le 24 août à l'arrivée, deux par jour d'excursion du 25 au
+29, un le 30 au départ pour Lecce. À Lecce rien n'est ajouté, la gare est à 1,1 km et aucune
+ligne urbaine n'a pu être corroborée.
+
+**Conséquence budgétaire assumée.** Le transport prévu passe de 116,40 € à **130,80 €**, ce qui
+dépassait l'enveloppe Transport de 130 €. Elle est relevée à **150 €**, et le budget conseillé
+passe de 565 à **585 €**. Une enveloppe qui part déjà en dépassement au premier jour ne sert à
+rien.
+
+**Correction d'horaire, la plus importante de la journée.** Le carnet annonçait « bagages à
+l'hôtel à partir de 13 h ». La réservation dit **16 h**. Trois heures d'écart, sac sur le dos, un
+jour d'arrivée après un vol. Corrigé, avec la consigne d'occuper l'intervalle dans la vieille
+ville.
+
+**Données d'arrivée dans les deux hébergements** : heures d'arrivée et de départ dans la note, et
+un champ `telephone` sur le lieu, rendu en bouton d'appel `tel:` placé **avant** le bouton
+d'itinéraire. Quand on cherche ce bouton, c'est qu'on est en retard ou devant une porte fermée.
+
+**Ce qui n'est délibérément pas dans le dépôt : les références de réservation.** Le dépôt est
+public, vérifié par une requête anonyme à l'API GitHub qui renvoie 200. Une référence de
+confirmation associée à un nom permet de consulter ou d'annuler une réservation ; elle n'a rien à
+faire dans un historique Git public, où sa suppression ultérieure ne l'efface pas. Les numéros de
+téléphone sont en revanche des lignes professionnelles publiées par les hébergeurs.
+
+**Deux défauts trouvés au passage, sans rapport avec la demande.**
+
+- L'écran des enveloppes annonçait « Revenir aux enveloppes conseillées (450 €) », un chiffre
+  **écrit en dur** alors que les défauts totalisaient 565 €, et 585 € désormais. Il est calculé.
+  Même famille de bug que le nom de logement en chaîne libre : une valeur recopiée finit toujours
+  par mentir.
+- Le test de `etatEnveloppes` vérifiait l'arithmétique en s'appuyant sur les **vraies** enveloppes
+  par défaut, donc il cassait à chaque révision de budget. Il utilise maintenant des enveloppes
+  fictives et rondes. Un test de calcul ne doit pas dépendre d'une décision de budget ; le bloc
+  `rythme` faisait déjà correctement la distinction.
+
 ## 2026-07-31 — Le logement devient un lieu référencé, plus une chaîne libre
 
 Le carnet portait le logement en texte libre : `hebergement: 'Host Bari Centrale'`, répété sur

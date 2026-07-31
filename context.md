@@ -70,10 +70,14 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **Logements changés le 31/07/2026**, les anciens sont annulés et n'apparaissent plus nulle part.
   - **Bari : The Queen Room Bari**, Via Brigata Regina 88, quartier Libertà, angle Via Napoli,
     près du port. 489 €, 6 nuits. **1,9 km de Bari Centrale, 24 minutes à pied** : c'est le vrai
-    changement, l'ancien était à 200 m. Cinq matins d'excursion partent de cette marche, prévoir
-    le bus urbain. Aucun arrêt ferroviaire proche n'a pu être corroboré dans OpenStreetMap.
+    changement, l'ancien était à 200 m. **Bus AMTAB ligne 1**, Bari Centrale ↔ Santo Spirito,
+    arrêt à 250 m du logement, **1,20 € les 90 minutes**, chiffré dans le carnet sur les sept
+    journées concernées. Aucun arrêt ferroviaire proche n'existe dans OpenStreetMap.
+    **Arrivée à partir de 16 h**, pas 13 h comme l'annonçait le carnet, départ avant 10 h.
+    Téléphone +39 02 8088 9702, bouton d'appel dans l'écran Lieux.
   - **Lecce : Mammasisi Rooms**, Via Richel Rubichi 3, entre la Piazza Sant'Oronzo et la Via XXV
     Luglio, rue piétonne. 228 €, 4 nuits. 1,1 km de la gare, 1,2 km du City Terminal, à l'opposé.
+    Arrivée à partir de 11 h 30, départ avant 10 h. Téléphone +39 0832 181 0425.
   - Aucun des deux n'est répertorié dans OpenStreetMap, aucun des deux numéros n'est cartographié :
     les deux sont en `precision: 'rue'`, positions relevées sur les captures des réservations.
 - **Courses, recalculées deux fois après les déménagements.** Bari : **Coop Via Napoli à 147 m**,
@@ -89,8 +93,12 @@ développement Vite fait son propre repli SPA et masque le problème.
 - **Applications de transport dans Réglages**, une donnée par `reglages/donnees/applications.ts`,
   liens vérifiés. L'app des bus de Bari est **MUVT** (`muvt.app`), pas « Muvin » : le domaine
   `muvin.it` répond mais n'est pas un service barese, un test interdit ce mot dans les liens.
-- **Budget** : enveloppes par défaut à **565 €**, contre 267,40 € au plan initial. Les repas
-  sont passés à 25 € par jour, petit-déjeuner compris. Réglable dans l'écran Réglages.
+- **Budget** : enveloppes par défaut à **585 €**, contre 267,40 € au plan initial. Les repas
+  sont à 25 € par jour, petit-déjeuner compris, et le transport est passé à 150 € quand les bus
+  urbains de Bari ont été chiffrés (plan à 130,80 €). Réglable dans l'écran Réglages.
+- **Les références de réservation ne sont pas dans le dépôt, et ne doivent pas y entrer** : il
+  est public. Une référence associée à un nom permet de consulter ou d'annuler la réservation, et
+  un historique Git ne s'efface pas. Les garder dans le portefeuille Apple ou une note chiffrée.
 - **Les marqueurs de la carte portent le glyphe de leur type**, pas seulement une couleur : six
   teintes se confondaient deux à deux. Les couleurs vivent dans `@theme` de `style.css`, en
   `--color-carte-*`, jamais en dur dans un composant. `lieux/marqueurs.ts` construit les

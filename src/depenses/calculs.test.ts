@@ -9,7 +9,7 @@ import {
   totalParCategorie,
   totalParDate,
 } from './calculs'
-import type { CategorieId, Depense } from './types'
+import type { CategorieId, Depense, Enveloppes } from './types'
 
 function depense(
   centimes: number,
@@ -21,11 +21,12 @@ function depense(
 }
 
 describe('enveloppes par défaut', () => {
-  it('totalisent 565 €, le budget réaliste retenu', () => {
-    // 130 transport + 275 repas + 30 courses + 35 glaces + 45 visites
+  it('totalisent 585 €, le budget réaliste retenu', () => {
+    // 150 transport + 275 repas + 30 courses + 35 glaces + 45 visites
     // + 40 souvenirs + 10 divers. Les repas ont été relevés à 25 € par jour :
-    // le plan d'origine ne comptait que deux repas quotidiens.
-    expect(totalEnveloppes(enveloppesParDefaut())).toBe(56_500)
+    // le plan d'origine ne comptait que deux repas quotidiens. Le transport est
+    // passé de 130 à 150 € quand les bus urbains de Bari ont été chiffrés.
+    expect(totalEnveloppes(enveloppesParDefaut())).toBe(58_500)
   })
 
   it('accordent aux repas la plus grosse enveloppe', () => {
@@ -63,16 +64,30 @@ describe('totaux', () => {
 })
 
 describe('etatEnveloppes', () => {
-  const enveloppes = enveloppesParDefaut()
+  /**
+   * Enveloppes fictives et rondes, découplées du budget réel : ces tests
+   * valident l'arithmétique, pas les arbitrages de budget. Câblés sur les
+   * valeurs par défaut, ils cassaient à chaque révision d'une enveloppe, ce qui
+   * transforme un test de calcul en test de décision.
+   */
+  const enveloppes: Enveloppes = {
+    transport: 10_000,
+    repas: 20_000,
+    courses: 3_000,
+    glaces: 3_500,
+    visites: 4_000,
+    souvenirs: 4_000,
+    divers: 1_000,
+  }
 
   it('calcule reste et pourcentage par catégorie', () => {
     const lignes = etatEnveloppes([depense(6_500, 'transport')], enveloppes)
     const transport = lignes.find((l) => l.id === 'transport')
     expect(transport).toMatchObject({
       depense: 6_500,
-      enveloppe: 13_000,
-      reste: 6_500,
-      pourcentage: 50,
+      enveloppe: 10_000,
+      reste: 3_500,
+      pourcentage: 65,
       depasse: false,
     })
   })

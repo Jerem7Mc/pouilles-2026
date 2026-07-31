@@ -8,9 +8,12 @@ describe('itinéraire', () => {
     expect(ITINERAIRE.map((jour) => jour.date)).toEqual([...JOURS])
   })
 
-  it('reproduit le total de transport du plan : 116,40 €', () => {
+  it('reproduit le total de transport du plan : 130,80 €', () => {
+    // 116,40 € au plan d'origine, plus douze trajets de bus AMTAB à 1,20 € :
+    // le logement de Bari est à 1,9 km de la gare, la marche n'est pas tenable
+    // deux fois par jour pendant six jours en août.
     const total = ITINERAIRE.reduce((somme, jour) => somme + jour.transportPrevu, 0)
-    expect(total).toBe(11_640)
+    expect(total).toBe(13_080)
   })
 
   it('prévoit 25 € de repas par jour, soit 275 € au total', () => {

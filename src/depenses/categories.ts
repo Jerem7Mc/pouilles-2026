@@ -23,8 +23,8 @@ export const CATEGORIES: readonly Categorie[] = [
     label: 'Transport',
     court: 'Transp.',
     icone: 'transport',
-    enveloppeDefaut: 13_000,
-    base: '116,40 € de trains et bus prévus, plus une marge pour les navettes et les erreurs de billet',
+    enveloppeDefaut: 15_000,
+    base: '130,80 € de trains et bus prévus, bus urbains de Bari compris, plus une marge pour les erreurs de billet',
   },
   {
     id: 'repas',

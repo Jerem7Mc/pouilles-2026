@@ -8,6 +8,13 @@ import { useDepenses } from './useDepenses'
 
 const { enveloppes, budgetTotal, reglerEnveloppe, reinitialiserEnveloppes } = useDepenses()
 
+// Calculé et non écrit en dur : le bouton annonçait 450 € alors que les
+// enveloppes par défaut en totalisaient 565, et ce chiffre a encore bougé
+// depuis. Une somme affichée doit venir de la somme réelle.
+const totalConseille = computed(() =>
+  CATEGORIES.reduce((somme, categorie) => somme + categorie.enveloppeDefaut, 0),
+)
+
 const valeurs = computed(() =>
   CATEGORIES.map((categorie) => ({
     ...categorie,
@@ -64,7 +71,7 @@ function modifie(id: CategorieId, evenement: Event) {
       class="mt-4 min-h-11 w-full text-xs font-bold text-encre-doux underline decoration-sable-fonce decoration-2 underline-offset-4"
       @click="reinitialiserEnveloppes()"
     >
-      Revenir aux enveloppes conseillées (450 €)
+      Revenir aux enveloppes conseillées ({{ formatEuros(totalConseille) }})
     </button>
   </section>
 </template>

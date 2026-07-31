@@ -29,6 +29,13 @@ export interface Lieu {
   lat: number
   lon: number
   precision: Precision
+  /**
+   * Numéro à appeler, au format international. Réservé aux hébergements : c'est
+   * le seul cas où l'on a besoin de joindre quelqu'un, typiquement pour un
+   * retard d'arrivée. Volontairement absent des références de réservation, qui
+   * n'ont pas à figurer dans un dépôt public.
+   */
+  telephone?: string
   /** Journées du voyage où ce lieu est pertinent, en dates ISO. */
   jours: readonly string[]
 }
@@ -486,10 +493,11 @@ export const LIEUX: readonly Lieu[] = [
     type: 'hebergement',
     ville: 'Bari',
     adresse: 'Via Brigata Regina 88, Bari',
-    note: '6 nuits du 24 au 30 août, quartier Libertà, à l’angle de la Via Napoli et près du port. Compter 1,9 km jusqu’à la gare de Bari Centrale, soit 24 minutes à pied : à prévoir les matins de départ en excursion, ou prendre un bus urbain. Position relevée sur la carte de la réservation.',
+    note: '6 nuits. Arrivée le 24 août à partir de 16 h, départ le 30 avant 10 h. Quartier Libertà, à l’angle de la Via Napoli et près du port. Bus AMTAB ligne 1 depuis Bari Centrale, arrêt à 250 m, 1,20 € les 90 minutes ; à pied ce sont 1,9 km et 24 minutes. Position relevée sur la carte de la réservation.',
     lat: 41.12777,
     lon: 16.85153,
     precision: 'rue',
+    telephone: '+39 02 8088 9702',
     jours: JOURS_BARI,
   },
   {
@@ -498,10 +506,11 @@ export const LIEUX: readonly Lieu[] = [
     type: 'hebergement',
     ville: 'Lecce',
     adresse: 'Via Richel Rubichi 3, Lecce',
-    note: '4 nuits du 30 août au 3 septembre, à deux pas de la Piazza Sant’Oronzo et de l’amphithéâtre romain, en rue piétonne. 1,1 km de la gare, 13 minutes à pied. Le City Terminal, d’où partent les bus pour Otrante et Porto Cesareo, est à 1,2 km dans l’autre sens. Position relevée sur la carte de la réservation.',
+    note: '4 nuits. Arrivée le 30 août à partir de 11 h 30, départ le 3 septembre avant 10 h. À deux pas de la Piazza Sant’Oronzo et de l’amphithéâtre romain, en rue piétonne. 1,1 km de la gare, 13 minutes à pied. Le City Terminal, d’où partent les bus pour Otrante et Porto Cesareo, est à 1,2 km dans l’autre sens. Position relevée sur la carte de la réservation.',
     lat: 40.35313,
     lon: 18.17352,
     precision: 'rue',
+    telephone: '+39 0832 181 0425',
     jours: JOURS_LECCE,
   },
 
@@ -746,6 +755,16 @@ export function lienCarte(lieu: Lieu): string {
     return `https://maps.apple.com/?ll=${lieu.lat},${lieu.lon}&q=${encodeURIComponent(lieu.nom)}`
   }
   return `https://maps.apple.com/?q=${encodeURIComponent(lieu.adresse)}`
+}
+
+/**
+ * Lien d'appel. Les espaces du numéro affiché sont retirés : iOS les tolère,
+ * d'autres composeurs non, et le format international garantit que l'appel
+ * part correctement depuis une carte SIM française.
+ */
+export function lienTelephone(lieu: Lieu): string | null {
+  if (!lieu.telephone) return null
+  return `tel:${lieu.telephone.replace(/\s/gu, '')}`
 }
 
 /**

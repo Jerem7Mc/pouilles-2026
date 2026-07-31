@@ -9,6 +9,7 @@ import {
   LIBELLES_TYPE,
   LIEUX,
   lienCarte,
+  lienTelephone,
   lienItineraire,
   lieuParId,
 } from './donnees/lieux'
@@ -187,6 +188,17 @@ function reinitialise() {
           <p class="text-xs font-bold uppercase tracking-wider text-terre">{{ lieu.ville }}</p>
           <p class="mt-1.5 text-sm leading-relaxed text-encre-doux">{{ lieu.note }}</p>
           <p class="mt-1 text-xs text-encre-doux/80">{{ LIBELLES_PRECISION[lieu.precision] }}</p>
+
+          <!-- Appeler passe avant l'itinéraire : quand on cherche ce bouton,
+               c'est qu'on est en retard ou perdu devant une porte fermée. -->
+          <a
+            v-if="lienTelephone(lieu)"
+            :href="lienTelephone(lieu)!"
+            class="mt-2 flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-terre text-xs font-bold text-white"
+          >
+            <Icone nom="urgence" :taille="15" />
+            Appeler le {{ lieu.telephone }}
+          </a>
 
           <div class="mt-2 flex gap-1.5">
             <a

@@ -19,10 +19,10 @@ export const ITINERAIRE: readonly Jour[] = [
     base: 'Bari',
     lieuHebergement: 'the-queen-room-bari',
     aFaire:
-      'Bagages à l’hôtel à partir de 13 h. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
+      'Bagages au logement à partir de 16 h, pas avant : viser la vieille ville en attendant, sac sur le dos. Ruelles de Bari Vecchia, les mamies qui fabriquent les orecchiette dans la rue, puis passeggiata sur le front de mer au coucher du soleil.',
     transport:
-      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,9 km, quartier Libertà : 24 minutes à pied, ou un bus urbain avec les bagages.',
-    transportPrevu: 530,
+      'Train navette Ferrotramviaria depuis le sous-sol du terminal de l’aéroport jusqu’à Bari Centrale. Le logement est ensuite à 1,9 km, quartier Libertà : bus AMTAB ligne 1 depuis Bari Centrale, arrêt à 250 m, 1,20 € le titre de 90 minutes. À pied ce sont 24 minutes, déconseillé avec les bagages.',
+    transportPrevu: 650,
     ouManger:
       'Boulangerie Fiore : deux grosses parts de focaccia barese (huile d’olive, tomates fraîches, olives).',
     repasPrevu: REPAS_PAR_JOUR,
@@ -46,8 +46,8 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Journée entière dans la cité de pierre : églises rupestres, habitations troglodytes, panorama depuis la Piazza Pascoli.',
     transport:
-      'Train direct Ferrovie Appulo Lucane (FAL) depuis la gare adjacente à Bari Centrale. Billets aux bornes grises FAL. Horaires à plein régime le mardi.',
-    transportPrevu: 1140,
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, puis train direct Ferrovie Appulo Lucane (FAL) depuis la gare adjacente. Billets aux bornes grises FAL. Horaires à plein régime le mardi.',
+    transportPrevu: 1380,
     ouManger:
       'Restaurant La Lopa, midi et soir : fave e cicorie (purée de fèves à l’huile d’olive, chicorée sauvage, peperoni cruschi).',
     repasPrevu: REPAS_PAR_JOUR,
@@ -63,8 +63,9 @@ export const ITINERAIRE: readonly Jour[] = [
     lieuHebergement: 'the-queen-room-bari',
     aFaire:
       'Air marin à Trani : la cathédrale blanche posée au ras de l’eau, le fort historique et le port de pêche.',
-    transport: 'Train régional direct, réservable sur l’application ou le site Trenitalia.',
-    transportPrevu: 720,
+    transport:
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, puis train régional direct, réservable sur l’application ou le site Trenitalia.',
+    transportPrevu: 960,
     ouManger:
       'Friterie marine Peschef sur le port : poulpe grillé ou grande salade de fruits de mer, huile d’olive et citron.',
     repasPrevu: REPAS_PAR_JOUR,
@@ -81,8 +82,8 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Matinée à Polignano pour la crique de Lama Monachile et les falaises. Après-midi à Monopoli : baignade à la Cala Porta Vecchia et centre fortifié.',
     transport:
-      'Trains régionaux successifs Trenitalia (Bari, Polignano, Monopoli, Bari). Chaque trajet dure de 5 à 30 minutes.',
-    transportPrevu: 960,
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, puis trains régionaux successifs Trenitalia (Bari, Polignano, Monopoli, Bari). Chaque trajet dure de 5 à 30 minutes.',
+    transportPrevu: 1200,
     ouManger:
       'Pescaria à Polignano : panino con polpo fritto (poulpe frit, figues, chicorée). Demander impérativement à retirer la crème de ricotta.',
     repasPrevu: REPAS_PAR_JOUR,
@@ -99,8 +100,8 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'La ville blanche juchée sur sa colline : labyrinthe de ruelles chaulées et vue sur les plaines d’oliviers jusqu’à la mer.',
     transport:
-      'Train régional Trenitalia jusqu’à la gare d’Ostuni, puis navette de bus STP devant la gare pour monter au centre historique.',
-    transportPrevu: 1300,
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, train régional Trenitalia jusqu’à la gare d’Ostuni, puis navette de bus STP devant la gare pour monter au centre historique.',
+    transportPrevu: 1540,
     ouManger:
       'Boulangerie d’Ostuni : puccia au feu de bois garnie de légumes grillés, thon à l’huile et câpres. Préciser « senza formaggio ».',
     repasPrevu: REPAS_PAR_JOUR,
@@ -119,8 +120,8 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Les 1500 maisons à toit conique. Se concentrer sur le quartier résidentiel préservé de Rione Aia Piccola pour éviter les foules du samedi.',
     transport:
-      'Bus officiel FSE (Ferrovie del Sud Est). Horaires et billets sur l’interface Trenitalia.',
-    transportPrevu: 1000,
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, puis bus officiel FSE (Ferrovie del Sud Est). Horaires et billets sur l’interface Trenitalia.',
+    transportPrevu: 1240,
     ouManger:
       'Grand cornet de taralli artisanaux (farine, vin blanc, huile d’olive) en boulangerie, avec tomates cerises et fruits frais.',
     repasPrevu: REPAS_PAR_JOUR,
@@ -140,8 +141,8 @@ export const ITINERAIRE: readonly Jour[] = [
     aFaire:
       'Matinée de transfert. Après-midi à Lecce, la Florence du Sud : théâtre romain, palais, Piazza del Duomo.',
     transport:
-      'Train régional direct Bari Centrale vers Lecce (Trenitalia), puis 1,1 km jusqu’au logement, 13 minutes à pied par le centre historique.',
-    transportPrevu: 1180,
+      'Bus AMTAB ligne 1 jusqu’à Bari Centrale, train régional direct vers Lecce (Trenitalia), puis 1,1 km jusqu’au logement, 13 minutes à pied par le centre historique.',
+    transportPrevu: 1300,
     ouManger:
       'La Puccia, Viale Giacomo Leopardi : puccia leccese sur mesure, prosciutto crudo, tomates séchées, olives, roquette. Sans fromage ni crème.',
     repasPrevu: REPAS_PAR_JOUR,
